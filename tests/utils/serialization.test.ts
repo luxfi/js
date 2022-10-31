@@ -41,7 +41,7 @@ import { getPreferredHRP } from "../../src/utils"
 const serialization: Serialization = Serialization.getInstance()
 
 describe("Serialization", (): void => {
-  const address: string = "X-avax1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj"
+  const address: string = "X-lux1wst8jt3z3fm9ce0z6akj3266zmgccdp03hjlaj"
   const nodeID: string = "NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ"
   const privateKey: string =
     "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
@@ -50,7 +50,7 @@ describe("Serialization", (): void => {
   const hex: string = "66726f6d20736e6f77666c616b6520746f204176616c616e636865"
   const decimalString: string = "12345"
   const num: number = 12345
-  const utf8: string = "from snowflake to Avalanche"
+  const utf8: string = "from snowflake to Lux"
   const bn: BN = new BN(9000)
   const name: string = "BaseTx"
   const denomination: Buffer = Buffer.alloc(1)
@@ -328,7 +328,7 @@ describe("Serialization", (): void => {
     const amount: BN = new BN(0)
     const amountHex: string = "0000000000000000"
     const bytes: string = "0000000000000000000000000000000000000000"
-    const xAddress: string = "X-avax1pdurs53v6vtue9sw7am9ayjqh9mcnqe9s80sgn"
+    const xAddress: string = "X-lux1pdurs53v6vtue9sw7am9ayjqh9mcnqe9s80sgn"
     const xAddressHex: string = "0b7838522cd317cc960ef7765e9240b977898325"
     const address: string = "X-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u"
     const bech32: SerializedType = "bech32"
@@ -339,7 +339,7 @@ describe("Serialization", (): void => {
     const assetID: Buffer = serialization.typeToBuffer(cChainID, cb58)
     const assetidHex: string =
       "9d0775f450604bd2fbc49ce0c5c1c6dfeb2dc2acb8c92c26eeae6e6df4502b19"
-    const payload: Buffer = Buffer.from("From snowflake to Avalanche")
+    const payload: Buffer = Buffer.from("From snowflake to Lux")
     const groupIDHex: string = "00003039"
     const payloadHex: string =
       "46726f6d20736e6f77666c616b6520746f204176616c616e636865"

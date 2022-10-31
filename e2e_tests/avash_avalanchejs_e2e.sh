@@ -7,19 +7,19 @@ is_bootstrapped () {
     curl -s -X POST --data '{ "jsonrpc":"2.0", "id"     :1, "method" :"health.getLiveness" }' -H 'content-type:application/json;' $node_ip:$node_port/ext/health | grep true > /dev/null
 }
 
-avalanchego_ip=127.0.0.1
-avalanchego_ports=$(seq 9650 2 9658)
+luxgo_ip=127.0.0.1
+luxgo_ports=$(seq 9650 2 9658)
 
 max_bootstrapping_time=130
 
-[ $# != 2 ] && echo usage: $0 avash_dir avalanchejs_dir && exit 1
+[ $# != 2 ] && echo usage: $0 avash_dir luxjs_dir && exit 1
 
 avash_location=$1
-avalanchejs_location=$2
+luxjs_location=$2
 
 # make absolute paths
 avash_location=$(cd $avash_location; pwd)
-avalanchejs_location=$(cd $avalanchejs_location; pwd)
+luxjs_location=$(cd $luxjs_location; pwd)
 
 # create avash ipc fifo
 fifo_fname=$avash_location/avash.fifo
@@ -36,16 +36,16 @@ echo runscript scripts/five_node_staking.lua >> $fifo_fname
 start_time=$(date -u +%s)
 elapsed=0
 sleep 2
-for port in $avalanchego_ports
+for port in $luxgo_ports
 do
-    echo waiting for node $avalanchego_ip:$port to finish bootstrapping
-    is_bootstrapped $avalanchego_ip $port
+    echo waiting for node $luxgo_ip:$port to finish bootstrapping
+    is_bootstrapped $luxgo_ip $port
     while [ $? != 0 ] && [ $elapsed -lt $max_bootstrapping_time ]
     do
         sleep 5
         end_time=$(date -u +%s)
         elapsed=$(($end_time-$start_time))
-        is_bootstrapped $avalanchego_ip $port
+        is_bootstrapped $luxgo_ip $port
     done
 done
 echo elapsed: $elapsed seconds
@@ -55,16 +55,16 @@ then
 fi
 
 # execute tests
-export AVALANCHEGO_IP=$avalanchego_ip
-export AVALANCHEGO_PORT=$(echo $avalanchego_ports | cut -d" " -f1)
-echo testing on avalanchego $AVALANCHEGO_IP:$AVALANCHEGO_PORT
-cd $avalanchejs_location
+export LUXD_IP=$luxgo_ip
+export LUXD_PORT=$(echo $luxgo_ports | cut -d" " -f1)
+echo testing on luxgo $LUXD_IP:$LUXD_PORT
+cd $luxjs_location
 yarn test -i --roots e2e_tests
 
 # end avash network
 cd $avash_location
 echo exit >> $fifo_fname
-echo killall avalanchego
+echo killall luxgo
 
 # cleanup
 rm -f $fifo_fname

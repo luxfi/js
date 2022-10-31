@@ -1,17 +1,17 @@
-import { Avalanche } from "src"
+import { Lux } from "src"
 
-export const getAvalanche = (): Avalanche => {
-  if (typeof process.env.AVALANCHEGO_IP === "undefined") {
-    throw "Undefined environment variable: AVALANCHEGO_IP"
+export const getLux = (): Lux => {
+  if (typeof process.env.LUXD_IP === "undefined") {
+    throw "Undefined environment variable: LUXD_IP"
   }
-  if (typeof process.env.AVALANCHEGO_PORT === "undefined") {
-    throw "Undefined environment variable: AVALANCHEGO_PORT"
+  if (typeof process.env.LUXD_PORT === "undefined") {
+    throw "Undefined environment variable: LUXD_PORT"
   }
-  const avalanche: Avalanche = new Avalanche(
-    process.env.AVALANCHEGO_IP,
-    parseInt(process.env.AVALANCHEGO_PORT)
+  const lux: Lux = new Lux(
+    process.env.LUXD_IP,
+    parseInt(process.env.LUXD_PORT)
   )
-  return avalanche
+  return lux
 }
 
 export enum Matcher {

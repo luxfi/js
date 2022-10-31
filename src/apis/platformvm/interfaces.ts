@@ -79,14 +79,14 @@ export interface GetPendingValidatorsParams {
   nodeIDs?: string[]
 }
 
-export interface ExportAVAXParams {
+export interface ExportLUXParams {
   username: string
   password: string
   amount: string
   to: string
 }
 
-export interface ImportAVAXParams {
+export interface ImportLUXParams {
   username: string
   password: string
   sourceChain: string

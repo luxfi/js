@@ -216,8 +216,8 @@ export abstract class WeightedValidatorTx extends ValidatorTx {
    * @param memo Optional. {@link https://github.com/feross/buffer|Buffer} for the memo field
    * @param nodeID Optional. The node ID of the validator being added.
    * @param startTime Optional. The Unix time when the validator starts validating the Primary Network.
-   * @param endTime Optional. The Unix time when the validator stops validating the Primary Network (and staked AVAX is returned).
-   * @param weight Optional. The amount of nAVAX the validator is staking.
+   * @param endTime Optional. The Unix time when the validator stops validating the Primary Network (and staked LUX is returned).
+   * @param weight Optional. The amount of nLUX the validator is staking.
    */
   constructor(
     networkID: number = DefaultNetworkID,
@@ -376,8 +376,8 @@ export class AddDelegatorTx extends WeightedValidatorTx {
    * @param memo Optional. {@link https://github.com/feross/buffer|Buffer} for the memo field
    * @param nodeID Optional. The node ID of the validator being added.
    * @param startTime Optional. The Unix time when the validator starts validating the Primary Network.
-   * @param endTime Optional. The Unix time when the validator stops validating the Primary Network (and staked AVAX is returned).
-   * @param stakeAmount Optional. The amount of nAVAX the validator is staking.
+   * @param endTime Optional. The Unix time when the validator stops validating the Primary Network (and staked LUX is returned).
+   * @param stakeAmount Optional. The amount of nLUX the validator is staking.
    * @param stakeOuts Optional. The outputs used in paying the stake.
    * @param rewardOwners Optional. The [[ParseableOutput]] containing a [[SECPOwnerOutput]] for the rewards.
    */
@@ -496,8 +496,8 @@ export class AddValidatorTx extends AddDelegatorTx {
    * @param memo Optional. {@link https://github.com/feross/buffer|Buffer} for the memo field
    * @param nodeID Optional. The node ID of the validator being added.
    * @param startTime Optional. The Unix time when the validator starts validating the Primary Network.
-   * @param endTime Optional. The Unix time when the validator stops validating the Primary Network (and staked AVAX is returned).
-   * @param stakeAmount Optional. The amount of nAVAX the validator is staking.
+   * @param endTime Optional. The Unix time when the validator stops validating the Primary Network (and staked LUX is returned).
+   * @param stakeAmount Optional. The amount of nLUX the validator is staking.
    * @param stakeOuts Optional. The outputs used in paying the stake.
    * @param rewardOwners Optional. The [[ParseableOutput]] containing the [[SECPOwnerOutput]] for the rewards.
    * @param delegationFee Optional. The percent fee this validator charges when others delegate stake to them.

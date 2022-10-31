@@ -1,6 +1,6 @@
 # Admin RPC
 
-Example scripts for the Avalanche [Admin RPC](https://docs.avax.network/build/avalanchego-apis/admin-api)
+Example scripts for the Lux [Admin RPC](https://docs.lux.network/build/luxgo-apis/admin-api)
 
 * [alias.ts](./alias.ts)
 * [aliasChain.ts](./aliasChain.ts)

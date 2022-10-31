@@ -1,10 +1,10 @@
-import { getAvalanche, createTests, Matcher } from "./e2etestlib"
+import { getLux, createTests, Matcher } from "./e2etestlib"
 import { HealthAPI } from "../src/apis/health/api"
-import Avalanche from "src"
+import Lux from "src"
 
 describe("Info", (): void => {
-  const avalanche: Avalanche = getAvalanche()
-  const health: HealthAPI = avalanche.Health()
+  const lux: Lux = getLux()
+  const health: HealthAPI = lux.Health()
 
   // test_name          response_promise               resp_fn                 matcher           expected_value/obtained_value
   const tests_spec: any = [

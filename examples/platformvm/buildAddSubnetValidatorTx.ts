@@ -1,24 +1,24 @@
-import { Avalanche, BN, Buffer } from "avalanche/dist"
+import { Lux, BN, Buffer } from "lux/dist"
 import {
   PlatformVMAPI,
   KeyChain,
   UTXOSet,
   UnsignedTx,
   Tx
-} from "avalanche/dist/apis/platformvm"
-import { GetUTXOsResponse } from "avalanche/dist/apis/platformvm/interfaces"
+} from "lux/dist/apis/platformvm"
+import { GetUTXOsResponse } from "lux/dist/apis/platformvm/interfaces"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   UnixNow
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const pchain: PlatformVMAPI = avalanche.PChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const pchain: PlatformVMAPI = lux.PChain()
 // Keychain with 4 keys-A, B, C, and D
 const pKeychain: KeyChain = pchain.keyChain()
 // Keypair A

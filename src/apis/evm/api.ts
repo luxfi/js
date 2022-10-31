@@ -5,7 +5,7 @@
 
 import { Buffer } from "buffer/"
 import BN from "bn.js"
-import AvalancheCore from "../../avalanche"
+import LuxCore from "../../lux"
 import { JRPCAPI } from "../../common/jrpcapi"
 import { RequestResponseData } from "../../common/apibase"
 import BinTools from "../../utils/bintools"
@@ -31,14 +31,14 @@ import {
 } from "../../utils/errors"
 import { Serialization, SerializedType } from "../../utils"
 import {
-  ExportAVAXParams,
+  ExportLUXParams,
   ExportKeyParams,
   ExportParams,
   GetAtomicTxParams,
   GetAssetDescriptionParams,
   GetAtomicTxStatusParams,
   GetUTXOsParams,
-  ImportAVAXParams,
+  ImportLUXParams,
   ImportKeyParams,
   ImportParams
 } from "./interfaces"
@@ -54,7 +54,7 @@ const serialization: Serialization = Serialization.getInstance()
  *
  * @category RPCAPIs
  *
- * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Avalanche.addAPI]] function to register this interface with Avalanche.
+ * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Lux.addAPI]] function to register this interface with Lux.
  */
 export class EVMAPI extends JRPCAPI {
   /**
@@ -63,7 +63,7 @@ export class EVMAPI extends JRPCAPI {
   protected keychain: KeyChain = new KeyChain("", "")
   protected blockchainID: string = ""
   protected blockchainAlias: string = undefined
-  protected AVAXAssetID: Buffer = undefined
+  protected LUXAssetID: Buffer = undefined
   protected txFee: BN = undefined
 
   /**
@@ -201,32 +201,32 @@ export class EVMAPI extends JRPCAPI {
   }
 
   /**
-   * Fetches the AVAX AssetID and returns it in a Promise.
+   * Fetches the LUX AssetID and returns it in a Promise.
    *
    * @param refresh This function caches the response. Refresh = true will bust the cache.
    *
-   * @returns The the provided string representing the AVAX AssetID
+   * @returns The the provided string representing the LUX AssetID
    */
-  getAVAXAssetID = async (refresh: boolean = false): Promise<Buffer> => {
-    if (typeof this.AVAXAssetID === "undefined" || refresh) {
+  getLUXAssetID = async (refresh: boolean = false): Promise<Buffer> => {
+    if (typeof this.LUXAssetID === "undefined" || refresh) {
       const asset: Asset = await this.getAssetDescription(PrimaryAssetAlias)
-      this.AVAXAssetID = asset.assetID
+      this.LUXAssetID = asset.assetID
     }
-    return this.AVAXAssetID
+    return this.LUXAssetID
   }
 
   /**
-   * Overrides the defaults and sets the cache to a specific AVAX AssetID
+   * Overrides the defaults and sets the cache to a specific LUX AssetID
    *
-   * @param avaxAssetID A cb58 string or Buffer representing the AVAX AssetID
+   * @param luxAssetID A cb58 string or Buffer representing the LUX AssetID
    *
-   * @returns The the provided string representing the AVAX AssetID
+   * @returns The the provided string representing the LUX AssetID
    */
-  setAVAXAssetID = (avaxAssetID: string | Buffer) => {
-    if (typeof avaxAssetID === "string") {
-      avaxAssetID = bintools.cb58Decode(avaxAssetID)
+  setLUXAssetID = (luxAssetID: string | Buffer) => {
+    if (typeof luxAssetID === "string") {
+      luxAssetID = bintools.cb58Decode(luxAssetID)
     }
-    this.AVAXAssetID = avaxAssetID
+    this.LUXAssetID = luxAssetID
   }
 
   /**
@@ -280,7 +280,7 @@ export class EVMAPI extends JRPCAPI {
     }
 
     const response: RequestResponseData = await this.callMethod(
-      "avax.getAtomicTxStatus",
+      "lux.getAtomicTxStatus",
       params
     )
     return response.data.result.status
@@ -301,7 +301,7 @@ export class EVMAPI extends JRPCAPI {
     }
 
     const response: RequestResponseData = await this.callMethod(
-      "avax.getAtomicTx",
+      "lux.getAtomicTx",
       params
     )
     return response.data.result.tx
@@ -320,13 +320,13 @@ export class EVMAPI extends JRPCAPI {
   }
 
   /**
-   * Send ANT (Avalanche Native Token) assets including AVAX from the C-Chain to an account on the X-Chain.
+   * Send ANT (Lux Native Token) assets including LUX from the C-Chain to an account on the X-Chain.
    *
    * After calling this method, you must call the X-Chain’s import method to complete the transfer.
    *
    * @param username The Keystore user that controls the X-Chain account specified in `to`
    * @param password The password of the Keystore user
-   * @param to The account on the X-Chain to send the AVAX to.
+   * @param to The account on the X-Chain to send the LUX to.
    * @param amount Amount of asset to export as a {@link https://github.com/indutny/bn.js/|BN}
    * @param assetID The asset id which is being sent
    *
@@ -347,7 +347,7 @@ export class EVMAPI extends JRPCAPI {
       assetID
     }
     const response: RequestResponseData = await this.callMethod(
-      "avax.export",
+      "lux.export",
       params
     )
     return response.data.result.txID
@@ -356,31 +356,31 @@ export class EVMAPI extends JRPCAPI {
   }
 
   /**
-   * Send AVAX from the C-Chain to an account on the X-Chain.
+   * Send LUX from the C-Chain to an account on the X-Chain.
    *
-   * After calling this method, you must call the X-Chain’s importAVAX method to complete the transfer.
+   * After calling this method, you must call the X-Chain’s importLUX method to complete the transfer.
    *
    * @param username The Keystore user that controls the X-Chain account specified in `to`
    * @param password The password of the Keystore user
-   * @param to The account on the X-Chain to send the AVAX to.
-   * @param amount Amount of AVAX to export as a {@link https://github.com/indutny/bn.js/|BN}
+   * @param to The account on the X-Chain to send the LUX to.
+   * @param amount Amount of LUX to export as a {@link https://github.com/indutny/bn.js/|BN}
    *
    * @returns String representing the transaction id
    */
-  exportAVAX = async (
+  exportLUX = async (
     username: string,
     password: string,
     to: string,
     amount: BN
   ): Promise<string> => {
-    const params: ExportAVAXParams = {
+    const params: ExportLUXParams = {
       to,
       amount: amount.toString(10),
       username,
       password
     }
     const response: RequestResponseData = await this.callMethod(
-      "avax.exportAVAX",
+      "lux.exportLUX",
       params
     )
     return response.data.result.txID
@@ -428,7 +428,7 @@ export class EVMAPI extends JRPCAPI {
     }
 
     const response: RequestResponseData = await this.callMethod(
-      "avax.getUTXOs",
+      "lux.getUTXOs",
       params
     )
     const utxos: UTXOSet = new UTXOSet()
@@ -448,7 +448,7 @@ export class EVMAPI extends JRPCAPI {
   }
 
   /**
-   * Send ANT (Avalanche Native Token) assets including AVAX from an account on the X-Chain to an address on the C-Chain. This transaction
+   * Send ANT (Lux Native Token) assets including LUX from an account on the X-Chain to an address on the C-Chain. This transaction
    * must be signed with the key of the account that the asset is sent from and which pays
    * the transaction fee.
    *
@@ -473,7 +473,7 @@ export class EVMAPI extends JRPCAPI {
       password
     }
     const response: RequestResponseData = await this.callMethod(
-      "avax.import",
+      "lux.import",
       params
     )
     return response.data.result.txID
@@ -482,33 +482,33 @@ export class EVMAPI extends JRPCAPI {
   }
 
   /**
-   * Send AVAX from an account on the X-Chain to an address on the C-Chain. This transaction
-   * must be signed with the key of the account that the AVAX is sent from and which pays
+   * Send LUX from an account on the X-Chain to an address on the C-Chain. This transaction
+   * must be signed with the key of the account that the LUX is sent from and which pays
    * the transaction fee.
    *
    * @param username The Keystore user that controls the account specified in `to`
    * @param password The password of the Keystore user
-   * @param to The address of the account the AVAX is sent to. This must be the same as the to
-   * argument in the corresponding call to the X-Chain’s exportAVAX
+   * @param to The address of the account the LUX is sent to. This must be the same as the to
+   * argument in the corresponding call to the X-Chain’s exportLUX
    * @param sourceChain The chainID where the funds are coming from.
    *
    * @returns Promise for a string for the transaction, which should be sent to the network
    * by calling issueTx.
    */
-  importAVAX = async (
+  importLUX = async (
     username: string,
     password: string,
     to: string,
     sourceChain: string
   ): Promise<string> => {
-    const params: ImportAVAXParams = {
+    const params: ImportLUXParams = {
       to,
       sourceChain,
       username,
       password
     }
     const response: RequestResponseData = await this.callMethod(
-      "avax.importAVAX",
+      "lux.importLUX",
       params
     )
     return response.data.result.txID
@@ -536,7 +536,7 @@ export class EVMAPI extends JRPCAPI {
       privateKey
     }
     const response: RequestResponseData = await this.callMethod(
-      "avax.importKey",
+      "lux.importKey",
       params
     )
     return response.data.result.address
@@ -564,7 +564,7 @@ export class EVMAPI extends JRPCAPI {
     } else {
       /* istanbul ignore next */
       throw new TransactionError(
-        "Error - avax.issueTx: provided tx is not expected type of string, Buffer, or Tx"
+        "Error - lux.issueTx: provided tx is not expected type of string, Buffer, or Tx"
       )
     }
     const params: IssueTxParams = {
@@ -572,7 +572,7 @@ export class EVMAPI extends JRPCAPI {
       encoding: "hex"
     }
     const response: RequestResponseData = await this.callMethod(
-      "avax.issueTx",
+      "lux.issueTx",
       params
     )
     return response.data.result.txID
@@ -600,7 +600,7 @@ export class EVMAPI extends JRPCAPI {
       address
     }
     const response: RequestResponseData = await this.callMethod(
-      "avax.exportKey",
+      "lux.exportKey",
       params
     )
     return response.data.result
@@ -657,8 +657,8 @@ export class EVMAPI extends JRPCAPI {
     )
     const atomicUTXOs: UTXOSet = utxoResponse.utxos
     const networkID: number = this.core.getNetworkID()
-    const avaxAssetID: string = Defaults.network[`${networkID}`].X.avaxAssetID
-    const avaxAssetIDBuf: Buffer = bintools.cb58Decode(avaxAssetID)
+    const luxAssetID: string = Defaults.network[`${networkID}`].X.luxAssetID
+    const luxAssetIDBuf: Buffer = bintools.cb58Decode(luxAssetID)
     const atomics: UTXO[] = atomicUTXOs.getAllUTXOs()
 
     if (atomics.length === 0) {
@@ -674,7 +674,7 @@ export class EVMAPI extends JRPCAPI {
       atomics,
       sourceChain,
       fee,
-      avaxAssetIDBuf
+      luxAssetIDBuf
     )
 
     return builtUnsignedTx
@@ -734,7 +734,7 @@ export class EVMAPI extends JRPCAPI {
         "Error - EVMAPI.buildExportTx: Destination ChainID must be 32 bytes in length."
       )
     }
-    const assetDescription: any = await this.getAssetDescription("AVAX")
+    const assetDescription: any = await this.getAssetDescription("LUX")
     let evmInputs: EVMInput[] = []
     if (bintools.cb58Encode(assetDescription.assetID) === assetID) {
       const evmInput: EVMInput = new EVMInput(
@@ -746,17 +746,17 @@ export class EVMAPI extends JRPCAPI {
       evmInput.addSignatureIdx(0, bintools.stringToAddress(fromAddressBech))
       evmInputs.push(evmInput)
     } else {
-      // if asset id isn't AVAX asset id then create 2 inputs
-      // first input will be AVAX and will be for the amount of the fee
+      // if asset id isn't LUX asset id then create 2 inputs
+      // first input will be LUX and will be for the amount of the fee
       // second input will be the ANT
-      const evmAVAXInput: EVMInput = new EVMInput(
+      const evmLUXInput: EVMInput = new EVMInput(
         fromAddressHex,
         fee,
         assetDescription.assetID,
         nonce
       )
-      evmAVAXInput.addSignatureIdx(0, bintools.stringToAddress(fromAddressBech))
-      evmInputs.push(evmAVAXInput)
+      evmLUXInput.addSignatureIdx(0, bintools.stringToAddress(fromAddressBech))
+      evmInputs.push(evmLUXInput)
 
       const evmANTInput: EVMInput = new EVMInput(
         fromAddressHex,
@@ -861,15 +861,15 @@ export class EVMAPI extends JRPCAPI {
 
   /**
    * This class should not be instantiated directly.
-   * Instead use the [[Avalanche.addAPI]] method.
+   * Instead use the [[Lux.addAPI]] method.
    *
-   * @param core A reference to the Avalanche class
-   * @param baseURL Defaults to the string "/ext/bc/C/avax" as the path to blockchain's baseURL
+   * @param core A reference to the Lux class
+   * @param baseURL Defaults to the string "/ext/bc/C/lux" as the path to blockchain's baseURL
    * @param blockchainID The Blockchain's ID. Defaults to an empty string: ""
    */
   constructor(
-    core: AvalancheCore,
-    baseURL: string = "/ext/bc/C/avax",
+    core: LuxCore,
+    baseURL: string = "/ext/bc/C/lux",
     blockchainID: string = ""
   ) {
     super(core, baseURL)

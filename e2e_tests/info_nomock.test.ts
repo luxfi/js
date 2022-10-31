@@ -1,11 +1,11 @@
-import { getAvalanche, createTests, Matcher } from "./e2etestlib"
+import { getLux, createTests, Matcher } from "./e2etestlib"
 import { InfoAPI } from "src/apis/info/api"
 import BN from "bn.js"
-import Avalanche from "src"
+import Lux from "src"
 
 describe("Info", (): void => {
-  const avalanche: Avalanche = getAvalanche()
-  const info: InfoAPI = avalanche.Info()
+  const lux: Lux = getLux()
+  const info: InfoAPI = lux.Info()
 
   // test_name          response_promise               resp_fn                 matcher           expected_value/obtained_value
   const tests_spec: any = [
@@ -42,7 +42,7 @@ describe("Info", (): void => {
       () => info.getNodeVersion(),
       (x) => x,
       Matcher.toMatch,
-      () => /^avalanche\/\d*\.\d*\.\d*$/
+      () => /^lux\/\d*\.\d*\.\d*$/
     ],
     [
       "isBootstrapped",

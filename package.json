@@ -1,7 +1,7 @@
 {
-  "name": "avalanche",
+  "name": "luxjs",
   "version": "3.15.5",
-  "description": "Avalanche Platform JS Library",
+  "description": "Lux Platform JS Library",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist/ && npx tsc -b && cp -r typings/src ./dist",
@@ -25,14 +25,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ava-labs/avalanchejs.git"
+    "url": "git+https://github.com/luxdefi/luxjs.git"
   },
   "keywords": [
-    "Avalanche",
+    "Lux",
     "blockchain",
     "defi"
   ],
-  "author": "Gabriel Cardona <gabriel@avalabs.org>",
+  "author": "Zach Kelling <z@lux.partners>",
   "contributors": [
     "Evan Richard <evan@avalabs.org>",
     "Paul Kim <paul.kim@avalabs.org>",
@@ -42,9 +42,9 @@
   ],
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/ava-labs/avalanchejs/issues"
+    "url": "https://github.com/luxdefi/luxjs/issues"
   },
-  "homepage": "https://github.com/ava-labs/avalanchejs#readme",
+  "homepage": "https://github.com/luxdefi/luxjs#readme",
   "devDependencies": {
     "@types/bech32": "1.1.4",
     "@types/bn.js": "5.1.1",

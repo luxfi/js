@@ -4,7 +4,7 @@
  */
 import BN from "bn.js"
 import { Buffer } from "buffer/"
-import AvalancheCore from "../../avalanche"
+import LuxCore from "../../lux"
 import BinTools from "../../utils/bintools"
 import { UTXO, UTXOSet } from "./utxos"
 import { AVMConstants } from "./constants"
@@ -16,7 +16,7 @@ import { InitialStates } from "./initialstates"
 import { UnixNow } from "../../utils/helperfunctions"
 import { JRPCAPI } from "../../common/jrpcapi"
 import { RequestResponseData } from "../../common/apibase"
-import { Defaults, PrimaryAssetAlias, ONEAVAX } from "../../utils/constants"
+import { Defaults, PrimaryAssetAlias, ONELUX } from "../../utils/constants"
 import { MinterSet } from "./minterset"
 import { PersistanceOptions } from "../../utils/persistenceoptions"
 import { OutputOwners } from "../../common/output"
@@ -40,7 +40,7 @@ import {
   ExportKeyParams,
   GetAllBalancesParams,
   GetAssetDescriptionParams,
-  GetAVAXAssetIDParams,
+  GetLUXAssetIDParams,
   GetBalanceParams,
   GetTxParams,
   GetTxStatusParams,
@@ -77,7 +77,7 @@ const serialization: Serialization = Serialization.getInstance()
  *
  * @category RPCAPIs
  *
- * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Avalanche.addAPI]] function to register this interface with Avalanche.
+ * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Lux.addAPI]] function to register this interface with Lux.
  */
 export class AVMAPI extends JRPCAPI {
   /**
@@ -86,7 +86,7 @@ export class AVMAPI extends JRPCAPI {
   protected keychain: KeyChain = new KeyChain("", "")
   protected blockchainID: string = ""
   protected blockchainAlias: string = undefined
-  protected AVAXAssetID: Buffer = undefined
+  protected LUXAssetID: Buffer = undefined
   protected txFee: BN = undefined
   protected creationTxFee: BN = undefined
   protected mintTxFee: BN = undefined
@@ -182,34 +182,34 @@ export class AVMAPI extends JRPCAPI {
   }
 
   /**
-   * Fetches the AVAX AssetID and returns it in a Promise.
+   * Fetches the LUX AssetID and returns it in a Promise.
    *
    * @param refresh This function caches the response. Refresh = true will bust the cache.
    *
-   * @returns The the provided string representing the AVAX AssetID
+   * @returns The the provided string representing the LUX AssetID
    */
-  getAVAXAssetID = async (refresh: boolean = false): Promise<Buffer> => {
-    if (typeof this.AVAXAssetID === "undefined" || refresh) {
-      const asset: GetAVAXAssetIDParams = await this.getAssetDescription(
+  getLUXAssetID = async (refresh: boolean = false): Promise<Buffer> => {
+    if (typeof this.LUXAssetID === "undefined" || refresh) {
+      const asset: GetLUXAssetIDParams = await this.getAssetDescription(
         PrimaryAssetAlias
       )
-      this.AVAXAssetID = asset.assetID
+      this.LUXAssetID = asset.assetID
     }
-    return this.AVAXAssetID
+    return this.LUXAssetID
   }
 
   /**
-   * Overrides the defaults and sets the cache to a specific AVAX AssetID
+   * Overrides the defaults and sets the cache to a specific LUX AssetID
    *
-   * @param avaxAssetID A cb58 string or Buffer representing the AVAX AssetID
+   * @param luxAssetID A cb58 string or Buffer representing the LUX AssetID
    *
-   * @returns The the provided string representing the AVAX AssetID
+   * @returns The the provided string representing the LUX AssetID
    */
-  setAVAXAssetID = (avaxAssetID: string | Buffer) => {
-    if (typeof avaxAssetID === "string") {
-      avaxAssetID = bintools.cb58Decode(avaxAssetID)
+  setLUXAssetID = (luxAssetID: string | Buffer) => {
+    if (typeof luxAssetID === "string") {
+      luxAssetID = bintools.cb58Decode(luxAssetID)
     }
-    this.AVAXAssetID = avaxAssetID
+    this.LUXAssetID = luxAssetID
   }
 
   /**
@@ -343,12 +343,12 @@ export class AVMAPI extends JRPCAPI {
     utx: UnsignedTx,
     outTotal: BN = new BN(0)
   ): Promise<boolean> => {
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
     const outputTotal: BN = outTotal.gt(new BN(0))
       ? outTotal
-      : utx.getOutputTotal(avaxAssetID)
-    const fee: BN = utx.getBurn(avaxAssetID)
-    if (fee.lte(ONEAVAX.mul(new BN(10))) || fee.lte(outputTotal)) {
+      : utx.getOutputTotal(luxAssetID)
+    const fee: BN = utx.getBurn(luxAssetID)
+    if (fee.lte(ONELUX.mul(new BN(10))) || fee.lte(outputTotal)) {
       return true
     } else {
       return false
@@ -413,8 +413,8 @@ export class AVMAPI extends JRPCAPI {
   /**
    * Create a new fixed-cap, fungible asset. A quantity of it is created at initialization and there no more is ever created.
    *
-   * @param username The user paying the transaction fee (in $AVAX) for asset creation
-   * @param password The password for the user paying the transaction fee (in $AVAX) for asset creation
+   * @param username The user paying the transaction fee (in $LUX) for asset creation
+   * @param password The password for the user paying the transaction fee (in $LUX) for asset creation
    * @param name The human-readable name for the asset
    * @param symbol Optional. The shorthand symbol for the asset. Between 0 and 4 characters
    * @param denomination Optional. Determines how balances of this asset are displayed by user interfaces. Default is 0
@@ -424,11 +424,11 @@ export class AVMAPI extends JRPCAPI {
    * Example initialHolders:
    * [
    *   {
-   *     "address": "X-avax1kj06lhgx84h39snsljcey3tpc046ze68mek3g5",
+   *     "address": "X-lux1kj06lhgx84h39snsljcey3tpc046ze68mek3g5",
    *     "amount": 10000
    *   },
    *   {
-   *     "address": "X-avax1am4w6hfrvmh3akduzkjthrtgtqafalce6an8cr",
+   *     "address": "X-lux1am4w6hfrvmh3akduzkjthrtgtqafalce6an8cr",
    *     "amount": 50000
    *   }
    * ]
@@ -462,8 +462,8 @@ export class AVMAPI extends JRPCAPI {
   /**
    * Create a new variable-cap, fungible asset. No units of the asset exist at initialization. Minters can mint units of this asset using createMintTx, signMintTx and sendMintTx.
    *
-   * @param username The user paying the transaction fee (in $AVAX) for asset creation
-   * @param password The password for the user paying the transaction fee (in $AVAX) for asset creation
+   * @param username The user paying the transaction fee (in $LUX) for asset creation
+   * @param password The password for the user paying the transaction fee (in $LUX) for asset creation
    * @param name The human-readable name for the asset
    * @param symbol Optional. The shorthand symbol for the asset -- between 0 and 4 characters
    * @param denomination Optional. Determines how balances of this asset are displayed by user interfaces. Default is 0
@@ -474,15 +474,15 @@ export class AVMAPI extends JRPCAPI {
    * [
    *    {
    *      "minters":[
-   *        "X-avax1am4w6hfrvmh3akduzkjthrtgtqafalce6an8cr"
+   *        "X-lux1am4w6hfrvmh3akduzkjthrtgtqafalce6an8cr"
    *      ],
    *      "threshold": 1
    *     },
    *     {
    *      "minters": [
-   *        "X-avax1am4w6hfrvmh3akduzkjthrtgtqafalce6an8cr",
-   *        "X-avax1kj06lhgx84h39snsljcey3tpc046ze68mek3g5",
-   *        "X-avax1yell3e4nln0m39cfpdhgqprsd87jkh4qnakklx"
+   *        "X-lux1am4w6hfrvmh3akduzkjthrtgtqafalce6an8cr",
+   *        "X-lux1kj06lhgx84h39snsljcey3tpc046ze68mek3g5",
+   *        "X-lux1yell3e4nln0m39cfpdhgqprsd87jkh4qnakklx"
    *      ],
    *      "threshold": 2
    *     }
@@ -517,8 +517,8 @@ export class AVMAPI extends JRPCAPI {
   /**
    * Creates a family of NFT Asset. No units of the asset exist at initialization. Minters can mint units of this asset using createMintTx, signMintTx and sendMintTx.
    *
-   * @param username The user paying the transaction fee (in $AVAX) for asset creation
-   * @param password The password for the user paying the transaction fee (in $AVAX) for asset creation
+   * @param username The user paying the transaction fee (in $LUX) for asset creation
+   * @param password The password for the user paying the transaction fee (in $LUX) for asset creation
    * @param from Optional. An array of addresses managed by the node's keystore for this blockchain which will fund this transaction
    * @param changeAddr Optional. An address to send the change
    * @param name The human-readable name for the asset
@@ -615,8 +615,8 @@ export class AVMAPI extends JRPCAPI {
   /**
    * Mint non-fungible tokens which were created with AVMAPI.createNFTAsset
    *
-   * @param username The user paying the transaction fee (in $AVAX) for asset creation
-   * @param password The password for the user paying the transaction fee (in $AVAX) for asset creation
+   * @param username The user paying the transaction fee (in $LUX) for asset creation
+   * @param password The password for the user paying the transaction fee (in $LUX) for asset creation
    * @param from Optional. An array of addresses managed by the node's keystore for this blockchain which will fund this transaction
    * @param changeAddr Optional. An address to send the change
    * @param assetID The asset id which is being sent
@@ -681,8 +681,8 @@ export class AVMAPI extends JRPCAPI {
   /**
    * Send NFT from one account to another on X-Chain
    *
-   * @param username The user paying the transaction fee (in $AVAX) for asset creation
-   * @param password The password for the user paying the transaction fee (in $AVAX) for asset creation
+   * @param username The user paying the transaction fee (in $LUX) for asset creation
+   * @param password The password for the user paying the transaction fee (in $LUX) for asset creation
    * @param from Optional. An array of addresses managed by the node's keystore for this blockchain which will fund this transaction
    * @param changeAddr Optional. An address to send the change
    * @param assetID The asset id which is being sent
@@ -799,7 +799,7 @@ export class AVMAPI extends JRPCAPI {
   }
 
   /**
-   * Send ANT (Avalanche Native Token) assets including AVAX from the X-Chain to an account on the P-Chain or C-Chain.
+   * Send ANT (Lux Native Token) assets including LUX from the X-Chain to an account on the P-Chain or C-Chain.
    *
    * After calling this method, you must call the P-Chain's `import` or the C-Chain’s `import` method to complete the transfer.
    *
@@ -833,7 +833,7 @@ export class AVMAPI extends JRPCAPI {
   }
 
   /**
-   * Send ANT (Avalanche Native Token) assets including AVAX from an account on the P-Chain or C-Chain to an address on the X-Chain. This transaction
+   * Send ANT (Lux Native Token) assets including LUX from an account on the P-Chain or C-Chain to an address on the X-Chain. This transaction
    * must be signed with the key of the account that the asset is sent from and which pays
    * the transaction fee.
    *
@@ -1111,7 +1111,7 @@ export class AVMAPI extends JRPCAPI {
     const networkID: number = this.core.getNetworkID()
     const blockchainIDBuf: Buffer = bintools.cb58Decode(this.blockchainID)
     const fee: BN = this.getTxFee()
-    const feeAssetID: Buffer = await this.getAVAXAssetID()
+    const feeAssetID: Buffer = await this.getLUXAssetID()
     const builtUnsignedTx: UnsignedTx = utxoset.buildBaseTx(
       networkID,
       blockchainIDBuf,
@@ -1183,7 +1183,7 @@ export class AVMAPI extends JRPCAPI {
     if (memo instanceof PayloadBase) {
       memo = memo.getPayload()
     }
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
 
     let utxoidArray: string[] = []
     if (typeof utxoid === "string") {
@@ -1200,7 +1200,7 @@ export class AVMAPI extends JRPCAPI {
       change,
       utxoidArray,
       this.getTxFee(),
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf,
       locktime,
@@ -1280,7 +1280,7 @@ export class AVMAPI extends JRPCAPI {
     const atomicUTXOs: UTXOSet = (
       await this.getUTXOs(ownerAddresses, srcChain, 0, undefined)
     ).utxos
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
     const atomics: UTXO[] = atomicUTXOs.getAllUTXOs()
 
     if (atomics.length === 0) {
@@ -1305,7 +1305,7 @@ export class AVMAPI extends JRPCAPI {
       atomics,
       sourceChain,
       this.getTxFee(),
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf,
       locktime,
@@ -1336,8 +1336,8 @@ export class AVMAPI extends JRPCAPI {
    * @param asOf Optional. The timestamp to verify the transaction against as a {@link https://github.com/indutny/bn.js/|BN}
    * @param locktime Optional. The locktime field created in the resulting outputs
    * @param threshold Optional. The number of signatures required to spend the funds in the resultant UTXO
-   * @param assetID Optional. The assetID of the asset to send. Defaults to AVAX assetID.
-   * Regardless of the asset which you"re exporting, all fees are paid in AVAX.
+   * @param assetID Optional. The assetID of the asset to send. Defaults to LUX assetID.
+   * Regardless of the asset which you"re exporting, all fees are paid in LUX.
    *
    * @returns An unsigned transaction ([[UnsignedTx]]) which contains an [[ExportTx]].
    */
@@ -1401,9 +1401,9 @@ export class AVMAPI extends JRPCAPI {
       memo = memo.getPayload()
     }
 
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
     if (typeof assetID === "undefined") {
-      assetID = bintools.cb58Encode(avaxAssetID)
+      assetID = bintools.cb58Encode(luxAssetID)
     }
 
     const networkID: number = this.core.getNetworkID()
@@ -1420,7 +1420,7 @@ export class AVMAPI extends JRPCAPI {
       change,
       destinationChain,
       fee,
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf,
       locktime,
@@ -1447,7 +1447,7 @@ export class AVMAPI extends JRPCAPI {
    * @param initialState The [[InitialStates]] that represent the intial state of a created asset
    * @param name String for the descriptive name of the asset
    * @param symbol String for the ticker symbol of the asset
-   * @param denomination Number for the denomination which is 10^D. D must be >= 0 and <= 32. Ex: $1 AVAX = 10^9 $nAVAX
+   * @param denomination Number for the denomination which is 10^D. D must be >= 0 and <= 32. Ex: $1 LUX = 10^9 $nLUX
    * @param mintOutputs Optional. Array of [[SECPMintOutput]]s to be included in the transaction. These outputs can be spent to mint more tokens.
    * @param memo Optional CB58 Buffer or String which contains arbitrary bytes, up to 256 bytes
    * @param asOf Optional. The timestamp to verify the transaction against as a {@link https://github.com/indutny/bn.js/|BN}
@@ -1495,7 +1495,7 @@ export class AVMAPI extends JRPCAPI {
 
     const networkID: number = this.core.getNetworkID()
     const blockchainID: Buffer = bintools.cb58Decode(this.blockchainID)
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
     const fee: BN = this.getDefaultCreationTxFee()
     const builtUnsignedTx: UnsignedTx = utxoset.buildCreateAssetTx(
       networkID,
@@ -1508,7 +1508,7 @@ export class AVMAPI extends JRPCAPI {
       denomination,
       mintOutputs,
       fee,
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf
     )
@@ -1548,7 +1548,7 @@ export class AVMAPI extends JRPCAPI {
 
     const networkID: number = this.core.getNetworkID()
     const blockchainID: Buffer = bintools.cb58Decode(this.blockchainID)
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
     const fee: BN = this.getMintTxFee()
     const builtUnsignedTx: UnsignedTx = utxoset.buildSECPMintTx(
       networkID,
@@ -1559,7 +1559,7 @@ export class AVMAPI extends JRPCAPI {
       change,
       mintUTXOID,
       fee,
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf
     )
@@ -1591,15 +1591,15 @@ export class AVMAPI extends JRPCAPI {
    * [
    *      {
    *          "minters":[
-   *              "X-avax1ghstjukrtw8935lryqtnh643xe9a94u3tc75c7"
+   *              "X-lux1ghstjukrtw8935lryqtnh643xe9a94u3tc75c7"
    *          ],
    *          "threshold": 1
    *      },
    *      {
    *          "minters": [
-   *              "X-avax1yell3e4nln0m39cfpdhgqprsd87jkh4qnakklx",
-   *              "X-avax1k4nr26c80jaquzm9369j5a4shmwcjn0vmemcjz",
-   *              "X-avax1ztkzsrjnkn0cek5ryvhqswdtcg23nhge3nnr5e"
+   *              "X-lux1yell3e4nln0m39cfpdhgqprsd87jkh4qnakklx",
+   *              "X-lux1k4nr26c80jaquzm9369j5a4shmwcjn0vmemcjz",
+   *              "X-lux1ztkzsrjnkn0cek5ryvhqswdtcg23nhge3nnr5e"
    *          ],
    *          "threshold": 2
    *      }
@@ -1650,7 +1650,7 @@ export class AVMAPI extends JRPCAPI {
     const networkID: number = this.core.getNetworkID()
     const blockchainID: Buffer = bintools.cb58Decode(this.blockchainID)
     const creationTxFee: BN = this.getCreationTxFee()
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
     const builtUnsignedTx: UnsignedTx = utxoset.buildCreateNFTAssetTx(
       networkID,
       blockchainID,
@@ -1660,7 +1660,7 @@ export class AVMAPI extends JRPCAPI {
       name,
       symbol,
       creationTxFee,
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf,
       locktime
@@ -1723,7 +1723,7 @@ export class AVMAPI extends JRPCAPI {
       utxoid = [utxoid]
     }
 
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
 
     if (owners instanceof OutputOwners) {
       owners = [owners]
@@ -1742,7 +1742,7 @@ export class AVMAPI extends JRPCAPI {
       groupID,
       payload,
       txFee,
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf
     )
@@ -2073,14 +2073,14 @@ export class AVMAPI extends JRPCAPI {
   }
 
   /**
-   * This class should not be instantiated directly. Instead use the [[Avalanche.addAP`${I}`]] method.
+   * This class should not be instantiated directly. Instead use the [[Lux.addAP`${I}`]] method.
    *
-   * @param core A reference to the Avalanche class
+   * @param core A reference to the Lux class
    * @param baseURL Defaults to the string "/ext/bc/X" as the path to blockchain's baseURL
    * @param blockchainID The Blockchain"s ID. Defaults to an empty string: ""
    */
   constructor(
-    core: AvalancheCore,
+    core: LuxCore,
     baseURL: string = "/ext/bc/X",
     blockchainID: string = ""
   ) {

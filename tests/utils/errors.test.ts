@@ -1,6 +1,6 @@
 import BinTools from "../../src/utils/bintools"
 import {
-  AvalancheError,
+  LuxError,
   AddressError,
   GooseEggCheckError,
   ChainIdError,
@@ -47,17 +47,17 @@ import {
 } from "src/utils"
 
 describe("Errors", (): void => {
-  test("AvalancheError", (): void => {
+  test("LuxError", (): void => {
     try {
-      throw new AvalancheError("Testing AvalancheError", "0")
+      throw new LuxError("Testing LuxError", "0")
     } catch (error: any) {
       expect(error.getCode()).toBe("0")
     }
     expect((): void => {
-      throw new AvalancheError("Testing AvalancheError", "0")
-    }).toThrow("Testing AvalancheError")
+      throw new LuxError("Testing LuxError", "0")
+    }).toThrow("Testing LuxError")
     expect((): void => {
-      throw new AvalancheError("Testing AvalancheError", "0")
+      throw new LuxError("Testing LuxError", "0")
     }).toThrowError()
   })
 

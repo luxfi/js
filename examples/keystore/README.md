@@ -1,6 +1,6 @@
 # Keystore RPC
 
-Example scripts for the Avalanche [Keystore RPC](https://docs.avax.network/build/avalanchego-apis/keystore)
+Example scripts for the Lux [Keystore RPC](https://docs.lux.network/build/luxgo-apis/keystore)
 
 * [createUser.ts](./createUser.ts)
 * [deleteUser.ts](./deleteUser.ts)

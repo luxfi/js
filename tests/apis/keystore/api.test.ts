@@ -1,6 +1,6 @@
 import mockAxios from "jest-mock-axios"
 import { HttpResponse } from "jest-mock-axios/dist/lib/mock-axios-types"
-import { Avalanche } from "src"
+import { Lux } from "src"
 import { KeystoreAPI } from "../../../src/apis/keystore/api"
 
 describe("Keystore", (): void => {
@@ -11,7 +11,7 @@ describe("Keystore", (): void => {
   const username: string = "AvaLabs"
   const password: string = "password"
 
-  const avalanche: Avalanche = new Avalanche(
+  const lux: Lux = new Lux(
     ip,
     port,
     protocol,
@@ -24,7 +24,7 @@ describe("Keystore", (): void => {
   let keystore: KeystoreAPI
 
   beforeAll((): void => {
-    keystore = new KeystoreAPI(avalanche)
+    keystore = new KeystoreAPI(lux)
   })
 
   afterEach((): void => {

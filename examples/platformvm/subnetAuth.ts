@@ -1,5 +1,5 @@
-import { Buffer } from "avalanche/dist"
-import { SubnetAuth } from "avalanche/dist/apis/platformvm"
+import { Buffer } from "lux/dist"
+import { SubnetAuth } from "lux/dist/apis/platformvm"
 
 const address1: Buffer = Buffer.alloc(4)
 const address2: Buffer = Buffer.alloc(4)

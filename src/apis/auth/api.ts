@@ -2,7 +2,7 @@
  * @packageDocumentation
  * @module API-Auth
  */
-import AvalancheCore from "../../avalanche"
+import LuxCore from "../../lux"
 import { JRPCAPI } from "../../common/jrpcapi"
 import { RequestResponseData } from "../../common/apibase"
 import { ErrorResponseObject } from "../../utils/errors"
@@ -17,7 +17,7 @@ import {
  *
  * @category RPCAPIs
  *
- * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Avalanche.addAPI]] function to register this interface with Avalanche.
+ * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Lux.addAPI]] function to register this interface with Lux.
  */
 export class AuthAPI extends JRPCAPI {
   /**
@@ -89,13 +89,13 @@ export class AuthAPI extends JRPCAPI {
   }
 
   /**
-   * This class should not be instantiated directly. Instead use the [[Avalanche.addAPI]]
+   * This class should not be instantiated directly. Instead use the [[Lux.addAPI]]
    * method.
    *
-   * @param core A reference to the Avalanche class
+   * @param core A reference to the Lux class
    * @param baseURL Defaults to the string "/ext/auth" as the path to rpc's baseURL
    */
-  constructor(core: AvalancheCore, baseURL: string = "/ext/auth") {
+  constructor(core: LuxCore, baseURL: string = "/ext/auth") {
     super(core, baseURL)
   }
 }

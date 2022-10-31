@@ -1,4 +1,4 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
 import {
   AVMAPI,
   KeyChain,
@@ -16,12 +16,12 @@ import {
   SECPMintOutput,
   TransferableOperation,
   Tx
-} from "avalanche/dist/apis/avm"
+} from "lux/dist/apis/avm"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 // before you run this example buildCreateNFTAssetTx.ts
 
@@ -50,8 +50,8 @@ const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const xchain: AVMAPI = avalanche.XChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const xchain: AVMAPI = lux.XChain()
 const bintools: BinTools = BinTools.getInstance()
 const xKeychain: KeyChain = xchain.keyChain()
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
@@ -59,8 +59,8 @@ xKeychain.importKey(privKey)
 const xAddresses: Buffer[] = xchain.keyChain().getAddresses()
 const xAddressStrings: string[] = xchain.keyChain().getAddressStrings()
 const blockchainID: string = Defaults.network[networkID].X.blockchainID
-const avaxAssetID: string = Defaults.network[networkID].X.avaxAssetID
-const avaxAssetIDBuf: Buffer = bintools.cb58Decode(avaxAssetID)
+const luxAssetID: string = Defaults.network[networkID].X.luxAssetID
+const luxAssetIDBuf: Buffer = bintools.cb58Decode(luxAssetID)
 const outputs: TransferableOutput[] = []
 const inputs: TransferableInput[] = []
 const operations: TransferableOperation[] = []
@@ -83,7 +83,7 @@ const main = async (): Promise<any> => {
       const amountOutput: AmountOutput = utxo.getOutput() as AmountOutput
       const amt: BN = amountOutput.getAmount().clone()
 
-      if (assetID.toString("hex") === avaxAssetIDBuf.toString("hex")) {
+      if (assetID.toString("hex") === luxAssetIDBuf.toString("hex")) {
         const secpTransferOutput: SECPTransferOutput = new SECPTransferOutput(
           amt.sub(fee),
           xAddresses,
@@ -93,7 +93,7 @@ const main = async (): Promise<any> => {
         // Uncomment for codecID 00 01
         // secpTransferOutput.setCodecID(codecID)
         const transferableOutput: TransferableOutput = new TransferableOutput(
-          avaxAssetIDBuf,
+          luxAssetIDBuf,
           secpTransferOutput
         )
         outputs.push(transferableOutput)
@@ -105,7 +105,7 @@ const main = async (): Promise<any> => {
         const input: TransferableInput = new TransferableInput(
           txid,
           outputidx,
-          avaxAssetIDBuf,
+          luxAssetIDBuf,
           secpTransferInput
         )
         inputs.push(input)

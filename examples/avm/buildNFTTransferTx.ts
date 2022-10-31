@@ -1,4 +1,4 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
 import {
   AVMAPI,
   KeyChain,
@@ -7,13 +7,13 @@ import {
   Tx,
   AVMConstants,
   UTXO
-} from "avalanche/dist/apis/avm"
-import { GetUTXOsResponse } from "avalanche/dist/apis/avm/interfaces"
+} from "lux/dist/apis/avm"
+import { GetUTXOsResponse } from "lux/dist/apis/avm/interfaces"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   UnixNow
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const getUTXOIDs = (
   utxoSet: UTXOSet,
@@ -40,8 +40,8 @@ const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const xchain: AVMAPI = avalanche.XChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const xchain: AVMAPI = lux.XChain()
 const bintools: BinTools = BinTools.getInstance()
 const xKeychain: KeyChain = xchain.keyChain()
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`

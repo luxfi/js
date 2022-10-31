@@ -32,7 +32,7 @@ export class KeyPair extends SECP256k1KeyPair {
 }
 
 /**
- * Class for representing a key chain in Avalanche.
+ * Class for representing a key chain in Lux.
  *
  * @typeparam KeyPair Class extending [[SECP256k1KeyChain]] which is used as the key in [[KeyChain]]
  */

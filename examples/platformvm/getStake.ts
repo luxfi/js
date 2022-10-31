@@ -1,17 +1,17 @@
-import { Avalanche } from "avalanche/dist"
-import { PlatformVMAPI, KeyChain } from "avalanche/dist/apis/platformvm"
-import { GetStakeResponse } from "avalanche/dist/apis/platformvm/interfaces"
+import { Lux } from "lux/dist"
+import { PlatformVMAPI, KeyChain } from "lux/dist/apis/platformvm"
+import { GetStakeResponse } from "lux/dist/apis/platformvm/interfaces"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const pchain: PlatformVMAPI = avalanche.PChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const pchain: PlatformVMAPI = lux.PChain()
 const pKeychain: KeyChain = pchain.keyChain()
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
 pKeychain.importKey(privKey)

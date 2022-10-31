@@ -228,7 +228,7 @@ export class CreateAssetTx extends BaseTx {
    * @param memo Optional {@link https://github.com/feross/buffer|Buffer} for the memo field
    * @param name String for the descriptive name of the asset
    * @param symbol String for the ticker symbol of the asset
-   * @param denomination Optional number for the denomination which is 10^D. D must be >= 0 and <= 32. Ex: $1 AVAX = 10^9 $nAVAX
+   * @param denomination Optional number for the denomination which is 10^D. D must be >= 0 and <= 32. Ex: $1 LUX = 10^9 $nLUX
    * @param initialState Optional [[InitialStates]] that represent the intial state of a created asset
    */
   constructor(

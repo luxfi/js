@@ -1,8 +1,8 @@
-# AvalancheJS - The Avalanche Platform JavaScript Library
+# LuxJS - The Lux Platform JavaScript Library
 
 ## Overview
 
-AvalancheJS is a JavaScript Library for interfacing with the Avalanche Platform. It is built using TypeScript and intended to support both browser and Node.js. The AvalancheJS library allows you to issue commands to the Avalanche node APIs.
+LuxJS is a JavaScript Library for interfacing with the Lux Platform. It is built using TypeScript and intended to support both browser and Node.js. The LuxJS library allows you to issue commands to the Lux node APIs.
 
 The APIs currently supported by default are:
 
@@ -18,9 +18,9 @@ The APIs currently supported by default are:
 * PlatformVM API (P-Chain)
 * Socket
 
-We built AvalancheJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Avalanche Platform who has enabled their API endpoints for the developer's consumption. We keep the library up-to-date with the latest changes in the [Avalanche Platform Specification](https://docs.avax.network).
+We built LuxJS with ease of use in mind. With this library, any Javascript developer is able to interact with a node on the Lux Platform who has enabled their API endpoints for the developer's consumption. We keep the library up-to-date with the latest changes in the [Lux Platform Specification](https://docs.lux.network).
 
-  Using AvalancheJS, developers can:
+  Using LuxJS, developers can:
 
 * Locally manage private keys
 * Retrieve balances on addresses
@@ -28,66 +28,66 @@ We built AvalancheJS with ease of use in mind. With this library, any Javascript
 * Build and sign transactions
 * Issue signed transactions to the X-Chain, P-Chain, and C-Chain
 * Perform cross-chain swaps between the X-Chain<->P-Chain and between the X-Chain<->C-Chain
-* Add Validators and Delegators to the Primary Subnetwork by staking AVAX
+* Add Validators and Delegators to the Primary Subnetwork by staking LUX
 * Create a Subnetwork
 * Administer a local node
-* Retrieve Avalanche network information from a node
+* Retrieve Lux network information from a node
 
 ### Requirements
 
-AvalancheJS requires Node.js LTS version 14.16.0 or higher to compile.
+LuxJS requires Node.js LTS version 14.16.0 or higher to compile.
 
 ### Installation
 
-Avalanche is available for install via `yarn`:
+Lux is available for install via `yarn`:
 
-`yarn add avalanche`
+`yarn add lux`
 
 You can also pull the repo down directly and build it from scratch:
 
 `yarn build`
 
-This will generate a pure Javascript library and place it in a folder named "web" in the project root. The "avalanche.js" file can then be dropped into any project as a pure javascript implementation of Avalanche.
+This will generate a pure Javascript library and place it in a folder named "web" in the project root. The "lux.js" file can then be dropped into any project as a pure javascript implementation of Lux.
 
-The AvalancheJS library can be imported into your existing Node.js project as follows:
+The LuxJS library can be imported into your existing Node.js project as follows:
 
 ```js
-const avalanche = require("avalanche")
+const lux = require("lux")
 ```
 
 Or into your TypeScript project like this:
 
 ```js
-import { Avalanche } from "avalanche"
+import { Lux } from "lux"
 ```
 
 ### Importing essentials
 
 ```js
-import { Avalanche, BinTools, BN, Buffer } from "avalanche"
+import { Lux, BinTools, BN, Buffer } from "lux"
 
 const bintools = BinTools.getInstance()
 ```
 
 The above lines import the libraries used in the tutorials. The libraries include:
 
-* Avalanche: Our javascript module.
-* BinTools: A singleton built into AvalancheJS that is used for dealing with binary data.
-* [BN](https://www.npmjs.com/package/bn.js): A bignumber module use by AvalancheJS.
+* Lux: Our javascript module.
+* BinTools: A singleton built into LuxJS that is used for dealing with binary data.
+* [BN](https://www.npmjs.com/package/bn.js): A bignumber module use by LuxJS.
 * [Buffer](https://www.npmjs.com/package/buffer): A Buffer library.
 
 ## Example 1 &mdash; Managing X-Chain Keys
 
-AvalancheJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it's registered. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche Platform endpoint of choice.
+LuxJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it's registered. The first step in this process is to create an instance of LuxJS connected to our Lux Platform endpoint of choice.
 
 ```js
-import { Avalanche, BinTools, Buffer, BN } from "avalanche"
+import { Lux, BinTools, Buffer, BN } from "lux"
 
 const bintools = BinTools.getInstance()
 
 const myNetworkID = 12345 //default is 1, we want to override that for our local network
-const avalanche = new Avalanche("localhost", 9650, "http", myNetworkID)
-const xchain = avalanche.XChain() //returns a reference to the X-Chain used by AvalancheJS
+const lux = new Lux("localhost", 9650, "http", myNetworkID)
+const xchain = lux.XChain() //returns a reference to the X-Chain used by LuxJS
 ```
 
 ### Accessing the KeyChain
@@ -165,20 +165,20 @@ const isValid = keypair.verify(message, signature) // returns a boolean
 
 ## Example 2 &mdash; Creating An Asset
 
-This example creates an asset in the X-Chain and publishes it to the Avalanche Platform. The first step in this process is to create an instance of AvalancheJS connected to our Avalanche Platform endpoint of choice.
+This example creates an asset in the X-Chain and publishes it to the Lux Platform. The first step in this process is to create an instance of LuxJS connected to our Lux Platform endpoint of choice.
 
 ```js
-import { Avalanche, BinTools, Buffer, BN } from "avalanche"
-import { InitialStates, SECPTransferOutput } from "avalanche/dist/apis/avm"
+import { Lux, BinTools, Buffer, BN } from "lux"
+import { InitialStates, SECPTransferOutput } from "lux/dist/apis/avm"
 
 const myNetworkID = 12345 // default is 1, we want to override that for our local network
-const avalanche = new Avalanche("localhost", 9650, "http", myNetworkID)
-const xchain = avalanche.XChain() // returns a reference to the X-Chain used by AvalancheJS
+const lux = new Lux("localhost", 9650, "http", myNetworkID)
+const xchain = lux.XChain() // returns a reference to the X-Chain used by LuxJS
 ```
 
 ### Describe the new asset
 
-The first steps in creating a new asset using AvalancheJS is to determine the qualities of the asset. We will give the asset a name, a ticker symbol, as well as a denomination.
+The first steps in creating a new asset using LuxJS is to determine the qualities of the asset. We will give the asset a name, a ticker symbol, as well as a denomination.
 
 ```js
 // Name our new coin and give it a symbol
@@ -186,7 +186,7 @@ const name = "TeamRocket"
 const symbol = "ROKT"
 
 // Where is the decimal point indicate what 1 asset is and where fractional assets begin
-// Ex: 1 AVAX is denomination 9, so the smallest unit of AVAX is nanoAVAX (nAVAX) at 10^-9 AVAX
+// Ex: 1 LUX is denomination 9, so the smallest unit of LUX is nanoLUX (nLUX) at 10^-9 LUX
 const denomination = 9
 ```
 
@@ -247,7 +247,7 @@ const signed = unsigned.sign(xchain) // returns a Tx class
 
 Now that we have a signed transaction ready to send to the network, let's issue it!
 
-Using the AvalancheJS X-Chain API, we going to call the `issueTx` function. This function can take either the Tx class returned in the previous step, a CB58 representation of the transaction, or a raw Buffer class with the data for the transaction. Examples of each are below:
+Using the LuxJS X-Chain API, we going to call the `issueTx` function. This function can take either the Tx class returned in the previous step, a CB58 representation of the transaction, or a raw Buffer class with the data for the transaction. Examples of each are below:
 
 ```js
 // using the Tx class
@@ -288,19 +288,19 @@ The X-Chain uses the TxID of the transaction which created the asset as the uniq
 
 ## Example 3 &mdash; Sending An Asset
 
-This example sends an asset in the X-Chain to a single recipient. The first step in this process is to create an instance of Avalanche connected to our Avalanche Platform endpoint of choice.
+This example sends an asset in the X-Chain to a single recipient. The first step in this process is to create an instance of Lux connected to our Lux Platform endpoint of choice.
 
 ```js
-import { Avalanche, BinTools, Buffer, BN } from "avalanche"
+import { Lux, BinTools, Buffer, BN } from "lux"
 
 const myNetworkID = 12345 // default is 1, we want to override that for our local network
-const avalanche = new avalanche.Avalanche(
+const lux = new lux.Lux(
   "localhost",
   9650,
   "http",
   myNetworkID
 )
-const xchain = avalanche.XChain() // returns a reference to the X-Chain used by AvalancheJS
+const xchain = lux.XChain() // returns a reference to the X-Chain used by LuxJS
 ```
 
 We're also assuming that the keystore contains a list of addresses used in this transaction.
@@ -333,7 +333,7 @@ We have 400 coins! We're going to now send 100 of those coins to our friend's ad
 
 ```js
 const sendAmount = new BN(100) // amounts are in BN format
-const friendsAddress = "X-avax1k26jvfdzyukms95puxcceyzsa3lzwf5ftt0fjk" // address format is Bech32
+const friendsAddress = "X-lux1k26jvfdzyukms95puxcceyzsa3lzwf5ftt0fjk" // address format is Bech32
 
 // The below returns a UnsignedTx
 // Parameters sent are (in order of appearance):
@@ -400,7 +400,7 @@ yarn build && yarn test
 ```
 
 If the E2E check does not pass, go into the 'checks' section of the PR.
-`https://github.com/ava-labs/avalanchejs/pull/<PR number>/checks`
+`https://github.com/ava-labs/luxjs/pull/<PR number>/checks`
 
 * Click on the `> E2E` tab on the left
 * Click 'Re-run jobs' on the right

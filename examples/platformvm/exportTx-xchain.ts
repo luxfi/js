@@ -1,5 +1,5 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
-import { AVMAPI, KeyChain as AVMKeyChain } from "avalanche/dist/apis/avm"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
+import { AVMAPI, KeyChain as AVMKeyChain } from "lux/dist/apis/avm"
 import {
   PlatformVMAPI,
   KeyChain,
@@ -13,22 +13,22 @@ import {
   UnsignedTx,
   Tx,
   ExportTx
-} from "avalanche/dist/apis/platformvm"
-import { Output } from "avalanche/dist/common"
+} from "lux/dist/apis/platformvm"
+import { Output } from "lux/dist/common"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults,
-  MILLIAVAX
-} from "avalanche/dist/utils"
+  MILLILUX
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const xchain: AVMAPI = avalanche.XChain()
-const pchain: PlatformVMAPI = avalanche.PChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const xchain: AVMAPI = lux.XChain()
+const pchain: PlatformVMAPI = lux.PChain()
 const bintools: BinTools = BinTools.getInstance()
 const xKeychain: AVMKeyChain = xchain.keyChain()
 const pKeychain: KeyChain = pchain.keyChain()
@@ -42,13 +42,13 @@ const pChainBlockchainID: string = Defaults.network[networkID].P.blockchainID
 const exportedOuts: TransferableOutput[] = []
 const outputs: TransferableOutput[] = []
 const inputs: TransferableInput[] = []
-const fee: BN = MILLIAVAX
+const fee: BN = MILLILUX
 const threshold: number = 1
 const locktime: BN = new BN(0)
-const memo: Buffer = Buffer.from("Manually Export AVAX from P-Chain to X-Chain")
+const memo: Buffer = Buffer.from("Manually Export LUX from P-Chain to X-Chain")
 
 const main = async (): Promise<any> => {
-  const avaxAssetID: Buffer = await pchain.getAVAXAssetID()
+  const luxAssetID: Buffer = await pchain.getLUXAssetID()
   const getBalanceResponse: any = await pchain.getBalance(pAddressStrings[0])
   const unlocked: BN = new BN(getBalanceResponse.unlocked)
   console.log(unlocked.sub(fee).toString())
@@ -59,7 +59,7 @@ const main = async (): Promise<any> => {
     threshold
   )
   const transferableOutput: TransferableOutput = new TransferableOutput(
-    avaxAssetID,
+    luxAssetID,
     secpTransferOutput
   )
   exportedOuts.push(transferableOutput)
@@ -81,7 +81,7 @@ const main = async (): Promise<any> => {
     const input: TransferableInput = new TransferableInput(
       txid,
       outputidx,
-      avaxAssetID,
+      luxAssetID,
       secpTransferInput
     )
     inputs.push(input)

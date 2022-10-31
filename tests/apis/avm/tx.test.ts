@@ -21,7 +21,7 @@ import {
   TransferableOperation,
   NFTTransferOperation
 } from "../../../src/apis/avm/ops"
-import { Avalanche } from "../../../src/index"
+import { Lux } from "../../../src/index"
 import { UTF8Payload } from "../../../src/utils/payload"
 import { InitialStates } from "../../../src/apis/avm/initialstates"
 import { UnixNow } from "../../../src/utils/helperfunctions"
@@ -32,7 +32,7 @@ import { ImportTx } from "../../../src/apis/avm/importtx"
 import { ExportTx } from "../../../src/apis/avm/exporttx"
 import { PlatformChainID } from "../../../src/utils/constants"
 import { Defaults } from "../../../src/utils/constants"
-import { ONEAVAX } from "../../../src/utils/constants"
+import { ONELUX } from "../../../src/utils/constants"
 import { HttpResponse } from "jest-mock-axios/dist/lib/mock-axios-types"
 
 /**
@@ -88,15 +88,15 @@ describe("Transactions", (): void => {
   const ip: string = "127.0.0.1"
   const port: number = 8080
   const protocol: string = "http"
-  let avalanche: Avalanche
+  let lux: Lux
   const blockchainID: Buffer = bintools.cb58Decode(bID)
   const name: string = "Mortycoin is the dumb as a sack of hammers."
   const symbol: string = "morT"
   const denomination: number = 8
-  let avaxAssetID: Buffer
+  let luxAssetID: Buffer
 
   beforeAll(async (): Promise<void> => {
-    avalanche = new Avalanche(
+    lux = new Lux(
       ip,
       port,
       protocol,
@@ -106,9 +106,9 @@ describe("Transactions", (): void => {
       undefined,
       true
     )
-    api = new AVMAPI(avalanche, "/ext/bc/avm", bID)
+    api = new AVMAPI(lux, "/ext/bc/avm", bID)
 
-    const result: Promise<Buffer> = api.getAVAXAssetID()
+    const result: Promise<Buffer> = api.getLUXAssetID()
     const payload: object = {
       result: {
         name,
@@ -122,14 +122,14 @@ describe("Transactions", (): void => {
     }
 
     mockAxios.mockResponse(responseObj)
-    avaxAssetID = await result
+    luxAssetID = await result
   })
 
   beforeEach((): void => {
     set = new UTXOSet()
-    keymgr1 = new KeyChain(avalanche.getHRP(), alias)
-    keymgr2 = new KeyChain(avalanche.getHRP(), alias)
-    keymgr3 = new KeyChain(avalanche.getHRP(), alias)
+    keymgr1 = new KeyChain(lux.getHRP(), alias)
+    keymgr2 = new KeyChain(lux.getHRP(), alias)
+    keymgr3 = new KeyChain(lux.getHRP(), alias)
     addrs1 = []
     addrs2 = []
     addrs3 = []
@@ -147,7 +147,7 @@ describe("Transactions", (): void => {
       addrs2.push(keymgr2.makeKey().getAddress())
       addrs3.push(keymgr3.makeKey().getAddress())
     }
-    amount = ONEAVAX.mul(new BN(amnt))
+    amount = ONELUX.mul(new BN(amnt))
     addresses = keymgr1.getAddresses()
     fallAddresses = keymgr2.getAddresses()
     locktime = new BN(54321)
@@ -355,7 +355,7 @@ describe("Transactions", (): void => {
       1
     )
     const transferableOutput: TransferableOutput = new TransferableOutput(
-      avaxAssetID,
+      luxAssetID,
       output
     )
     outs.push(transferableOutput)
@@ -371,7 +371,7 @@ describe("Transactions", (): void => {
     const transferableInput: TransferableInput = new TransferableInput(
       txid,
       outputIndex,
-      avaxAssetID,
+      luxAssetID,
       input
     )
     ins.push(transferableInput)
@@ -390,7 +390,7 @@ describe("Transactions", (): void => {
       1
     )
     const transferableOutput: TransferableOutput = new TransferableOutput(
-      avaxAssetID,
+      luxAssetID,
       output
     )
     outs.push(transferableOutput)
@@ -406,7 +406,7 @@ describe("Transactions", (): void => {
   })
 
   test("confirm inputTotal, outputTotal and fee are correct", async (): Promise<void> => {
-    // AVAX assetID
+    // LUX assetID
     const assetID: Buffer = bintools.cb58Decode(
       "n8XH5JY1EX5VYqDeAhB4Zd4GKxi9UNQy6oPpMsCAj1Q6xkiiL"
     )
@@ -461,7 +461,7 @@ describe("Transactions", (): void => {
       1
     )
     const transferableOutput: TransferableOutput = new TransferableOutput(
-      avaxAssetID,
+      luxAssetID,
       output
     )
     outs.push(transferableOutput)
@@ -477,7 +477,7 @@ describe("Transactions", (): void => {
     const transferableInput: TransferableInput = new TransferableInput(
       txid,
       outputIndex,
-      avaxAssetID,
+      luxAssetID,
       input
     )
     ins.push(transferableInput)
@@ -497,7 +497,7 @@ describe("Transactions", (): void => {
       1
     )
     const transferableOutput: TransferableOutput = new TransferableOutput(
-      avaxAssetID,
+      luxAssetID,
       output
     )
     outs.push(transferableOutput)
@@ -513,7 +513,7 @@ describe("Transactions", (): void => {
     const transferableInput: TransferableInput = new TransferableInput(
       txid,
       outputIndex,
-      avaxAssetID,
+      luxAssetID,
       input
     )
     ins.push(transferableInput)
@@ -533,7 +533,7 @@ describe("Transactions", (): void => {
       1
     )
     const transferableOutput: TransferableOutput = new TransferableOutput(
-      avaxAssetID,
+      luxAssetID,
       output
     )
     outs.push(transferableOutput)
@@ -549,7 +549,7 @@ describe("Transactions", (): void => {
     const transferableInput: TransferableInput = new TransferableInput(
       txid,
       outputIndex,
-      avaxAssetID,
+      luxAssetID,
       input
     )
     ins.push(transferableInput)
@@ -610,7 +610,7 @@ describe("Transactions", (): void => {
       set.buildBaseTx(
         netid,
         blockchainID,
-        ONEAVAX.mul(new BN(amnt * 10000)),
+        ONELUX.mul(new BN(amnt * 10000)),
         assetID,
         addrs3,
         addrs1,
@@ -841,7 +841,7 @@ describe("Transactions", (): void => {
       addrs2,
       nftutxoids,
       new BN(90),
-      avaxAssetID,
+      luxAssetID,
       undefined,
       UnixNow(),
       UnixNow().add(new BN(50)),
@@ -878,7 +878,7 @@ describe("Transactions", (): void => {
       netid,
       blockchainID,
       new BN(90),
-      avaxAssetID,
+      luxAssetID,
       addrs3,
       addrs1,
       addrs2,

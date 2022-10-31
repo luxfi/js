@@ -1,8 +1,8 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
 import {
   PlatformVMAPI,
   KeyChain as PlatformVMKeyChain
-} from "avalanche/dist/apis/platformvm"
+} from "lux/dist/apis/platformvm"
 import {
   EVMAPI,
   KeyChain as EVMKeyChain,
@@ -12,22 +12,22 @@ import {
   ExportTx,
   SECPTransferOutput,
   TransferableOutput
-} from "avalanche/dist/apis/evm"
+} from "lux/dist/apis/evm"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults,
-  ONEAVAX
-} from "avalanche/dist/utils"
+  ONELUX
+} from "lux/dist/utils"
 const Web3 = require("web3")
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const pchain: PlatformVMAPI = avalanche.PChain()
-const cchain: EVMAPI = avalanche.CChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const pchain: PlatformVMAPI = lux.PChain()
+const cchain: EVMAPI = lux.CChain()
 const bintools: BinTools = BinTools.getInstance()
 const pKeychain: PlatformVMKeyChain = pchain.keyChain()
 let privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
@@ -53,8 +53,8 @@ const pChainId: string = Defaults.network[networkID].P.blockchainID
 const pChainIdBuf: Buffer = bintools.cb58Decode(pChainId)
 const cChainId: string = Defaults.network[networkID].C.blockchainID
 const cChainIdBuf: Buffer = bintools.cb58Decode(cChainId)
-const avaxAssetID: string = Defaults.network[networkID].X.avaxAssetID
-const avaxAssetIDBuf: Buffer = bintools.cb58Decode(avaxAssetID)
+const luxAssetID: string = Defaults.network[networkID].X.luxAssetID
+const luxAssetIDBuf: Buffer = bintools.cb58Decode(luxAssetID)
 const cHexAddress: string = "0xeA6B543A9E625C04745EcA3D7a74D74B733b8C15"
 const evmInputs: EVMInput[] = []
 const exportedOuts: TransferableOutput[] = []
@@ -72,21 +72,21 @@ const main = async (): Promise<any> => {
 
   const evmInput: EVMInput = new EVMInput(
     cHexAddress,
-    ONEAVAX,
-    avaxAssetID,
+    ONELUX,
+    luxAssetID,
     nonce
   )
   evmInput.addSignatureIdx(0, cAddresses[0])
   evmInputs.push(evmInput)
 
   const secpTransferOutput: SECPTransferOutput = new SECPTransferOutput(
-    ONEAVAX.sub(fee.mul(new BN(2))),
+    ONELUX.sub(fee.mul(new BN(2))),
     pAddresses,
     locktime,
     threshold
   )
   const transferableOutput: TransferableOutput = new TransferableOutput(
-    avaxAssetIDBuf,
+    luxAssetIDBuf,
     secpTransferOutput
   )
   exportedOuts.push(transferableOutput)

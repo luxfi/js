@@ -185,7 +185,7 @@ export class GenesisAsset extends CreateAssetTx {
    * @param assetAlias Optional String for the asset alias
    * @param name Optional String for the descriptive name of the asset
    * @param symbol Optional String for the ticker symbol of the asset
-   * @param denomination Optional number for the denomination which is 10^D. D must be >= 0 and <= 32. Ex: $1 AVAX = 10^9 $nAVAX
+   * @param denomination Optional number for the denomination which is 10^D. D must be >= 0 and <= 32. Ex: $1 LUX = 10^9 $nLUX
    * @param initialState Optional [[InitialStates]] that represent the intial state of a created asset
    * @param memo Optional {@link https://github.com/feross/buffer|Buffer} for the memo field
    */

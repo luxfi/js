@@ -1,5 +1,5 @@
 import mockAxios from "jest-mock-axios"
-import { Avalanche } from "src"
+import { Lux } from "src"
 import { PlatformVMAPI } from "../../../src/apis/platformvm/api"
 import { Buffer } from "buffer/"
 import BN from "bn.js"
@@ -28,7 +28,7 @@ import { UnsignedTx, Tx } from "../../../src/apis/platformvm/tx"
 import { UnixNow } from "../../../src/utils/helperfunctions"
 import { UTF8Payload } from "../../../src/utils/payload"
 import { NodeIDStringToBuffer } from "../../../src/utils/helperfunctions"
-import { ONEAVAX } from "../../../src/utils/constants"
+import { ONELUX } from "../../../src/utils/constants"
 import {
   Serializable,
   Serialization,
@@ -98,7 +98,7 @@ describe("PlatformVMAPI", (): void => {
   const username: string = "AvaLabs"
   const password: string = "password"
 
-  const avalanche: Avalanche = new Avalanche(
+  const lux: Lux = new Lux(
     ip,
     port,
     protocol,
@@ -114,7 +114,7 @@ describe("PlatformVMAPI", (): void => {
   const addrA: string =
     "P-" +
     bech32.bech32.encode(
-      avalanche.getHRP(),
+      lux.getHRP(),
       bech32.bech32.toWords(
         bintools.cb58Decode("B6D4v1VtPYLbiUvYXtW4Px8oE9imC2vGW")
       )
@@ -122,7 +122,7 @@ describe("PlatformVMAPI", (): void => {
   const addrB: string =
     "P-" +
     bech32.bech32.encode(
-      avalanche.getHRP(),
+      lux.getHRP(),
       bech32.bech32.toWords(
         bintools.cb58Decode("P5wdRuZeaDt28eHMP5S3w9ZdoBfo7wuzF")
       )
@@ -130,14 +130,14 @@ describe("PlatformVMAPI", (): void => {
   const addrC: string =
     "P-" +
     bech32.bech32.encode(
-      avalanche.getHRP(),
+      lux.getHRP(),
       bech32.bech32.toWords(
         bintools.cb58Decode("6Y3kysjF9jnHnYkdS9yGAuoHyae2eNmeV")
       )
     )
 
   beforeAll((): void => {
-    api = new PlatformVMAPI(avalanche, "/ext/bc/P")
+    api = new PlatformVMAPI(lux, "/ext/bc/P")
     alias = api.getBlockchainAlias()
   })
 
@@ -146,14 +146,14 @@ describe("PlatformVMAPI", (): void => {
   })
 
   test("getCreateSubnetTxFee", async (): Promise<void> => {
-    let pchain: PlatformVMAPI = new PlatformVMAPI(avalanche, "/ext/bc/P")
+    let pchain: PlatformVMAPI = new PlatformVMAPI(lux, "/ext/bc/P")
     const feeResponse: string = "1000000000"
     const fee: BN = pchain.getCreateSubnetTxFee()
     expect(fee.toString()).toBe(feeResponse)
   })
 
   test("getCreateChainTxFee", async (): Promise<void> => {
-    let pchain: PlatformVMAPI = new PlatformVMAPI(avalanche, "/ext/bc/P")
+    let pchain: PlatformVMAPI = new PlatformVMAPI(lux, "/ext/bc/P")
     const feeResponse: string = "1000000000"
     const fee: BN = pchain.getCreateChainTxFee()
     expect(fee.toString()).toBe(feeResponse)
@@ -161,7 +161,7 @@ describe("PlatformVMAPI", (): void => {
 
   test("refreshBlockchainID", async (): Promise<void> => {
     let n3bcID: string = Defaults.network[3].P["blockchainID"]
-    let testAPI: PlatformVMAPI = new PlatformVMAPI(avalanche, "/ext/bc/P")
+    let testAPI: PlatformVMAPI = new PlatformVMAPI(lux, "/ext/bc/P")
     let bc1: string = testAPI.getBlockchainID()
     expect(bc1).toBe(PlatformChainID)
 
@@ -638,13 +638,13 @@ describe("PlatformVMAPI", (): void => {
     expect(response).toBe(key)
   })
 
-  test("exportAVAX", async (): Promise<void> => {
+  test("exportLUX", async (): Promise<void> => {
     const amount: BN = new BN(100)
     const to: string = "abcdef"
     const username: string = "Robert"
     const password: string = "Paulson"
     const txID: string = "valid"
-    const result: Promise<string | ErrorResponseObject> = api.exportAVAX(
+    const result: Promise<string | ErrorResponseObject> = api.exportLUX(
       username,
       password,
       amount,
@@ -666,12 +666,12 @@ describe("PlatformVMAPI", (): void => {
     expect(response).toBe(txID)
   })
 
-  test("importAVAX", async (): Promise<void> => {
+  test("importLUX", async (): Promise<void> => {
     const to: string = "abcdef"
     const username: string = "Robert"
     const password = "Paulson"
     const txID = "valid"
-    const result: Promise<string | ErrorResponseObject> = api.importAVAX(
+    const result: Promise<string | ErrorResponseObject> = api.importLUX(
       username,
       password,
       to,
@@ -1076,8 +1076,8 @@ describe("PlatformVMAPI", (): void => {
     const denomination: number = 8
 
     beforeEach(async (): Promise<void> => {
-      platformvm = new PlatformVMAPI(avalanche, "/ext/bc/P")
-      const result: Promise<Buffer> = platformvm.getAVAXAssetID()
+      platformvm = new PlatformVMAPI(lux, "/ext/bc/P")
+      const result: Promise<Buffer> = platformvm.getLUXAssetID()
       const payload: object = {
         result: {
           name,
@@ -1095,8 +1095,8 @@ describe("PlatformVMAPI", (): void => {
       set = new UTXOSet()
       lset = new UTXOSet()
       platformvm.newKeyChain()
-      keymgr2 = new KeyChain(avalanche.getHRP(), alias)
-      keymgr3 = new KeyChain(avalanche.getHRP(), alias)
+      keymgr2 = new KeyChain(lux.getHRP(), alias)
+      keymgr3 = new KeyChain(lux.getHRP(), alias)
       addrs1 = []
       addrs2 = []
       addrs3 = []
@@ -1126,7 +1126,7 @@ describe("PlatformVMAPI", (): void => {
           platformvm.addressFromBuffer(keymgr3.makeKey().getAddress())
         )
       }
-      const amount: BN = ONEAVAX.mul(new BN(amnt))
+      const amount: BN = ONELUX.mul(new BN(amnt))
       addressbuffs = platformvm.keyChain().getAddresses()
       addresses = addressbuffs.map((a) => platformvm.addressFromBuffer(a))
       const locktime: BN = new BN(54321)
@@ -1180,14 +1180,14 @@ describe("PlatformVMAPI", (): void => {
         txidx.writeUInt32BE(i, 0)
 
         const out: SECPTransferOutput = new SECPTransferOutput(
-          ONEAVAX.mul(new BN(5)),
+          ONELUX.mul(new BN(5)),
           addressbuffs,
           locktime,
           1
         )
         const pout: ParseableOutput = new ParseableOutput(out)
         const lockout: StakeableLockOut = new StakeableLockOut(
-          ONEAVAX.mul(new BN(5)),
+          ONELUX.mul(new BN(5)),
           addressbuffs,
           locktime,
           1,
@@ -1230,7 +1230,7 @@ describe("PlatformVMAPI", (): void => {
     })
 
     test("signTx", async (): Promise<void> => {
-      const assetID: Buffer = await platformvm.getAVAXAssetID()
+      const assetID: Buffer = await platformvm.getLUXAssetID()
       const txu2: UnsignedTx = set.buildBaseTx(
         networkID,
         bintools.cb58Decode(blockchainID),
@@ -1293,7 +1293,7 @@ describe("PlatformVMAPI", (): void => {
         [fungutxo],
         bintools.cb58Decode(PlatformChainID),
         platformvm.getTxFee(),
-        await platformvm.getAVAXAssetID(),
+        await platformvm.getLUXAssetID(),
         new UTF8Payload("hello world").getPayload(),
         UnixNow(),
         locktime,
@@ -1340,10 +1340,10 @@ describe("PlatformVMAPI", (): void => {
         set,
         amount,
         bintools.cb58Decode(
-          Defaults.network[avalanche.getNetworkID()].X["blockchainID"]
+          Defaults.network[lux.getNetworkID()].X["blockchainID"]
         ),
         addrbuff3.map((a) =>
-          serializer.bufferToType(a, type, avalanche.getHRP(), "P")
+          serializer.bufferToType(a, type, lux.getHRP(), "P")
         ),
         addrs1,
         addrs2,
@@ -1360,7 +1360,7 @@ describe("PlatformVMAPI", (): void => {
         addrbuff1,
         addrbuff2,
         bintools.cb58Decode(
-          Defaults.network[avalanche.getNetworkID()].X["blockchainID"]
+          Defaults.network[lux.getNetworkID()].X["blockchainID"]
         ),
         platformvm.getTxFee(),
         assetID,
@@ -1377,7 +1377,7 @@ describe("PlatformVMAPI", (): void => {
         set,
         amount,
         bintools.cb58Decode(
-          Defaults.network[avalanche.getNetworkID()].X["blockchainID"]
+          Defaults.network[lux.getNetworkID()].X["blockchainID"]
         ),
         addrs3,
         addrs1,
@@ -1549,7 +1549,7 @@ describe("PlatformVMAPI", (): void => {
     })
 
     test("buildAddValidatorTx sort StakeableLockOuts 1", async (): Promise<void> => {
-      // two UTXO. The 1st has a lesser stakeablelocktime and a greater amount of AVAX. The 2nd has a greater stakeablelocktime and a lesser amount of AVAX.
+      // two UTXO. The 1st has a lesser stakeablelocktime and a greater amount of LUX. The 2nd has a greater stakeablelocktime and a lesser amount of LUX.
       // We expect this test to only consume the 2nd UTXO since it has the greater locktime.
       const addrbuff1: Buffer[] = addrs1.map((a) => platformvm.parseAddress(a))
       const amount1: BN = new BN("20000000000000000")
@@ -1609,8 +1609,8 @@ describe("PlatformVMAPI", (): void => {
       )
       const outputidx0: number = 0
       const outputidx1: number = 0
-      const assetID = await platformvm.getAVAXAssetID()
-      const assetID2 = await platformvm.getAVAXAssetID()
+      const assetID = await platformvm.getLUXAssetID()
+      const assetID2 = await platformvm.getLUXAssetID()
       const utxo1: UTXO = new UTXO(
         codecID,
         txid,
@@ -1722,7 +1722,7 @@ describe("PlatformVMAPI", (): void => {
 
     test("buildAddValidatorTx sort StakeableLockOuts 2", async (): Promise<void> => {
       // TODO - debug test
-      // two UTXO. The 1st has a lesser stakeablelocktime and a greater amount of AVAX. The 2nd has a greater stakeablelocktime and a lesser amount of AVAX.
+      // two UTXO. The 1st has a lesser stakeablelocktime and a greater amount of LUX. The 2nd has a greater stakeablelocktime and a lesser amount of LUX.
       // this time we're staking a greater amount than is available in the 2nd UTXO.
       // We expect this test to consume the full 2nd UTXO and a fraction of the 1st UTXO..
       const addrbuff1: Buffer[] = addrs1.map(
@@ -1785,8 +1785,8 @@ describe("PlatformVMAPI", (): void => {
       )
       const outputidx0: number = 0
       const outputidx1: number = 0
-      const assetID: Buffer = await platformvm.getAVAXAssetID()
-      const assetID2: Buffer = await platformvm.getAVAXAssetID()
+      const assetID: Buffer = await platformvm.getLUXAssetID()
+      const assetID2: Buffer = await platformvm.getLUXAssetID()
       const utxo1: UTXO = new UTXO(
         codecID,
         txid,
@@ -1897,8 +1897,8 @@ describe("PlatformVMAPI", (): void => {
       // TODO - debug test
       // three UTXO.
       // The 1st is a SecpTransferableOutput.
-      // The 2nd has a lesser stakeablelocktime and a greater amount of AVAX.
-      // The 3rd has a greater stakeablelocktime and a lesser amount of AVAX.
+      // The 2nd has a lesser stakeablelocktime and a greater amount of LUX.
+      // The 3rd has a greater stakeablelocktime and a lesser amount of LUX.
       //
       // this time we're staking a greater amount than is available in the 3rd UTXO.
       // We expect this test to consume the full 3rd UTXO and a fraction of the 2nd UTXO and not to consume the SecpTransferableOutput
@@ -1969,8 +1969,8 @@ describe("PlatformVMAPI", (): void => {
       )
       const outputidx0: number = 0
       const outputidx1: number = 0
-      const assetID: Buffer = await platformvm.getAVAXAssetID()
-      const assetID2: Buffer = await platformvm.getAVAXAssetID()
+      const assetID: Buffer = await platformvm.getLUXAssetID()
+      const assetID2: Buffer = await platformvm.getLUXAssetID()
       const utxo0: UTXO = new UTXO(
         codecID,
         txid0,
@@ -2248,12 +2248,12 @@ describe("PlatformVMAPI", (): void => {
       const addrbuff1 = addrs1.map((a) => platformvm.parseAddress(a))
       const addrbuff2 = addrs2.map((a) => platformvm.parseAddress(a))
       const addrbuff3 = addrs3.map((a) => platformvm.parseAddress(a))
-      const amount: BN = ONEAVAX.mul(new BN(25))
+      const amount: BN = ONELUX.mul(new BN(25))
 
       const locktime: BN = new BN(54321)
       const threshold: number = 2
 
-      platformvm.setMinStake(ONEAVAX.mul(new BN(25)), ONEAVAX.mul(new BN(25)))
+      platformvm.setMinStake(ONELUX.mul(new BN(25)), ONELUX.mul(new BN(25)))
 
       const txu1: UnsignedTx = await platformvm.buildAddValidatorTx(
         lset,
@@ -2325,26 +2325,26 @@ describe("PlatformVMAPI", (): void => {
       const addrbuff1 = addrs1.map((a) => platformvm.parseAddress(a))
       const addrbuff2 = addrs2.map((a) => platformvm.parseAddress(a))
       const addrbuff3 = addrs3.map((a) => platformvm.parseAddress(a))
-      const amount: BN = ONEAVAX.mul(new BN(3))
+      const amount: BN = ONELUX.mul(new BN(3))
 
       const locktime: BN = new BN(54321)
       const threshold: number = 2
 
-      platformvm.setMinStake(ONEAVAX.mul(new BN(3)), ONEAVAX.mul(new BN(3)))
+      platformvm.setMinStake(ONELUX.mul(new BN(3)), ONELUX.mul(new BN(3)))
 
-      //2 utxos; one lockedstakeable; other unlocked; both utxos have 2 avax; stake 3 AVAX
+      //2 utxos; one lockedstakeable; other unlocked; both utxos have 2 lux; stake 3 LUX
 
       const dummySet: UTXOSet = new UTXOSet()
 
       const lockedBaseOut: SECPTransferOutput = new SECPTransferOutput(
-        ONEAVAX.mul(new BN(2)),
+        ONELUX.mul(new BN(2)),
         addrbuff1,
         locktime,
         1
       )
       const lockedBaseXOut: ParseableOutput = new ParseableOutput(lockedBaseOut)
       const lockedOut: StakeableLockOut = new StakeableLockOut(
-        ONEAVAX.mul(new BN(2)),
+        ONELUX.mul(new BN(2)),
         addrbuff1,
         locktime,
         1,
@@ -2363,7 +2363,7 @@ describe("PlatformVMAPI", (): void => {
       const txidxUnlocked: Buffer = Buffer.alloc(4)
       txidxUnlocked.writeUInt32BE(2, 0)
       const unlockedOut: SECPTransferOutput = new SECPTransferOutput(
-        ONEAVAX.mul(new BN(2)),
+        ONELUX.mul(new BN(2)),
         addrbuff1,
         locktime,
         1

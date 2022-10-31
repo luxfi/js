@@ -1,6 +1,6 @@
 import mockAxios from "jest-mock-axios"
 import { HttpResponse } from "jest-mock-axios/dist/lib/mock-axios-types"
-import { Avalanche } from "src"
+import { Lux } from "src"
 import { IsAcceptedResponse } from "src/apis/index/interfaces"
 import { IndexAPI } from "../../../src/apis/index/api"
 
@@ -9,7 +9,7 @@ describe("Index", () => {
   const port: number = 9650
   const protocol: string = "https"
 
-  const avalanche: Avalanche = new Avalanche(ip, port, protocol, 12345)
+  const lux: Lux = new Lux(ip, port, protocol, 12345)
   let index: IndexAPI
 
   const id: string = "6fXf5hncR8LXvwtM8iezFQBpK5cubV6y1dWgpJCcNyzGB1EzY"
@@ -19,7 +19,7 @@ describe("Index", () => {
   const idx: string = "0"
 
   beforeAll(() => {
-    index = avalanche.Index()
+    index = lux.Index()
   })
 
   afterEach(() => {

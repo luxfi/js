@@ -23,7 +23,7 @@ const num: SerializedType = "number"
 const buffer: SerializedType = "Buffer"
 
 /**
- * Class for representing a threshold and set of minting addresses in Avalanche.
+ * Class for representing a threshold and set of minting addresses in Lux.
  *
  * @typeparam MinterSet including a threshold and array of addresses
  */

@@ -2,7 +2,7 @@
  * @packageDocumentation
  * @module API-Info
  */
-import AvalancheCore from "../../avalanche"
+import LuxCore from "../../lux"
 import { JRPCAPI } from "../../common/jrpcapi"
 import { RequestResponseData } from "../../common/apibase"
 import BN from "bn.js"
@@ -20,7 +20,7 @@ import {
  *
  * @category RPCAPIs
  *
- * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Avalanche.addAPI]] function to register this interface with Avalanche.
+ * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Lux.addAPI]] function to register this interface with Lux.
  */
 export class InfoAPI extends JRPCAPI {
   /**
@@ -105,7 +105,7 @@ export class InfoAPI extends JRPCAPI {
   /**
    * Fetches the transaction fee from the node.
    *
-   * @returns Returns a Promise object of the transaction fee in nAVAX.
+   * @returns Returns a Promise object of the transaction fee in nLUX.
    */
   getTxFee = async (): Promise<GetTxFeeResponse> => {
     const response: RequestResponseData = await this.callMethod("info.getTxFee")
@@ -162,12 +162,12 @@ export class InfoAPI extends JRPCAPI {
   }
 
   /**
-   * This class should not be instantiated directly. Instead use the [[Avalanche.addAPI]] method.
+   * This class should not be instantiated directly. Instead use the [[Lux.addAPI]] method.
    *
-   * @param core A reference to the Avalanche class
+   * @param core A reference to the Lux class
    * @param baseURL Defaults to the string "/ext/info" as the path to rpc's baseURL
    */
-  constructor(core: AvalancheCore, baseURL: string = "/ext/info") {
+  constructor(core: LuxCore, baseURL: string = "/ext/info") {
     super(core, baseURL)
   }
 }

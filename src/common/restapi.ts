@@ -4,7 +4,7 @@
  */
 
 import { AxiosRequestConfig } from "axios"
-import AvalancheCore from "../avalanche"
+import LuxCore from "../lux"
 import { APIBase, RequestResponseData } from "./apibase"
 
 export class RESTAPI extends APIBase {
@@ -172,7 +172,7 @@ export class RESTAPI extends APIBase {
 
   /**
    *
-   * @param core Reference to the Avalanche instance using this endpoint
+   * @param core Reference to the Lux instance using this endpoint
    * @param baseURL Path of the APIs baseURL - ex: "/ext/bc/avm"
    * @param contentType Optional Determines the type of the entity attached to the
    * incoming request
@@ -180,7 +180,7 @@ export class RESTAPI extends APIBase {
    * desired on the client side
    */
   constructor(
-    core: AvalancheCore,
+    core: LuxCore,
     baseURL: string,
     contentType: string = "application/json;charset=UTF-8",
     acceptType: string = undefined

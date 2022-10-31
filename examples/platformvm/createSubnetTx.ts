@@ -1,4 +1,4 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
 import {
   PlatformVMAPI,
   KeyChain,
@@ -13,19 +13,19 @@ import {
   CreateSubnetTx,
   Tx,
   SECPOwnerOutput
-} from "avalanche/dist/apis/platformvm"
+} from "lux/dist/apis/platformvm"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const pchain: PlatformVMAPI = avalanche.PChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const pchain: PlatformVMAPI = lux.PChain()
 const bintools: BinTools = BinTools.getInstance()
 // Keychain with 4 keys-A, B, C, and D
 const pKeychain: KeyChain = pchain.keyChain()
@@ -59,9 +59,9 @@ const threshold: number = 1
 const threshold2: number = 2
 const locktime: BN = new BN(0)
 const memo: Buffer = Buffer.from(
-  "Manually create a CreateSubnetTx which creates a 1-of-2 AVAX utxo and a 2-of-3 SubnetAuth"
+  "Manually create a CreateSubnetTx which creates a 1-of-2 LUX utxo and a 2-of-3 SubnetAuth"
 )
-const avaxUTXOKeychain: Buffer[] = [pAddresses[0], pAddresses[1]]
+const luxUTXOKeychain: Buffer[] = [pAddresses[0], pAddresses[1]]
 const subnetAuthKeychain: Buffer[] = [
   pAddresses[1],
   pAddresses[2],
@@ -69,17 +69,17 @@ const subnetAuthKeychain: Buffer[] = [
 ]
 
 const main = async (): Promise<any> => {
-  const avaxAssetID: Buffer = await pchain.getAVAXAssetID()
+  const luxAssetID: Buffer = await pchain.getLUXAssetID()
   const getBalanceResponse: any = await pchain.getBalance(pAddressStrings[0])
   const unlocked: BN = new BN(getBalanceResponse.unlocked)
   const secpTransferOutput: SECPTransferOutput = new SECPTransferOutput(
     unlocked.sub(fee),
-    avaxUTXOKeychain,
+    luxUTXOKeychain,
     locktime,
     threshold
   )
   const transferableOutput: TransferableOutput = new TransferableOutput(
-    avaxAssetID,
+    luxAssetID,
     secpTransferOutput
   )
   outputs.push(transferableOutput)
@@ -99,7 +99,7 @@ const main = async (): Promise<any> => {
     const input: TransferableInput = new TransferableInput(
       txid,
       outputidx,
-      avaxAssetID,
+      luxAssetID,
       secpTransferInput
     )
     inputs.push(input)

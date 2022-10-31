@@ -1,24 +1,24 @@
-import { GetUTXOsResponse } from "avalanche/dist/apis/avm/interfaces"
-import { Avalanche, BN, Buffer } from "avalanche/dist"
+import { GetUTXOsResponse } from "lux/dist/apis/avm/interfaces"
+import { Lux, BN, Buffer } from "lux/dist"
 import {
   AVMAPI,
   KeyChain,
   UTXOSet,
   UnsignedTx,
   Tx
-} from "avalanche/dist/apis/avm"
-import { UnixNow } from "avalanche/dist/utils"
+} from "lux/dist/apis/avm"
+import { UnixNow } from "lux/dist/utils"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const xchain: AVMAPI = avalanche.XChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const xchain: AVMAPI = lux.XChain()
 const xKeychain: KeyChain = xchain.keyChain()
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
 xKeychain.importKey(privKey)

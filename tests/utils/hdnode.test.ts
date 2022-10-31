@@ -1,4 +1,4 @@
-import Avalanche, { HDNode, Mnemonic } from "src"
+import Lux, { HDNode, Mnemonic } from "src"
 import { Buffer } from "buffer/"
 import { AVMAPI, KeyChain } from "src/apis/avm"
 
@@ -6,9 +6,9 @@ const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
+const lux: Lux = new Lux(ip, port, protocol, networkID)
 const mnemonic: Mnemonic = Mnemonic.getInstance()
-const xchain: AVMAPI = avalanche.XChain()
+const xchain: AVMAPI = lux.XChain()
 const xKeychain: KeyChain = xchain.keyChain()
 
 describe("HDNode", (): void => {
@@ -24,16 +24,16 @@ describe("HDNode", (): void => {
   const m: string =
     "immune year obscure laptop wage diamond join glue ecology envelope box fade mixed cradle athlete absorb stick rival punch dinosaur skin blind benefit pretty"
   const addrs: string[] = [
-    "X-avax15qwuklmrfcmfw78yvka9pjsukjeevl4aveehq0",
-    "X-avax13wqaxm6zgjq5qwzuyyxyl9yrz3edcgwgfht6gt",
-    "X-avax1z3dn3vczxttts8dsdjfgtnkekf8nvqhhsj5stl",
-    "X-avax1j6kze9n7r3e8wq6jta5mf6pd3fwnu0v9wygc8p",
-    "X-avax1ngasfmvl8g63lzwznp0374myz7ajt4746g750m",
-    "X-avax1pr7pzcggtrk6uap58sfsrlnhqhayly2gtlux9l",
-    "X-avax1wwtn3gx7ke4ge2c29eg5sun36nyj55u4dle9gn",
-    "X-avax13527pvlnxa4wrfgt0h8ya7nkjawqq29sv5s89x",
-    "X-avax1gw6agtcsz969ugpqh2zx2lmjchg6npklvp43qq",
-    "X-avax10agjetvj0a0vf6wtlh7s6ctr8ha8ch8km8z567"
+    "X-lux15qwuklmrfcmfw78yvka9pjsukjeevl4aveehq0",
+    "X-lux13wqaxm6zgjq5qwzuyyxyl9yrz3edcgwgfht6gt",
+    "X-lux1z3dn3vczxttts8dsdjfgtnkekf8nvqhhsj5stl",
+    "X-lux1j6kze9n7r3e8wq6jta5mf6pd3fwnu0v9wygc8p",
+    "X-lux1ngasfmvl8g63lzwznp0374myz7ajt4746g750m",
+    "X-lux1pr7pzcggtrk6uap58sfsrlnhqhayly2gtlux9l",
+    "X-lux1wwtn3gx7ke4ge2c29eg5sun36nyj55u4dle9gn",
+    "X-lux13527pvlnxa4wrfgt0h8ya7nkjawqq29sv5s89x",
+    "X-lux1gw6agtcsz969ugpqh2zx2lmjchg6npklvp43qq",
+    "X-lux10agjetvj0a0vf6wtlh7s6ctr8ha8ch8km8z567"
   ]
 
   test("derive", (): void => {

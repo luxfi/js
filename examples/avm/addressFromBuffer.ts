@@ -1,11 +1,11 @@
-import { Avalanche, Buffer } from "avalanche/dist"
-import { AVMAPI } from "avalanche/dist/apis/avm"
-import { UTXOSet, UTXO } from "avalanche/dist/apis/platformvm"
-import { Output } from "avalanche/dist/common"
+import { Lux, Buffer } from "lux/dist"
+import { AVMAPI } from "lux/dist/apis/avm"
+import { UTXOSet, UTXO } from "lux/dist/apis/platformvm"
+import { Output } from "lux/dist/common"
 // Change the networkID to affect the HRP of the bech32 encoded address
 // NetworkID - Bech32 Address - ChainPrefix-HRP1AddressChecksum
 //         0 - X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
-//         1 - X-avax19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
+//         1 - X-lux19rknw8l0grnfunjrzwxlxync6zrlu33y2jxhrg
 //         2 - X-cascade19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
 //         3 - X-denali19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
 //         4 - X-everest19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
@@ -13,13 +13,13 @@ import { Output } from "avalanche/dist/common"
 //      1337 - X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
 //     12345 - X-local19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
 const networkID: number = 12345
-const avalanche: Avalanche = new Avalanche(
+const lux: Lux = new Lux(
   undefined,
   undefined,
   undefined,
   networkID
 )
-const xchain: AVMAPI = avalanche.XChain()
+const xchain: AVMAPI = lux.XChain()
 
 const main = async (): Promise<any> => {
   const utxoset: UTXOSet = new UTXOSet()

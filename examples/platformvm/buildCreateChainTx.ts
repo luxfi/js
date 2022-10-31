@@ -1,16 +1,16 @@
-import { Avalanche, BinTools, BN, Buffer, GenesisData } from "avalanche/dist"
+import { Lux, BinTools, BN, Buffer, GenesisData } from "lux/dist"
 import {
   PlatformVMAPI,
   KeyChain,
   UTXOSet,
   UnsignedTx,
   Tx
-} from "avalanche/dist/apis/platformvm"
+} from "lux/dist/apis/platformvm"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   UnixNow
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 /**
  * @ignore
@@ -20,8 +20,8 @@ const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const pchain: PlatformVMAPI = avalanche.PChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const pchain: PlatformVMAPI = lux.PChain()
 // Keychain with 4 keys-A, B, C, and D
 const pKeychain: KeyChain = pchain.keyChain()
 // Keypair A

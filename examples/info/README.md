@@ -1,6 +1,6 @@
 # Info RPC
 
-Example scripts for the Avalanche [Info RPC](https://docs.avax.network/build/avalanchego-apis/info-api)
+Example scripts for the Lux [Info RPC](https://docs.lux.network/build/luxgo-apis/info-api)
 
 * [getBlockchainID.ts](./getBlockchainID.ts)
 * [getNetworkID.ts](./getNetworkID.ts)

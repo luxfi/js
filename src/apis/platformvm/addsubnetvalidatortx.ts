@@ -253,7 +253,7 @@ export class AddSubnetValidatorTx extends BaseTx {
    * @param memo Optional {@link https://github.com/feross/buffer|Buffer} for the memo field
    * @param nodeID Optional. The node ID of the validator being added.
    * @param startTime Optional. The Unix time when the validator starts validating the Primary Network.
-   * @param endTime Optional. The Unix time when the validator stops validating the Primary Network (and staked AVAX is returned).
+   * @param endTime Optional. The Unix time when the validator stops validating the Primary Network (and staked LUX is returned).
    * @param weight Optional. Weight of this validator used when sampling
    * @param subnetID Optional. ID of the subnet this validator is validating
    */

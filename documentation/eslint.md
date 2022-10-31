@@ -1,4 +1,4 @@
-# AvalancheJS - ESlint Documentation
+# LuxJS - ESlint Documentation
 
 ## Overview
 

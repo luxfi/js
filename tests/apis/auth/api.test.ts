@@ -1,6 +1,6 @@
 import mockAxios from "jest-mock-axios"
 import { HttpResponse } from "jest-mock-axios/dist/lib/mock-axios-types"
-import { Avalanche } from "src"
+import { Lux } from "src"
 import { AuthAPI } from "../../../src/apis/auth/api"
 import { ErrorResponseObject } from "../../../src/utils/errors"
 
@@ -8,7 +8,7 @@ describe("Auth", (): void => {
   const ip: string = "127.0.0.1"
   const port: number = 9650
   const protocol: string = "https"
-  const avalanche: Avalanche = new Avalanche(
+  const lux: Lux = new Lux(
     ip,
     port,
     protocol,
@@ -30,7 +30,7 @@ describe("Auth", (): void => {
   let testEndpoints: string[] = ["/ext/opt/bin/bash/foo", "/dev/null", "/tmp"]
 
   beforeAll((): void => {
-    auth = avalanche.Auth()
+    auth = lux.Auth()
   })
 
   afterEach((): void => {

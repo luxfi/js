@@ -5,7 +5,7 @@
 
 import { AxiosRequestConfig } from "axios"
 import { fetchAdapter } from "../utils"
-import AvalancheCore from "../avalanche"
+import LuxCore from "../lux"
 import { APIBase, RequestResponseData } from "./apibase"
 
 export class JRPCAPI extends APIBase {
@@ -78,12 +78,12 @@ export class JRPCAPI extends APIBase {
 
   /**
    *
-   * @param core Reference to the Avalanche instance using this endpoint
+   * @param core Reference to the Lux instance using this endpoint
    * @param baseURL Path of the APIs baseURL - ex: "/ext/bc/avm"
    * @param jrpcVersion The jrpc version to use, default "2.0".
    */
   constructor(
-    core: AvalancheCore,
+    core: LuxCore,
     baseURL: string,
     jrpcVersion: string = "2.0"
   ) {

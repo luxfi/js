@@ -1,4 +1,4 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
 import {
   AVMAPI,
   KeyChain,
@@ -12,24 +12,24 @@ import {
   UnsignedTx,
   Tx,
   ExportTx
-} from "avalanche/dist/apis/avm"
+} from "lux/dist/apis/avm"
 import {
   PlatformVMAPI,
   KeyChain as PlatformVMKeyChain
-} from "avalanche/dist/apis/platformvm"
+} from "lux/dist/apis/platformvm"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const xchain: AVMAPI = avalanche.XChain()
-const pchain: PlatformVMAPI = avalanche.PChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const xchain: AVMAPI = lux.XChain()
+const pchain: PlatformVMAPI = lux.PChain()
 const bintools: BinTools = BinTools.getInstance()
 const xKeychain: KeyChain = xchain.keyChain()
 const pKeychain: PlatformVMKeyChain = pchain.keyChain()
@@ -52,8 +52,8 @@ const xAddressStrings: string[] = xchain.keyChain().getAddressStrings()
 const pAddresses: Buffer[] = pchain.keyChain().getAddresses()
 const xChainID: string = Defaults.network[networkID].X.blockchainID
 const xChainIDBuf: Buffer = bintools.cb58Decode(xChainID)
-const avaxAssetID: string = Defaults.network[networkID].X.avaxAssetID
-const avaxAssetIDBuf: Buffer = bintools.cb58Decode(avaxAssetID)
+const luxAssetID: string = Defaults.network[networkID].X.luxAssetID
+const luxAssetIDBuf: Buffer = bintools.cb58Decode(luxAssetID)
 const pChainID: string = Defaults.network[networkID].P.blockchainID
 const pChainIDBuf: Buffer = bintools.cb58Decode(pChainID)
 const exportedOuts: TransferableOutput[] = []
@@ -63,13 +63,13 @@ const fee: BN = xchain.getDefaultTxFee()
 const threshold: number = 2
 const locktime: BN = new BN(0)
 const memo: Buffer = Buffer.from(
-  "Export AVAX from the X-Chain to the P-Chain and create a multisig atomic utxo"
+  "Export LUX from the X-Chain to the P-Chain and create a multisig atomic utxo"
 )
 
 const main = async (): Promise<any> => {
   const getBalanceResponse: any = await xchain.getBalance(
     xAddressStrings[0],
-    avaxAssetID
+    luxAssetID
   )
   const balance: BN = new BN(getBalanceResponse.balance)
   const secpTransferOutput: SECPTransferOutput = new SECPTransferOutput(
@@ -79,7 +79,7 @@ const main = async (): Promise<any> => {
     threshold
   )
   const transferableOutput: TransferableOutput = new TransferableOutput(
-    avaxAssetIDBuf,
+    luxAssetIDBuf,
     secpTransferOutput
   )
   exportedOuts.push(transferableOutput)
@@ -99,7 +99,7 @@ const main = async (): Promise<any> => {
     const input: TransferableInput = new TransferableInput(
       txID,
       outputIdx,
-      avaxAssetIDBuf,
+      luxAssetIDBuf,
       secpTransferInput
     )
     inputs.push(input)

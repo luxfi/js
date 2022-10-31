@@ -1,4 +1,4 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
 import {
   AVMAPI,
   KeyChain,
@@ -12,19 +12,19 @@ import {
   UnsignedTx,
   Tx,
   ImportTx
-} from "avalanche/dist/apis/avm"
+} from "lux/dist/apis/avm"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const xchain: AVMAPI = avalanche.XChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const xchain: AVMAPI = lux.XChain()
 const bintools: BinTools = BinTools.getInstance()
 const xKeychain: KeyChain = xchain.keyChain()
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
@@ -32,8 +32,8 @@ xKeychain.importKey(privKey)
 const xAddresses: Buffer[] = xchain.keyChain().getAddresses()
 const xAddressStrings: string[] = xchain.keyChain().getAddressStrings()
 const blockchainID: string = Defaults.network[networkID].X.blockchainID
-const avaxAssetID: string = Defaults.network[networkID].X.avaxAssetID
-const avaxAssetIDBuf: Buffer = bintools.cb58Decode(avaxAssetID)
+const luxAssetID: string = Defaults.network[networkID].X.luxAssetID
+const luxAssetIDBuf: Buffer = bintools.cb58Decode(luxAssetID)
 const cChainBlockchainID: string = Defaults.network[networkID].P.blockchainID
 const importedInputs: TransferableInput[] = []
 const outputs: TransferableOutput[] = []
@@ -42,7 +42,7 @@ const fee: BN = xchain.getDefaultTxFee()
 const threshold: number = 1
 const locktime: BN = new BN(0)
 const memo: Buffer = Buffer.from(
-  "Manually Import AVAX to the X-Chain from the P-Chain"
+  "Manually Import LUX to the X-Chain from the P-Chain"
 )
 // Uncomment for codecID 00 01
 // const codecID: number = 1
@@ -67,7 +67,7 @@ const main = async (): Promise<any> => {
   const input: TransferableInput = new TransferableInput(
     txid,
     outputidx,
-    avaxAssetIDBuf,
+    luxAssetIDBuf,
     secpTransferInput
   )
   importedInputs.push(input)
@@ -81,7 +81,7 @@ const main = async (): Promise<any> => {
   // Uncomment for codecID 00 01
   // secpTransferOutput.setCodecID(codecID)
   const transferableOutput: TransferableOutput = new TransferableOutput(
-    avaxAssetIDBuf,
+    luxAssetIDBuf,
     secpTransferOutput
   )
   outputs.push(transferableOutput)

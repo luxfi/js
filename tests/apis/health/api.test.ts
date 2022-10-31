@@ -1,6 +1,6 @@
 import mockAxios from "jest-mock-axios"
 
-import { Avalanche } from "src"
+import { Lux } from "src"
 import { HealthAPI } from "../../../src/apis/health/api"
 import { HealthResponse } from "../../../src/apis/health/interfaces"
 import { HttpResponse } from "jest-mock-axios/dist/lib/mock-axios-types"
@@ -9,7 +9,7 @@ describe("Health", (): void => {
   const ip: string = "127.0.0.1"
   const port: number = 9650
   const protocol: string = "https"
-  const avalanche: Avalanche = new Avalanche(
+  const lux: Lux = new Lux(
     ip,
     port,
     protocol,
@@ -22,7 +22,7 @@ describe("Health", (): void => {
   let health: HealthAPI
 
   beforeAll((): void => {
-    health = new HealthAPI(avalanche)
+    health = new HealthAPI(lux)
   })
 
   afterEach((): void => {

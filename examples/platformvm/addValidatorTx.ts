@@ -1,4 +1,4 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
 import {
   PlatformVMAPI,
   KeyChain,
@@ -14,22 +14,22 @@ import {
   Tx,
   SECPOwnerOutput,
   ParseableOutput
-} from "avalanche/dist/apis/platformvm"
-import { Output } from "avalanche/dist/common"
+} from "lux/dist/apis/platformvm"
+import { Output } from "lux/dist/common"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults,
   NodeIDStringToBuffer,
   UnixNow
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const pchain: PlatformVMAPI = avalanche.PChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const pchain: PlatformVMAPI = lux.PChain()
 const bintools: BinTools = BinTools.getInstance()
 const pKeychain: KeyChain = pchain.keyChain()
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
@@ -53,7 +53,7 @@ const delegationFee: number = 10
 
 const main = async (): Promise<any> => {
   const stakeAmount: any = await pchain.getMinStake()
-  const avaxAssetID: Buffer = await pchain.getAVAXAssetID()
+  const luxAssetID: Buffer = await pchain.getLUXAssetID()
   const getBalanceResponse: any = await pchain.getBalance(pAddressStrings[0])
   const unlocked: BN = new BN(getBalanceResponse.unlocked)
   const secpTransferOutput: SECPTransferOutput = new SECPTransferOutput(
@@ -63,7 +63,7 @@ const main = async (): Promise<any> => {
     threshold
   )
   const transferableOutput: TransferableOutput = new TransferableOutput(
-    avaxAssetID,
+    luxAssetID,
     secpTransferOutput
   )
   outputs.push(transferableOutput)
@@ -75,7 +75,7 @@ const main = async (): Promise<any> => {
     threshold
   )
   const stakeTransferableOutput: TransferableOutput = new TransferableOutput(
-    avaxAssetID,
+    luxAssetID,
     stakeSECPTransferOutput
   )
   stakeOuts.push(stakeTransferableOutput)
@@ -104,7 +104,7 @@ const main = async (): Promise<any> => {
       const input: TransferableInput = new TransferableInput(
         txid,
         outputidx,
-        avaxAssetID,
+        luxAssetID,
         secpTransferInput
       )
       inputs.push(input)

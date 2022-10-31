@@ -1,4 +1,4 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
 import {
   EVMAPI,
   EVMOutput,
@@ -11,19 +11,19 @@ import {
   AmountOutput,
   UnsignedTx,
   Tx
-} from "avalanche/dist/apis/evm"
+} from "lux/dist/apis/evm"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const cchain: EVMAPI = avalanche.CChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const cchain: EVMAPI = lux.CChain()
 const bintools: BinTools = BinTools.getInstance()
 const cKeychain: KeyChain = cchain.keyChain()
 const cHexAddress: string = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"

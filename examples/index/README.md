@@ -1,6 +1,6 @@
 # Index RPC
 
-Example scripts for the Avalanche [Index RPC](https://docs.avax.network/build/avalanchego-apis/index-api)
+Example scripts for the Lux [Index RPC](https://docs.lux.network/build/luxgo-apis/index-api)
 
 * [getContainerByID.ts](./getContainerByID.ts)
 * [getContainerByIndex.ts](./getContainerByIndex.ts)

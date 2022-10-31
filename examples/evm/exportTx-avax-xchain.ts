@@ -1,5 +1,5 @@
-import { Avalanche, BinTools, BN, Buffer } from "avalanche/dist"
-import { AVMAPI, KeyChain as AVMKeyChain } from "avalanche/dist/apis/avm"
+import { Lux, BinTools, BN, Buffer } from "lux/dist"
+import { AVMAPI, KeyChain as AVMKeyChain } from "lux/dist/apis/avm"
 import {
   EVMAPI,
   KeyChain as EVMKeyChain,
@@ -9,20 +9,20 @@ import {
   ExportTx,
   SECPTransferOutput,
   TransferableOutput
-} from "avalanche/dist/apis/evm"
+} from "lux/dist/apis/evm"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const xchain: AVMAPI = avalanche.XChain()
-const cchain: EVMAPI = avalanche.CChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const xchain: AVMAPI = lux.XChain()
+const cchain: EVMAPI = lux.CChain()
 const bintools: BinTools = BinTools.getInstance()
 const xKeychain: AVMKeyChain = xchain.keyChain()
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
@@ -35,8 +35,8 @@ const xChainBlockchainIdStr: string = Defaults.network[networkID].X.blockchainID
 const xChainBlockchainIdBuf: Buffer = bintools.cb58Decode(xChainBlockchainIdStr)
 const cChainBlockchainIdStr: string = Defaults.network[networkID].C.blockchainID
 const cChainBlockchainIdBuf: Buffer = bintools.cb58Decode(cChainBlockchainIdStr)
-const avaxAssetID: string = Defaults.network[networkID].X.avaxAssetID
-const avaxAssetIDBuf: Buffer = bintools.cb58Decode(avaxAssetID)
+const luxAssetID: string = Defaults.network[networkID].X.luxAssetID
+const luxAssetIDBuf: Buffer = bintools.cb58Decode(luxAssetID)
 const cHexAddress: string = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"
 const evmInputs: EVMInput[] = []
 const exportedOuts: TransferableOutput[] = []
@@ -56,7 +56,7 @@ const main = async (): Promise<any> => {
   const evmInput: EVMInput = new EVMInput(
     cHexAddress,
     balance,
-    avaxAssetID,
+    luxAssetID,
     nonce
   )
   evmInput.addSignatureIdx(0, cAddresses[0])
@@ -69,7 +69,7 @@ const main = async (): Promise<any> => {
     threshold
   )
   const transferableOutput: TransferableOutput = new TransferableOutput(
-    avaxAssetIDBuf,
+    luxAssetIDBuf,
     secpTransferOutput
   )
   exportedOuts.push(transferableOutput)

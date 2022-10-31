@@ -1,26 +1,26 @@
-import { Avalanche, BN, Buffer } from "avalanche/dist"
-import { AVMAPI, KeyChain as AVMKeyChain } from "avalanche/dist/apis/avm"
+import { Lux, BN, Buffer } from "lux/dist"
+import { AVMAPI, KeyChain as AVMKeyChain } from "lux/dist/apis/avm"
 import {
   PlatformVMAPI,
   KeyChain,
   UTXOSet,
   UnsignedTx,
   Tx
-} from "avalanche/dist/apis/platformvm"
+} from "lux/dist/apis/platformvm"
 import {
   PrivateKeyPrefix,
   DefaultLocalGenesisPrivateKey,
   Defaults,
   UnixNow
-} from "avalanche/dist/utils"
+} from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const xchain: AVMAPI = avalanche.XChain()
-const pchain: PlatformVMAPI = avalanche.PChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const xchain: AVMAPI = lux.XChain()
+const pchain: PlatformVMAPI = lux.PChain()
 const xKeychain: AVMKeyChain = xchain.keyChain()
 const pKeychain: KeyChain = pchain.keyChain()
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
@@ -33,7 +33,7 @@ const fee: BN = pchain.getDefaultTxFee()
 const threshold: number = 1
 const locktime: BN = new BN(0)
 const memo: Buffer = Buffer.from(
-  "PlatformVM utility method buildExportTx to export AVAX from the P-Chain to the C-Chain"
+  "PlatformVM utility method buildExportTx to export LUX from the P-Chain to the C-Chain"
 )
 const asOf: BN = UnixNow()
 

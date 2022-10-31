@@ -201,7 +201,7 @@ export class EVMInput extends EVMOutput {
    * An [[EVMInput]] class which contains address, amount, assetID, nonce.
    *
    * @param address is the EVM address from which to transfer funds.
-   * @param amount is the amount of the asset to be transferred (specified in nAVAX for AVAX and the smallest denomination for all other assets).
+   * @param amount is the amount of the asset to be transferred (specified in nLUX for LUX and the smallest denomination for all other assets).
    * @param assetID The assetID which is being sent as a {@link https://github.com/feross/buffer|Buffer} or as a string.
    * @param nonce A {@link https://github.com/indutny/bn.js/|BN} or a number representing the nonce.
    */

@@ -4,7 +4,7 @@
  */
 import { Buffer } from "buffer/"
 import BN from "bn.js"
-import AvalancheCore from "../../avalanche"
+import LuxCore from "../../lux"
 import { JRPCAPI } from "../../common/jrpcapi"
 import { RequestResponseData } from "../../common/apibase"
 import {
@@ -14,7 +14,7 @@ import {
 } from "../../utils/errors"
 import BinTools from "../../utils/bintools"
 import { KeyChain } from "./keychain"
-import { Defaults, PlatformChainID, ONEAVAX } from "../../utils/constants"
+import { Defaults, PlatformChainID, ONELUX } from "../../utils/constants"
 import { PlatformVMConstants } from "./constants"
 import { UnsignedTx, Tx } from "./tx"
 import { PayloadBase } from "../../utils/payload"
@@ -49,10 +49,10 @@ import {
   AddValidatorParams,
   AddDelegatorParams,
   CreateSubnetParams,
-  ExportAVAXParams,
+  ExportLUXParams,
   ExportKeyParams,
   ImportKeyParams,
-  ImportAVAXParams,
+  ImportLUXParams,
   CreateBlockchainParams,
   Blockchain,
   GetTxStatusParams,
@@ -76,7 +76,7 @@ const serialization: Serialization = Serialization.getInstance()
  *
  * @category RPCAPIs
  *
- * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Avalanche.addAPI]] function to register this interface with Avalanche.
+ * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Lux.addAPI]] function to register this interface with Lux.
  */
 export class PlatformVMAPI extends JRPCAPI {
   /**
@@ -88,7 +88,7 @@ export class PlatformVMAPI extends JRPCAPI {
 
   protected blockchainAlias: string = undefined
 
-  protected AVAXAssetID: Buffer = undefined
+  protected LUXAssetID: Buffer = undefined
 
   protected txFee: BN = undefined
 
@@ -193,32 +193,32 @@ export class PlatformVMAPI extends JRPCAPI {
   }
 
   /**
-   * Fetches the AVAX AssetID and returns it in a Promise.
+   * Fetches the LUX AssetID and returns it in a Promise.
    *
    * @param refresh This function caches the response. Refresh = true will bust the cache.
    *
-   * @returns The the provided string representing the AVAX AssetID
+   * @returns The the provided string representing the LUX AssetID
    */
-  getAVAXAssetID = async (refresh: boolean = false): Promise<Buffer> => {
-    if (typeof this.AVAXAssetID === "undefined" || refresh) {
+  getLUXAssetID = async (refresh: boolean = false): Promise<Buffer> => {
+    if (typeof this.LUXAssetID === "undefined" || refresh) {
       const assetID: string = await this.getStakingAssetID()
-      this.AVAXAssetID = bintools.cb58Decode(assetID)
+      this.LUXAssetID = bintools.cb58Decode(assetID)
     }
-    return this.AVAXAssetID
+    return this.LUXAssetID
   }
 
   /**
-   * Overrides the defaults and sets the cache to a specific AVAX AssetID
+   * Overrides the defaults and sets the cache to a specific LUX AssetID
    *
-   * @param avaxAssetID A cb58 string or Buffer representing the AVAX AssetID
+   * @param luxAssetID A cb58 string or Buffer representing the LUX AssetID
    *
-   * @returns The the provided string representing the AVAX AssetID
+   * @returns The the provided string representing the LUX AssetID
    */
-  setAVAXAssetID = (avaxAssetID: string | Buffer) => {
-    if (typeof avaxAssetID === "string") {
-      avaxAssetID = bintools.cb58Decode(avaxAssetID)
+  setLUXAssetID = (luxAssetID: string | Buffer) => {
+    if (typeof luxAssetID === "string") {
+      luxAssetID = bintools.cb58Decode(luxAssetID)
     }
-    this.AVAXAssetID = avaxAssetID
+    this.LUXAssetID = luxAssetID
   }
 
   /**
@@ -344,12 +344,12 @@ export class PlatformVMAPI extends JRPCAPI {
     utx: UnsignedTx,
     outTotal: BN = new BN(0)
   ): Promise<boolean> => {
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
     let outputTotal: BN = outTotal.gt(new BN(0))
       ? outTotal
-      : utx.getOutputTotal(avaxAssetID)
-    const fee: BN = utx.getBurn(avaxAssetID)
-    if (fee.lte(ONEAVAX.mul(new BN(10))) || fee.lte(outputTotal)) {
+      : utx.getOutputTotal(luxAssetID)
+    const fee: BN = utx.getBurn(luxAssetID)
+    if (fee.lte(ONELUX.mul(new BN(10))) || fee.lte(outputTotal)) {
       return true
     } else {
       return false
@@ -530,7 +530,7 @@ export class PlatformVMAPI extends JRPCAPI {
    * cb58 serialized string for the SubnetID or its alias.
    * @param nodeIDs Optional. An array of strings
    *
-   * @returns Promise for an array of validators that are currently staking, see: {@link https://docs.avax.network/v1.0/en/api/platform/#platformgetcurrentvalidators|platform.getCurrentValidators documentation}.
+   * @returns Promise for an array of validators that are currently staking, see: {@link https://docs.lux.network/v1.0/en/api/platform/#platformgetcurrentvalidators|platform.getCurrentValidators documentation}.
    *
    */
   getCurrentValidators = async (
@@ -560,7 +560,7 @@ export class PlatformVMAPI extends JRPCAPI {
    * or a cb58 serialized string for the SubnetID or its alias.
    * @param nodeIDs Optional. An array of strings
    *
-   * @returns Promise for an array of validators that are pending staking, see: {@link https://docs.avax.network/v1.0/en/api/platform/#platformgetpendingvalidators|platform.getPendingValidators documentation}.
+   * @returns Promise for an array of validators that are pending staking, see: {@link https://docs.lux.network/v1.0/en/api/platform/#platformgetpendingvalidators|platform.getPendingValidators documentation}.
    *
    */
   getPendingValidators = async (
@@ -620,7 +620,7 @@ export class PlatformVMAPI extends JRPCAPI {
    * @param nodeID The node ID of the validator
    * @param startTime Javascript Date object for the start time to validate
    * @param endTime Javascript Date object for the end time to validate
-   * @param stakeAmount The amount of nAVAX the validator is staking as
+   * @param stakeAmount The amount of nLUX the validator is staking as
    * a {@link https://github.com/indutny/bn.js/|BN}
    * @param rewardAddress The address the validator reward will go to, if there is one.
    * @param delegationFeeRate Optional. A {@link https://github.com/indutny/bn.js/|BN} for the percent fee this validator
@@ -710,9 +710,9 @@ export class PlatformVMAPI extends JRPCAPI {
    * @param nodeID The node ID of the delegatee
    * @param startTime Javascript Date object for when the delegator starts delegating
    * @param endTime Javascript Date object for when the delegator starts delegating
-   * @param stakeAmount The amount of nAVAX the delegator is staking as
+   * @param stakeAmount The amount of nLUX the delegator is staking as
    * a {@link https://github.com/indutny/bn.js/|BN}
-   * @param rewardAddress The address of the account the staked AVAX and validation reward
+   * @param rewardAddress The address of the account the staked LUX and validation reward
    * (if applicable) are sent to at endTime
    *
    * @returns Promise for an array of validator"s stakingIDs.
@@ -797,7 +797,7 @@ export class PlatformVMAPI extends JRPCAPI {
   /**
    * Get the IDs of the blockchains a Subnet validates.
    *
-   * @param subnetID Either a {@link https://github.com/feross/buffer|Buffer} or an AVAX
+   * @param subnetID Either a {@link https://github.com/feross/buffer|Buffer} or an LUX
    * serialized string for the SubnetID or its alias.
    *
    * @returns Promise for an array of blockchainIDs the subnet validates.
@@ -831,33 +831,33 @@ export class PlatformVMAPI extends JRPCAPI {
   }
 
   /**
-   * Send AVAX from an account on the P-Chain to an address on the X-Chain. This transaction
-   * must be signed with the key of the account that the AVAX is sent from and which pays the
-   * transaction fee. After issuing this transaction, you must call the X-Chain’s importAVAX
+   * Send LUX from an account on the P-Chain to an address on the X-Chain. This transaction
+   * must be signed with the key of the account that the LUX is sent from and which pays the
+   * transaction fee. After issuing this transaction, you must call the X-Chain’s importLUX
    * method to complete the transfer.
    *
    * @param username The Keystore user that controls the account specified in `to`
    * @param password The password of the Keystore user
-   * @param to The address on the X-Chain to send the AVAX to. Do not include X- in the address
-   * @param amount Amount of AVAX to export as a {@link https://github.com/indutny/bn.js/|BN}
+   * @param to The address on the X-Chain to send the LUX to. Do not include X- in the address
+   * @param amount Amount of LUX to export as a {@link https://github.com/indutny/bn.js/|BN}
    *
-   * @returns Promise for an unsigned transaction to be signed by the account the the AVAX is
+   * @returns Promise for an unsigned transaction to be signed by the account the the LUX is
    * sent from and pays the transaction fee.
    */
-  exportAVAX = async (
+  exportLUX = async (
     username: string,
     password: string,
     amount: BN,
     to: string
   ): Promise<string | ErrorResponseObject> => {
-    const params: ExportAVAXParams = {
+    const params: ExportLUXParams = {
       username,
       password,
       to,
       amount: amount.toString(10)
     }
     const response: RequestResponseData = await this.callMethod(
-      "platform.exportAVAX",
+      "platform.exportLUX",
       params
     )
     return response.data.result.txID
@@ -866,34 +866,34 @@ export class PlatformVMAPI extends JRPCAPI {
   }
 
   /**
-   * Send AVAX from an account on the P-Chain to an address on the X-Chain. This transaction
-   * must be signed with the key of the account that the AVAX is sent from and which pays
+   * Send LUX from an account on the P-Chain to an address on the X-Chain. This transaction
+   * must be signed with the key of the account that the LUX is sent from and which pays
    * the transaction fee. After issuing this transaction, you must call the X-Chain’s
-   * importAVAX method to complete the transfer.
+   * importLUX method to complete the transfer.
    *
    * @param username The Keystore user that controls the account specified in `to`
    * @param password The password of the Keystore user
-   * @param to The ID of the account the AVAX is sent to. This must be the same as the to
-   * argument in the corresponding call to the X-Chain’s exportAVAX
+   * @param to The ID of the account the LUX is sent to. This must be the same as the to
+   * argument in the corresponding call to the X-Chain’s exportLUX
    * @param sourceChain The chainID where the funds are coming from.
    *
    * @returns Promise for a string for the transaction, which should be sent to the network
    * by calling issueTx.
    */
-  importAVAX = async (
+  importLUX = async (
     username: string,
     password: string,
     to: string,
     sourceChain: string
   ): Promise<string | ErrorResponseObject> => {
-    const params: ImportAVAXParams = {
+    const params: ImportLUXParams = {
       to,
       sourceChain,
       username,
       password
     }
     const response: RequestResponseData = await this.callMethod(
-      "platform.importAVAX",
+      "platform.importLUX",
       params
     )
     return response.data.result.txID
@@ -997,7 +997,7 @@ export class PlatformVMAPI extends JRPCAPI {
   }
 
   /**
-   * getMaxStakeAmount() returns the maximum amount of nAVAX staking to the named node during the time period.
+   * getMaxStakeAmount() returns the maximum amount of nLUX staking to the named node during the time period.
    *
    * @param subnetID A Buffer or cb58 string representing subnet
    * @param nodeID A string representing ID of the node whose stake amount is required during the given duration
@@ -1353,7 +1353,7 @@ export class PlatformVMAPI extends JRPCAPI {
     const atomicUTXOs: UTXOSet = await (
       await this.getUTXOs(ownerAddresses, srcChain, 0, undefined)
     ).utxos
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
 
     if (memo instanceof PayloadBase) {
       memo = memo.getPayload()
@@ -1370,7 +1370,7 @@ export class PlatformVMAPI extends JRPCAPI {
       atomics,
       sourceChain,
       this.getTxFee(),
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf,
       locktime,
@@ -1443,7 +1443,7 @@ export class PlatformVMAPI extends JRPCAPI {
     }
     /*
     if(bintools.cb58Encode(destinationChain) !== Defaults.network[this.core.getNetworkID()].X["blockchainID"]) {
-      throw new Error("Error - PlatformVMAPI.buildExportTx: Destination ChainID must The X-Chain ID in the current version of AvalancheJS.")
+      throw new Error("Error - PlatformVMAPI.buildExportTx: Destination ChainID must The X-Chain ID in the current version of LuxJS.")
     }*/
 
     let to: Buffer[] = []
@@ -1463,19 +1463,19 @@ export class PlatformVMAPI extends JRPCAPI {
       memo = memo.getPayload()
     }
 
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
 
     const builtUnsignedTx: UnsignedTx = utxoset.buildExportTx(
       this.core.getNetworkID(),
       bintools.cb58Decode(this.blockchainID),
       amount,
-      avaxAssetID,
+      luxAssetID,
       to,
       from,
       change,
       destinationChain,
       this.getTxFee(),
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf,
       locktime,
@@ -1495,11 +1495,11 @@ export class PlatformVMAPI extends JRPCAPI {
    * [[UnsignedTx]] manually and import the [[AddSubnetValidatorTx]] class directly.
    *
    * @param utxoset A set of UTXOs that the transaction is built on.
-   * @param fromAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who pays the fees in AVAX
+   * @param fromAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who pays the fees in LUX
    * @param changeAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who gets the change leftover from the fee payment
    * @param nodeID The node ID of the validator being added.
    * @param startTime The Unix time when the validator starts validating the Primary Network.
-   * @param endTime The Unix time when the validator stops validating the Primary Network (and staked AVAX is returned).
+   * @param endTime The Unix time when the validator stops validating the Primary Network (and staked LUX is returned).
    * @param weight The amount of weight for this subnet validator.
    * @param memo Optional contains arbitrary bytes, up to 256 bytes
    * @param asOf Optional. The timestamp to verify the transaction against as a {@link https://github.com/indutny/bn.js/|BN}
@@ -1534,7 +1534,7 @@ export class PlatformVMAPI extends JRPCAPI {
       memo = memo.getPayload()
     }
 
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
 
     const now: BN = UnixNow()
     if (startTime.lt(now) || endTime.lte(startTime)) {
@@ -1554,7 +1554,7 @@ export class PlatformVMAPI extends JRPCAPI {
       weight,
       subnetID,
       this.getDefaultTxFee(),
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf,
       subnetAuthCredentials
@@ -1574,11 +1574,11 @@ export class PlatformVMAPI extends JRPCAPI {
    *
    * @param utxoset A set of UTXOs that the transaction is built on
    * @param toAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who received the staked tokens at the end of the staking period
-   * @param fromAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who own the staking UTXOs the fees in AVAX
+   * @param fromAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who own the staking UTXOs the fees in LUX
    * @param changeAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who gets the change leftover from the fee payment
    * @param nodeID The node ID of the validator being added.
    * @param startTime The Unix time when the validator starts validating the Primary Network.
-   * @param endTime The Unix time when the validator stops validating the Primary Network (and staked AVAX is returned).
+   * @param endTime The Unix time when the validator stops validating the Primary Network (and staked LUX is returned).
    * @param stakeAmount The amount being delegated as a {@link https://github.com/indutny/bn.js/|BN}
    * @param rewardAddresses The addresses which will recieve the rewards from the delegated stake.
    * @param rewardLocktime Optional. The locktime field created in the resulting reward outputs
@@ -1632,7 +1632,7 @@ export class PlatformVMAPI extends JRPCAPI {
       )
     }
 
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
 
     const now: BN = UnixNow()
     if (startTime.lt(now) || endTime.lte(startTime)) {
@@ -1644,7 +1644,7 @@ export class PlatformVMAPI extends JRPCAPI {
     const builtUnsignedTx: UnsignedTx = utxoset.buildAddDelegatorTx(
       this.core.getNetworkID(),
       bintools.cb58Decode(this.blockchainID),
-      avaxAssetID,
+      luxAssetID,
       to,
       from,
       change,
@@ -1656,7 +1656,7 @@ export class PlatformVMAPI extends JRPCAPI {
       rewardThreshold,
       rewards,
       new BN(0),
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf
     )
@@ -1675,11 +1675,11 @@ export class PlatformVMAPI extends JRPCAPI {
    *
    * @param utxoset A set of UTXOs that the transaction is built on
    * @param toAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who received the staked tokens at the end of the staking period
-   * @param fromAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who own the staking UTXOs the fees in AVAX
+   * @param fromAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who own the staking UTXOs the fees in LUX
    * @param changeAddresses An array of addresses as {@link https://github.com/feross/buffer|Buffer} who gets the change leftover from the fee payment
    * @param nodeID The node ID of the validator being added.
    * @param startTime The Unix time when the validator starts validating the Primary Network.
-   * @param endTime The Unix time when the validator stops validating the Primary Network (and staked AVAX is returned).
+   * @param endTime The Unix time when the validator stops validating the Primary Network (and staked LUX is returned).
    * @param stakeAmount The amount being delegated as a {@link https://github.com/indutny/bn.js/|BN}
    * @param rewardAddresses The addresses which will recieve the rewards from the delegated stake.
    * @param delegationFee A number for the percentage of reward to be given to the validator when someone delegates to them. Must be between 0 and 100.
@@ -1745,7 +1745,7 @@ export class PlatformVMAPI extends JRPCAPI {
       )
     }
 
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
 
     const now: BN = UnixNow()
     if (startTime.lt(now) || endTime.lte(startTime)) {
@@ -1757,7 +1757,7 @@ export class PlatformVMAPI extends JRPCAPI {
     const builtUnsignedTx: UnsignedTx = utxoset.buildAddValidatorTx(
       this.core.getNetworkID(),
       bintools.cb58Decode(this.blockchainID),
-      avaxAssetID,
+      luxAssetID,
       to,
       from,
       change,
@@ -1770,7 +1770,7 @@ export class PlatformVMAPI extends JRPCAPI {
       rewards,
       delegationFee,
       new BN(0),
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf
     )
@@ -1822,7 +1822,7 @@ export class PlatformVMAPI extends JRPCAPI {
       memo = memo.getPayload()
     }
 
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
     const networkID: number = this.core.getNetworkID()
     const blockchainID: Buffer = bintools.cb58Decode(this.blockchainID)
     const fee: BN = this.getCreateSubnetTxFee()
@@ -1834,7 +1834,7 @@ export class PlatformVMAPI extends JRPCAPI {
       owners,
       subnetOwnerThreshold,
       fee,
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf
     )
@@ -1890,7 +1890,7 @@ export class PlatformVMAPI extends JRPCAPI {
       memo = memo.getPayload()
     }
 
-    const avaxAssetID: Buffer = await this.getAVAXAssetID()
+    const luxAssetID: Buffer = await this.getLUXAssetID()
     fxIDs = fxIDs.sort()
 
     const networkID: number = this.core.getNetworkID()
@@ -1907,7 +1907,7 @@ export class PlatformVMAPI extends JRPCAPI {
       fxIDs,
       genesisData,
       fee,
-      avaxAssetID,
+      luxAssetID,
       memo,
       asOf,
       subnetAuthCredentials
@@ -1961,12 +1961,12 @@ export class PlatformVMAPI extends JRPCAPI {
 
   /**
    * This class should not be instantiated directly.
-   * Instead use the [[Avalanche.addAPI]] method.
+   * Instead use the [[Lux.addAPI]] method.
    *
-   * @param core A reference to the Avalanche class
+   * @param core A reference to the Lux class
    * @param baseURL Defaults to the string "/ext/P" as the path to blockchain's baseURL
    */
-  constructor(core: AvalancheCore, baseURL: string = "/ext/bc/P") {
+  constructor(core: LuxCore, baseURL: string = "/ext/bc/P") {
     super(core, baseURL)
     this.blockchainID = PlatformChainID
     const netID: number = core.getNetworkID()

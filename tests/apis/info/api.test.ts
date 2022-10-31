@@ -1,5 +1,5 @@
 import mockAxios from "jest-mock-axios"
-import { Avalanche } from "src"
+import { Lux } from "src"
 import { InfoAPI } from "../../../src/apis/info/api"
 import BN from "bn.js"
 import {
@@ -13,7 +13,7 @@ describe("Info", (): void => {
   const port: number = 9650
   const protocol: string = "https"
 
-  const avalanche: Avalanche = new Avalanche(
+  const lux: Lux = new Lux(
     ip,
     port,
     protocol,
@@ -26,7 +26,7 @@ describe("Info", (): void => {
   let info: InfoAPI
 
   beforeAll((): void => {
-    info = avalanche.Info()
+    info = lux.Info()
   })
 
   afterEach((): void => {
@@ -37,7 +37,7 @@ describe("Info", (): void => {
     const result: Promise<string> = info.getBlockchainID("X")
     const payload: object = {
       result: {
-        blockchainID: avalanche.XChain().getBlockchainID()
+        blockchainID: lux.XChain().getBlockchainID()
       }
     }
     const responseObj: HttpResponse = {
@@ -129,7 +129,7 @@ describe("Info", (): void => {
     const result: Promise<string> = info.getNodeVersion()
     const payload: object = {
       result: {
-        version: "avalanche/0.5.5"
+        version: "lux/0.5.5"
       }
     }
     const responseObj: HttpResponse = {
@@ -140,7 +140,7 @@ describe("Info", (): void => {
     const response: string = await result
 
     expect(mockAxios.request).toHaveBeenCalledTimes(1)
-    expect(response).toBe("avalanche/0.5.5")
+    expect(response).toBe("lux/0.5.5")
   })
 
   test("isBootstrapped false", async (): Promise<void> => {
@@ -185,7 +185,7 @@ describe("Info", (): void => {
         ip: "127.0.0.1:60300",
         publicIP: "127.0.0.1:9659",
         nodeID: "NodeID-P7oB2McjBGgW2NXXWVYjV8JEDFoW9xDE5",
-        version: "avalanche/1.3.2",
+        version: "lux/1.3.2",
         lastSent: "2021-04-14T08:15:06-07:00",
         lastReceived: "2021-04-14T08:15:06-07:00",
         benched: null
@@ -194,7 +194,7 @@ describe("Info", (): void => {
         ip: "127.0.0.1:60302",
         publicIP: "127.0.0.1:9655",
         nodeID: "NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN",
-        version: "avalanche/1.3.2",
+        version: "lux/1.3.2",
         lastSent: "2021-04-14T08:15:06-07:00",
         lastReceived: "2021-04-14T08:15:06-07:00",
         benched: null

@@ -6,7 +6,7 @@
 import { Buffer } from "buffer/"
 
 /**
- * Class for representing a private and public keypair in Avalanche.
+ * Class for representing a private and public keypair in Lux.
  * All APIs that need key pairs should extend on this class.
  */
 export abstract class StandardKeyPair {
@@ -113,7 +113,7 @@ export abstract class StandardKeyPair {
 }
 
 /**
- * Class for representing a key chain in Avalanche.
+ * Class for representing a key chain in Lux.
  * All endpoints that need key chains should extend on this class.
  *
  * @typeparam KPClass extending [[StandardKeyPair]] which is used as the key in [[StandardKeyChain]]

@@ -1,4 +1,4 @@
-import { getAvalanche, createTests, Matcher } from "./e2etestlib"
+import { getLux, createTests, Matcher } from "./e2etestlib"
 import { KeystoreAPI } from "src/apis/keystore/api"
 import BN from "bn.js"
 
@@ -8,12 +8,12 @@ describe("XChain", (): void => {
   let addrB = { value: "" }
   let addrC = { value: "" }
 
-  const avalanche = getAvalanche()
-  const xchain = avalanche.XChain()
-  const keystore = new KeystoreAPI(avalanche)
+  const lux = getLux()
+  const xchain = lux.XChain()
+  const keystore = new KeystoreAPI(lux)
 
-  const user: string = "avalancheJsXChainUser"
-  const passwd: string = "avalancheJsP1ssw4rd"
+  const user: string = "luxJsXChainUser"
+  const passwd: string = "luxJsP1ssw4rd"
   const badUser: string = "asdfasdfsa"
   const badPass: string = "pass"
   const memo: string = "hello world"
@@ -50,7 +50,7 @@ describe("XChain", (): void => {
         xchain.send(
           badUser,
           passwd,
-          "AVAX",
+          "LUX",
           10,
           addrB.value,
           [addrC.value],
@@ -67,7 +67,7 @@ describe("XChain", (): void => {
         xchain.send(
           user,
           badPass,
-          "AVAX",
+          "LUX",
           10,
           addrB.value,
           [addrC.value],
@@ -80,14 +80,14 @@ describe("XChain", (): void => {
     ],
     [
       "getBalance",
-      () => xchain.getBalance(whaleAddr, "AVAX"),
+      () => xchain.getBalance(whaleAddr, "LUX"),
       (x) => x.balance,
       Matcher.toBe,
       () => "300000000000000000"
     ],
     [
       "getBalance2",
-      () => xchain.getBalance(whaleAddr, "AVAX"),
+      () => xchain.getBalance(whaleAddr, "LUX"),
       (x) => x.utxoIDs[0].txID,
       Matcher.toBe,
       () => "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"
@@ -105,7 +105,7 @@ describe("XChain", (): void => {
         xchain.send(
           user,
           passwd,
-          "AVAX",
+          "LUX",
           10,
           addrB.value,
           [whaleAddr],
@@ -123,8 +123,8 @@ describe("XChain", (): void => {
           user,
           passwd,
           [
-            { assetID: "AVAX", amount: 10, to: addrB.value },
-            { assetID: "AVAX", amount: 20, to: addrC.value }
+            { assetID: "LUX", amount: 10, to: addrB.value },
+            { assetID: "LUX", amount: 20, to: addrC.value }
           ],
           [whaleAddr],
           whaleAddr,
@@ -156,7 +156,7 @@ describe("XChain", (): void => {
           passwd,
           "C" + addrB.value.substring(1),
           new BN(10),
-          "AVAX"
+          "LUX"
         ),
       (x) => x,
       Matcher.toThrow,

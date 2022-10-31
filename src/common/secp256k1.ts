@@ -261,7 +261,7 @@ export abstract class SECP256k1KeyPair extends StandardKeyPair {
 }
 
 /**
- * Class for representing a key chain in Avalanche.
+ * Class for representing a key chain in Lux.
  *
  * @typeparam SECP256k1KeyPair Class extending [[StandardKeyPair]] which is used as the key in [[SECP256k1KeyChain]]
  */

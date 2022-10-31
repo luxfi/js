@@ -1,5 +1,5 @@
 import mockAxios from "jest-mock-axios"
-import { Avalanche } from "src"
+import { Lux } from "src"
 import { AVMAPI } from "../../../src/apis/avm/api"
 import { KeyPair, KeyChain } from "../../../src/apis/avm/keychain"
 import { Buffer } from "buffer/"
@@ -34,7 +34,7 @@ import { OutputOwners } from "../../../src/common/output"
 import { MinterSet } from "../../../src/apis/avm/minterset"
 import { PlatformChainID } from "../../../src/utils/constants"
 import { PersistanceOptions } from "../../../src/utils/persistenceoptions"
-import { ONEAVAX } from "../../../src/utils/constants"
+import { ONELUX } from "../../../src/utils/constants"
 import {
   Serializable,
   Serialization,
@@ -47,8 +47,8 @@ import {
   SendMultipleResponse,
   SendResponse
 } from "src/apis/avm/interfaces"
-import { CENTIAVAX } from "src/utils"
-import { MILLIAVAX } from "src/utils"
+import { CENTILUX } from "src/utils"
+import { MILLILUX } from "src/utils"
 
 /**
  * @ignore
@@ -88,7 +88,7 @@ describe("AVMAPI", (): void => {
   const username: string = "AvaLabs"
   const password: string = "password"
 
-  const avalanche: Avalanche = new Avalanche(
+  const lux: Lux = new Lux(
     ip,
     port,
     protocol,
@@ -102,26 +102,26 @@ describe("AVMAPI", (): void => {
   let alias: string
 
   const addrA: string = `X-${bech32.bech32.encode(
-    avalanche.getHRP(),
+    lux.getHRP(),
     bech32.bech32.toWords(
       bintools.cb58Decode("B6D4v1VtPYLbiUvYXtW4Px8oE9imC2vGW")
     )
   )}`
   const addrB: string = `X-${bech32.bech32.encode(
-    avalanche.getHRP(),
+    lux.getHRP(),
     bech32.bech32.toWords(
       bintools.cb58Decode("P5wdRuZeaDt28eHMP5S3w9ZdoBfo7wuzF")
     )
   )}`
   const addrC: string = `X-${bech32.bech32.encode(
-    avalanche.getHRP(),
+    lux.getHRP(),
     bech32.bech32.toWords(
       bintools.cb58Decode("6Y3kysjF9jnHnYkdS9yGAuoHyae2eNmeV")
     )
   )}`
 
   beforeAll((): void => {
-    api = new AVMAPI(avalanche, "/ext/bc/X", blockchainID)
+    api = new AVMAPI(lux, "/ext/bc/X", blockchainID)
     alias = api.getBlockchainAlias()
   })
 
@@ -294,7 +294,7 @@ describe("AVMAPI", (): void => {
   test("refreshBlockchainID", async (): Promise<void> => {
     const n3bcID: string = Defaults.network[3].X["blockchainID"]
     const n1337bcID: string = Defaults.network[1337].X["blockchainID"]
-    const testAPI: AVMAPI = new AVMAPI(avalanche, "/ext/bc/avm", n3bcID)
+    const testAPI: AVMAPI = new AVMAPI(lux, "/ext/bc/avm", n3bcID)
     const bc1: string = testAPI.getBlockchainID()
     expect(bc1).toBe(n3bcID)
 
@@ -449,7 +449,7 @@ describe("AVMAPI", (): void => {
   test("export", async (): Promise<void> => {
     const amount: BN = new BN(100)
     const to: string = "abcdef"
-    const assetID: string = "AVAX"
+    const assetID: string = "LUX"
     const username: string = "Robert"
     const password: string = "Paulson"
     const txID: string = "valid"
@@ -524,7 +524,7 @@ describe("AVMAPI", (): void => {
   })
 
   test("createFixedCapAsset", async (): Promise<void> => {
-    const kp: KeyPair = new KeyPair(avalanche.getHRP(), alias)
+    const kp: KeyPair = new KeyPair(lux.getHRP(), alias)
     kp.importKey(
       Buffer.from(
         "ef9bf2d4436491c153967c9709dd8e82795bdb9b5ad44ee22c2903005d1cf676",
@@ -571,7 +571,7 @@ describe("AVMAPI", (): void => {
   })
 
   test("createVariableCapAsset", async () => {
-    const kp: KeyPair = new KeyPair(avalanche.getHRP(), alias)
+    const kp: KeyPair = new KeyPair(lux.getHRP(), alias)
     kp.importKey(
       Buffer.from(
         "ef9bf2d4436491c153967c9709dd8e82795bdb9b5ad44ee22c2903005d1cf676",
@@ -935,9 +935,9 @@ describe("AVMAPI", (): void => {
     let xfersecpmintop: TransferableOperation
 
     beforeEach(async (): Promise<void> => {
-      avm = new AVMAPI(avalanche, "/ext/bc/X", blockchainID)
+      avm = new AVMAPI(lux, "/ext/bc/X", blockchainID)
 
-      const result: Promise<Buffer> = avm.getAVAXAssetID(true)
+      const result: Promise<Buffer> = avm.getLUXAssetID(true)
       const payload: object = {
         result: {
           name,
@@ -954,8 +954,8 @@ describe("AVMAPI", (): void => {
       await result
       set = new UTXOSet()
       avm.newKeyChain()
-      keymgr2 = new KeyChain(avalanche.getHRP(), alias)
-      keymgr3 = new KeyChain(avalanche.getHRP(), alias)
+      keymgr2 = new KeyChain(lux.getHRP(), alias)
+      keymgr3 = new KeyChain(lux.getHRP(), alias)
       addrs1 = []
       addrs2 = []
       addrs3 = []
@@ -980,7 +980,7 @@ describe("AVMAPI", (): void => {
         addrs2.push(avm.addressFromBuffer(keymgr2.makeKey().getAddress()))
         addrs3.push(avm.addressFromBuffer(keymgr3.makeKey().getAddress()))
       }
-      const amount: BN = ONEAVAX.mul(new BN(amnt))
+      const amount: BN = ONELUX.mul(new BN(amnt))
       addressbuffs = avm.keyChain().getAddresses()
       addresses = addressbuffs.map((a) => avm.addressFromBuffer(a))
       const locktime: BN = new BN(54321)
@@ -1457,7 +1457,7 @@ describe("AVMAPI", (): void => {
       )
 
       const txu2: UnsignedTx = set.buildCreateAssetTx(
-        avalanche.getNetworkID(),
+        lux.getNetworkID(),
         bintools.cb58Decode(avm.getBlockchainID()),
         addrs1.map((a) => avm.parseAddress(a)),
         addrs2.map((a) => avm.parseAddress(a)),
@@ -1466,7 +1466,7 @@ describe("AVMAPI", (): void => {
         symbol,
         denomination,
         undefined,
-        CENTIAVAX,
+        CENTILUX,
         assetID
       )
 
@@ -1519,7 +1519,7 @@ describe("AVMAPI", (): void => {
       )
 
       const txu2: UnsignedTx = set.buildCreateAssetTx(
-        avalanche.getNetworkID(),
+        lux.getNetworkID(),
         bintools.cb58Decode(avm.getBlockchainID()),
         addrs1.map((a) => avm.parseAddress(a)),
         addrs2.map((a) => avm.parseAddress(a)),
@@ -1582,14 +1582,14 @@ describe("AVMAPI", (): void => {
       )
 
       const txu2: UnsignedTx = set.buildSECPMintTx(
-        avalanche.getNetworkID(),
+        lux.getNetworkID(),
         bintools.cb58Decode(avm.getBlockchainID()),
         newMinter,
         secpMintXferOut1,
         addrs1.map((a) => avm.parseAddress(a)),
         addrs2.map((a) => avm.parseAddress(a)),
         secpMintUTXO.getUTXOID(),
-        MILLIAVAX,
+        MILLILUX,
         assetID
       )
 
@@ -1645,7 +1645,7 @@ describe("AVMAPI", (): void => {
       )
 
       const txu2: UnsignedTx = set.buildCreateNFTAssetTx(
-        avalanche.getNetworkID(),
+        lux.getNetworkID(),
         bintools.cb58Decode(avm.getBlockchainID()),
         addrs1.map((a: string): Buffer => avm.parseAddress(a)),
         addrs2.map((a: string): Buffer => avm.parseAddress(a)),
@@ -1698,7 +1698,7 @@ describe("AVMAPI", (): void => {
       const groupID: number = 0
       const locktime: BN = new BN(0)
       const threshold: number = 1
-      const payload: Buffer = Buffer.from("Avalanche")
+      const payload: Buffer = Buffer.from("Lux")
       const addrbuff1: Buffer[] = addrs1.map(
         (a: string): Buffer => avm.parseAddress(a)
       )
@@ -1725,7 +1725,7 @@ describe("AVMAPI", (): void => {
       )
 
       const txu2: UnsignedTx = set.buildCreateNFTMintTx(
-        avalanche.getNetworkID(),
+        lux.getNetworkID(),
         bintools.cb58Decode(avm.getBlockchainID()),
         [oo],
         addrbuff1,
@@ -1760,7 +1760,7 @@ describe("AVMAPI", (): void => {
       )
 
       const txu4: UnsignedTx = set.buildCreateNFTMintTx(
-        avalanche.getNetworkID(),
+        lux.getNetworkID(),
         bintools.cb58Decode(avm.getBlockchainID()),
         outputOwners,
         addrbuff1,
@@ -1924,7 +1924,7 @@ describe("AVMAPI", (): void => {
         [fungutxo],
         bintools.cb58Decode(PlatformChainID),
         avm.getTxFee(),
-        await avm.getAVAXAssetID(),
+        await avm.getLUXAssetID(),
         new UTF8Payload("hello world").getPayload(),
         UnixNow(),
         locktime,
@@ -1983,7 +1983,7 @@ describe("AVMAPI", (): void => {
         amount,
         bintools.cb58Decode(PlatformChainID),
         addrbuff3.map((a: Buffer): any =>
-          serialization.bufferToType(a, type, avalanche.getHRP(), "P")
+          serialization.bufferToType(a, type, lux.getHRP(), "P")
         ),
         addrs1,
         addrs2,

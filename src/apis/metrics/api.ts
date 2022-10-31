@@ -2,7 +2,7 @@
  * @packageDocumentation
  * @module API-Metrics
  */
-import AvalancheCore from "../../avalanche"
+import LuxCore from "../../lux"
 import { RESTAPI } from "../../common/restapi"
 import { RequestResponseData } from "../../common/apibase"
 import { AxiosRequestConfig } from "axios"
@@ -12,7 +12,7 @@ import { AxiosRequestConfig } from "axios"
  *
  * @category RPCAPIs
  *
- * @remarks This extends the [[RESTAPI]] class. This class should not be directly called. Instead, use the [[Avalanche.addAPI]] function to register this interface with Avalanche.
+ * @remarks This extends the [[RESTAPI]] class. This class should not be directly called. Instead, use the [[Lux.addAPI]] function to register this interface with Lux.
  */
 export class MetricsAPI extends RESTAPI {
   protected axConf = (): AxiosRequestConfig => {
@@ -32,12 +32,12 @@ export class MetricsAPI extends RESTAPI {
   }
 
   /**
-   * This class should not be instantiated directly. Instead use the [[Avalanche.addAPI]] method.
+   * This class should not be instantiated directly. Instead use the [[Lux.addAPI]] method.
    *
-   * @param core A reference to the Avalanche class
+   * @param core A reference to the Lux class
    * @param baseURL Defaults to the string "/ext/metrics" as the path to rpc's baseurl
    */
-  constructor(core: AvalancheCore, baseURL: string = "/ext/metrics") {
+  constructor(core: LuxCore, baseURL: string = "/ext/metrics") {
     super(core, baseURL)
   }
 }

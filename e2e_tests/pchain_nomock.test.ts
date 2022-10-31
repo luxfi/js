@@ -1,4 +1,4 @@
-import { getAvalanche, createTests, Matcher } from "./e2etestlib"
+import { getLux, createTests, Matcher } from "./e2etestlib"
 import { KeystoreAPI } from "src/apis/keystore/api"
 import BN from "bn.js"
 
@@ -8,17 +8,17 @@ describe("PChain", (): void => {
   let addrC = { value: "" }
   let createdSubnetID = { value: "" }
 
-  const avalanche = getAvalanche()
-  const pchain = avalanche.PChain()
-  const keystore = new KeystoreAPI(avalanche)
+  const lux = getLux()
+  const pchain = lux.PChain()
+  const keystore = new KeystoreAPI(lux)
 
   const now: number = new Date().getTime()
   const startTime: Date = new Date(now + 800)
   const endTime: Date = new Date(now + 50000)
   const stakeAmount: BN = new BN(200000000000)
 
-  const user: string = "avalancheJspChainUser"
-  const passwd: string = "avalancheJsP@ssw4rd"
+  const user: string = "luxJspChainUser"
+  const passwd: string = "luxJsP@ssw4rd"
   const badUser: string = "asdfasdfsa"
   const badPass: string = "pass"
   const memo: string = "hello world"
@@ -28,7 +28,7 @@ describe("PChain", (): void => {
   const nodeID: string = "NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg"
   const subnetID: string = "2bGsYJorY6X7RhjPBFs3kYjiNEHo4zGrD2eeyZbb43T2KKi7fM"
   const xChainAddr: string = "X-custom18jma8ppw3nhx5r4ap8clazz0dps7rv5u9xde7p"
-  const avalancheBlockChainID: string =
+  const luxBlockChainID: string =
     "2VvmkRw4yrz8tPrVnCCbvEK1JxNyujpqhmU6SGonxMpkWBx9UD"
 
   const rewardUTXOTxID: string =
@@ -102,7 +102,7 @@ describe("PChain", (): void => {
     ],
     [
       "getBlockchainStatus",
-      () => pchain.getBlockchainStatus(avalancheBlockChainID),
+      () => pchain.getBlockchainStatus(luxBlockChainID),
       (x) => x,
       Matcher.toBe,
       () => "Unknown"
@@ -233,8 +233,8 @@ describe("PChain", (): void => {
       () => /PrivateKey-\w*/
     ],
     // [
-    //   "exportAVAX",
-    //   () => pchain.exportAVAX(user, passwd, new BN(10), xChainAddr),
+    //   "exportLUX",
+    //   () => pchain.exportLUX(user, passwd, new BN(10), xChainAddr),
     //   (x) => x,
     //   Matcher.toThrow,
     //   () =>
@@ -259,8 +259,8 @@ describe("PChain", (): void => {
       () => ({ status: "Unknown" })
     ],
     [
-      "importAVAX",
-      () => pchain.importAVAX(user, passwd, addrB.value, "X"),
+      "importLUX",
+      () => pchain.importLUX(user, passwd, addrB.value, "X"),
       (x) => x,
       Matcher.toThrow,
       () => "no spendable funds were found"

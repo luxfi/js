@@ -1,17 +1,17 @@
-import { getAvalanche, createTests, Matcher } from "./e2etestlib"
+import { getLux, createTests, Matcher } from "./e2etestlib"
 import { KeystoreAPI } from "src/apis/keystore/api"
-import Avalanche from "src"
+import Lux from "src"
 
 describe("Keystore", (): void => {
-  const username1: string = "avalancheJsUser1"
-  const username2: string = "avalancheJsUser2"
-  const username3: string = "avalancheJsUser3"
-  const password: string = "avalancheJsP1ssw4rd"
+  const username1: string = "luxJsUser1"
+  const username2: string = "luxJsUser2"
+  const username3: string = "luxJsUser3"
+  const password: string = "luxJsP1ssw4rd"
 
   let exportedUser = { value: "" }
 
-  const avalanche: Avalanche = getAvalanche()
-  const keystore: KeystoreAPI = avalanche.NodeKeys()
+  const lux: Lux = getLux()
+  const keystore: KeystoreAPI = lux.NodeKeys()
 
   // test_name             response_promise                              resp_fn  matcher           expected_value/obtained_value
   const tests_spec: any = [

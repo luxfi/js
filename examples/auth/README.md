@@ -1,6 +1,6 @@
 # Auth RPC
 
-Example scripts for the Avalanche [Auth RPC](https://docs.avax.network/build/avalanchego-apis/auth-api)
+Example scripts for the Lux [Auth RPC](https://docs.lux.network/build/luxgo-apis/auth-api)
 
 * [changePassword.ts](./changePassword.ts)
 * [newToken.ts](./newToken.ts)

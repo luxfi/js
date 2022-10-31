@@ -1,12 +1,12 @@
-import { Avalanche, Buffer } from "../../src"
+import { Lux, Buffer } from "../../src"
 import { EVMAPI, Tx } from "../../src/apis/evm"
 
-const ip: string = "api.avax.network"
+const ip: string = "api.lux.network"
 const port: number = 443
 const protocol: string = "https"
 const networkID: number = 1
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const cchain: EVMAPI = avalanche.CChain()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const cchain: EVMAPI = lux.CChain()
 
 const main = async (): Promise<any> => {
   const txID: string = "2jfJtniC8MpnCZTAVo4snyepds33MBGB4Yf1QiPjhCeRYv7gZ5"

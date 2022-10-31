@@ -2,7 +2,7 @@
  * @packageDocumentation
  * @module API-Health
  */
-import AvalancheCore from "../../avalanche"
+import LuxCore from "../../lux"
 import { JRPCAPI } from "../../common/jrpcapi"
 import { RequestResponseData } from "../../common/apibase"
 import { HealthResponse } from "./interfaces"
@@ -12,7 +12,7 @@ import { HealthResponse } from "./interfaces"
  *
  * @category RPCAPIs
  *
- * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Avalanche.addAPI]] function to register this interface with Avalanche.
+ * @remarks This extends the [[JRPCAPI]] class. This class should not be directly called. Instead, use the [[Lux.addAPI]] function to register this interface with Lux.
  */
 export class HealthAPI extends JRPCAPI {
   /**
@@ -25,12 +25,12 @@ export class HealthAPI extends JRPCAPI {
   }
 
   /**
-   * This class should not be instantiated directly. Instead use the [[Avalanche.addAPI]] method.
+   * This class should not be instantiated directly. Instead use the [[Lux.addAPI]] method.
    *
-   * @param core A reference to the Avalanche class
+   * @param core A reference to the Lux class
    * @param baseURL Defaults to the string "/ext/health" as the path to rpc's baseURL
    */
-  constructor(core: AvalancheCore, baseURL: string = "/ext/health") {
+  constructor(core: LuxCore, baseURL: string = "/ext/health") {
     super(core, baseURL)
   }
 }

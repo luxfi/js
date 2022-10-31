@@ -1,4 +1,4 @@
-import AvalancheCore from "../src/avalanche"
+import LuxCore from "../src/lux"
 import { AxiosRequestConfig } from "axios"
 import { APIBase, RequestResponseData } from "../src/common/apibase"
 
@@ -69,7 +69,7 @@ export class TestAPI extends APIBase {
     return this._respFn(res)
   }
 
-  constructor(avax: AvalancheCore, endpoint: string = "/ext/testing") {
-    super(avax, endpoint)
+  constructor(lux: LuxCore, endpoint: string = "/ext/testing") {
+    super(lux, endpoint)
   }
 }

@@ -1,18 +1,18 @@
-import { getAvalanche, createTests, Matcher } from "./e2etestlib"
+import { getLux, createTests, Matcher } from "./e2etestlib"
 import { KeystoreAPI } from "src/apis/keystore/api"
 import BN from "bn.js"
-import Avalanche from "src"
+import Lux from "src"
 import { EVMAPI } from "src/apis/evm"
 
 describe("CChain", (): void => {
-  const avalanche: Avalanche = getAvalanche()
-  const cchain: EVMAPI = avalanche.CChain()
-  const keystore: KeystoreAPI = avalanche.NodeKeys()
+  const lux: Lux = getLux()
+  const cchain: EVMAPI = lux.CChain()
+  const keystore: KeystoreAPI = lux.NodeKeys()
 
   let exportTxHash = { value: "" }
 
-  const user: string = "avalancheJsCChainUser"
-  const passwd: string = "avalancheJsP@ssw4rd"
+  const user: string = "luxJsCChainUser"
+  const passwd: string = "luxJsP@ssw4rd"
   const key: string =
     "PrivateKey-ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
   const privateKeyHex: string =
@@ -37,8 +37,8 @@ describe("CChain", (): void => {
       () => whaleAddr
     ],
     [
-      "exportAVAX",
-      () => cchain.exportAVAX(user, passwd, xChainAddr, new BN(10)),
+      "exportLUX",
+      () => cchain.exportLUX(user, passwd, xChainAddr, new BN(10)),
       (x) => x,
       Matcher.Get,
       () => exportTxHash

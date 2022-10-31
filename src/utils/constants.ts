@@ -7,9 +7,9 @@ import BN from "bn.js"
 
 export const PrivateKeyPrefix: string = "PrivateKey-"
 export const NodeIDPrefix: string = "NodeID-"
-export const PrimaryAssetAlias: string = "AVAX"
-export const MainnetAPI: string = "api.avax.network"
-export const FujiAPI: string = "api.avax-test.network"
+export const PrimaryAssetAlias: string = "LUX"
+export const MainnetAPI: string = "api.lux.network"
+export const FujiAPI: string = "api.lux-test.network"
 
 export interface C {
   blockchainID: string
@@ -23,7 +23,7 @@ export interface C {
   txBytesGas?: number
   costPerSignature?: number
   txFee?: BN
-  avaxAssetID?: string
+  luxAssetID?: string
 }
 export interface X {
   blockchainID: string
@@ -31,7 +31,7 @@ export interface X {
   vm: string
   creationTxFee: BN | number
   mintTxFee: BN
-  avaxAssetID?: string
+  luxAssetID?: string
   txFee?: BN | number
   fee?: BN
 }
@@ -51,7 +51,7 @@ export interface P {
   maxStakeDuration: number
   minDelegationStake: BN
   minDelegationFee: BN
-  avaxAssetID?: string
+  luxAssetID?: string
   txFee?: BN | number
   fee?: BN
 }
@@ -68,7 +68,7 @@ export interface Networks {
 
 export const NetworkIDToHRP: object = {
   0: "custom",
-  1: "avax",
+  1: "lux",
   2: "cascade",
   3: "denali",
   4: "everest",
@@ -79,7 +79,7 @@ export const NetworkIDToHRP: object = {
 
 export const HRPToNetworkID: object = {
   manhattan: 0,
-  avax: 1,
+  lux: 1,
   cascade: 2,
   denali: 3,
   everest: 4,
@@ -90,7 +90,7 @@ export const HRPToNetworkID: object = {
 
 export const NetworkIDToNetworkNames: object = {
   0: ["Manhattan"],
-  1: ["Avalanche", "Mainnet"],
+  1: ["Lux", "Mainnet"],
   2: ["Cascade"],
   3: ["Denali"],
   4: ["Everest"],
@@ -101,7 +101,7 @@ export const NetworkIDToNetworkNames: object = {
 
 export const NetworkNameToNetworkID: object = {
   Manhattan: 0,
-  Avalanche: 1,
+  Lux: 1,
   Mainnet: 1,
   Cascade: 2,
   Denali: 3,
@@ -140,52 +140,52 @@ export const DefaultEVMLocalGenesisAddress: string =
 export const mnemonic: string =
   "output tooth keep tooth bracket fox city sustain blood raise install pond stem reject long scene clap gloom purpose mean music piece unknown light"
 
-export const ONEAVAX: BN = new BN(1000000000)
+export const ONELUX: BN = new BN(1000000000)
 
-export const DECIAVAX: BN = ONEAVAX.div(new BN(10))
+export const DECILUX: BN = ONELUX.div(new BN(10))
 
-export const CENTIAVAX: BN = ONEAVAX.div(new BN(100))
+export const CENTILUX: BN = ONELUX.div(new BN(100))
 
-export const MILLIAVAX: BN = ONEAVAX.div(new BN(1000))
+export const MILLILUX: BN = ONELUX.div(new BN(1000))
 
-export const MICROAVAX: BN = ONEAVAX.div(new BN(1000000))
+export const MICROLUX: BN = ONELUX.div(new BN(1000000))
 
-export const NANOAVAX: BN = ONEAVAX.div(new BN(1000000000))
+export const NANOLUX: BN = ONELUX.div(new BN(1000000000))
 
 export const WEI: BN = new BN(1)
 
 export const GWEI: BN = WEI.mul(new BN(1000000000))
 
-export const AVAXGWEI: BN = NANOAVAX.clone()
+export const LUXGWEI: BN = NANOLUX.clone()
 
-export const AVAXSTAKECAP: BN = ONEAVAX.mul(new BN(3000000))
+export const LUXSTAKECAP: BN = ONELUX.mul(new BN(3000000))
 
 // Start Manhattan
 const n0X: X = {
   blockchainID: "2vrXWHgGxh5n3YsLHMV16YVVJTpT4z45Fmb4y3bL6si8kLCyg9",
   alias: XChainAlias,
   vm: XChainVMName,
-  fee: MILLIAVAX,
-  creationTxFee: CENTIAVAX,
-  mintTxFee: MILLIAVAX
+  fee: MILLILUX,
+  creationTxFee: CENTILUX,
+  mintTxFee: MILLILUX
 }
 
 const n0P: P = {
   blockchainID: PlatformChainID,
   alias: PChainAlias,
   vm: PChainVMName,
-  fee: MILLIAVAX,
-  creationTxFee: CENTIAVAX,
-  createSubnetTx: ONEAVAX,
-  createChainTx: ONEAVAX,
+  fee: MILLILUX,
+  creationTxFee: CENTILUX,
+  createSubnetTx: ONELUX,
+  createChainTx: ONELUX,
   minConsumption: 0.1,
   maxConsumption: 0.12,
   maxStakingDuration: new BN(31536000),
-  maxSupply: new BN(720000000).mul(ONEAVAX),
-  minStake: ONEAVAX.mul(new BN(2000)),
+  maxSupply: new BN(720000000).mul(ONELUX),
+  minStake: ONELUX.mul(new BN(2000)),
   minStakeDuration: 2 * 7 * 24 * 60 * 60, //two weeks
   maxStakeDuration: 365 * 24 * 60 * 60, // one year
-  minDelegationStake: ONEAVAX.mul(new BN(25)),
+  minDelegationStake: ONELUX.mul(new BN(25)),
   minDelegationFee: new BN(2)
 }
 
@@ -193,41 +193,41 @@ const n0C: C = {
   blockchainID: "2fFZQibQXcd6LTE4rpBPBAkLVXFE91Kit8pgxaBG1mRnh5xqbb",
   alias: CChainAlias,
   vm: CChainVMName,
-  fee: MILLIAVAX,
+  fee: MILLILUX,
   gasPrice: GWEI.mul(new BN(470)), //equivalent to gas price
   chainID: 43111
 }
 // End Manhattan
 
 // Start mainnet
-let avaxAssetID: string = "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z"
+let luxAssetID: string = "FvwEAhmxKfeiG8SnEvq42hc6whRyY3EFYAvebMqDNDGCgxN5Z"
 const n1X: X = {
   blockchainID: "2oYMBNV4eNHyqk2fjjV5nVQLDbtmNJzq5s3qs3Lo6ftnC6FByM",
-  avaxAssetID: avaxAssetID,
+  luxAssetID: luxAssetID,
   alias: XChainAlias,
   vm: XChainVMName,
-  txFee: MILLIAVAX,
-  creationTxFee: CENTIAVAX,
-  mintTxFee: MILLIAVAX
+  txFee: MILLILUX,
+  creationTxFee: CENTILUX,
+  mintTxFee: MILLILUX
 }
 
 const n1P: P = {
   blockchainID: PlatformChainID,
-  avaxAssetID: avaxAssetID,
+  luxAssetID: luxAssetID,
   alias: PChainAlias,
   vm: PChainVMName,
-  txFee: MILLIAVAX,
-  createSubnetTx: ONEAVAX,
-  createChainTx: ONEAVAX,
-  creationTxFee: CENTIAVAX,
+  txFee: MILLILUX,
+  createSubnetTx: ONELUX,
+  createChainTx: ONELUX,
+  creationTxFee: CENTILUX,
   minConsumption: 0.1,
   maxConsumption: 0.12,
   maxStakingDuration: new BN(31536000),
-  maxSupply: new BN(720000000).mul(ONEAVAX),
-  minStake: ONEAVAX.mul(new BN(2000)),
+  maxSupply: new BN(720000000).mul(ONELUX),
+  minStake: ONELUX.mul(new BN(2000)),
   minStakeDuration: 2 * 7 * 24 * 60 * 60, //two weeks
   maxStakeDuration: 365 * 24 * 60 * 60, // one year
-  minDelegationStake: ONEAVAX.mul(new BN(25)),
+  minDelegationStake: ONELUX.mul(new BN(25)),
   minDelegationFee: new BN(2)
 }
 
@@ -239,7 +239,7 @@ const n1C: C = {
   costPerSignature: 1000,
   // DEPRECATED - txFee
   // WILL BE REMOVED IN NEXT MAJOR VERSION BUMP
-  txFee: MILLIAVAX,
+  txFee: MILLILUX,
   // DEPRECATED - gasPrice
   // WILL BE REMOVED IN NEXT MAJOR VERSION BUMP
   gasPrice: GWEI.mul(new BN(225)),
@@ -265,16 +265,16 @@ const n2P: P = {
   vm: PChainVMName,
   txFee: 0,
   creationTxFee: 0,
-  createSubnetTx: ONEAVAX,
-  createChainTx: ONEAVAX,
+  createSubnetTx: ONELUX,
+  createChainTx: ONELUX,
   minConsumption: 0.1,
   maxConsumption: 0.12,
   maxStakingDuration: new BN(31536000),
-  maxSupply: new BN(720000000).mul(ONEAVAX),
-  minStake: ONEAVAX.mul(new BN(2000)),
+  maxSupply: new BN(720000000).mul(ONELUX),
+  minStake: ONELUX.mul(new BN(2000)),
   minStakeDuration: 2 * 7 * 24 * 60 * 60, //two weeks
   maxStakeDuration: 365 * 24 * 60 * 60, // one year
-  minDelegationStake: ONEAVAX.mul(new BN(25)),
+  minDelegationStake: ONELUX.mul(new BN(25)),
   minDelegationFee: new BN(2)
 }
 
@@ -302,16 +302,16 @@ const n3P: P = {
   vm: PChainVMName,
   txFee: 0,
   creationTxFee: 0,
-  createSubnetTx: ONEAVAX,
-  createChainTx: ONEAVAX,
+  createSubnetTx: ONELUX,
+  createChainTx: ONELUX,
   minConsumption: 0.1,
   maxConsumption: 0.12,
   maxStakingDuration: new BN(31536000),
-  maxSupply: new BN(720000000).mul(ONEAVAX),
-  minStake: ONEAVAX.mul(new BN(2000)),
+  maxSupply: new BN(720000000).mul(ONELUX),
+  minStake: ONELUX.mul(new BN(2000)),
   minStakeDuration: 2 * 7 * 24 * 60 * 60, //two weeks
   maxStakeDuration: 365 * 24 * 60 * 60, // one year
-  minDelegationStake: ONEAVAX.mul(new BN(25)),
+  minDelegationStake: ONELUX.mul(new BN(25)),
   minDelegationFee: new BN(2)
 }
 
@@ -328,27 +328,27 @@ const n4X: X = {
   blockchainID: "jnUjZSRt16TcRnZzmh5aMhavwVHz3zBrSN8GfFMTQkzUnoBxC",
   alias: XChainAlias,
   vm: XChainVMName,
-  txFee: MILLIAVAX,
-  creationTxFee: CENTIAVAX,
-  mintTxFee: MILLIAVAX
+  txFee: MILLILUX,
+  creationTxFee: CENTILUX,
+  mintTxFee: MILLILUX
 }
 
 const n4P: P = {
   blockchainID: PlatformChainID,
   alias: PChainAlias,
   vm: PChainVMName,
-  txFee: MILLIAVAX,
-  creationTxFee: CENTIAVAX,
-  createSubnetTx: ONEAVAX,
-  createChainTx: ONEAVAX,
+  txFee: MILLILUX,
+  creationTxFee: CENTILUX,
+  createSubnetTx: ONELUX,
+  createChainTx: ONELUX,
   minConsumption: 0.1,
   maxConsumption: 0.12,
   maxStakingDuration: new BN(31536000),
-  maxSupply: new BN(720000000).mul(ONEAVAX),
-  minStake: ONEAVAX.mul(new BN(2000)),
+  maxSupply: new BN(720000000).mul(ONELUX),
+  minStake: ONELUX.mul(new BN(2000)),
   minStakeDuration: 2 * 7 * 24 * 60 * 60, //two weeks
   maxStakeDuration: 365 * 24 * 60 * 60, // one year
-  minDelegationStake: ONEAVAX.mul(new BN(25)),
+  minDelegationStake: ONELUX.mul(new BN(25)),
   minDelegationFee: new BN(2)
 }
 
@@ -362,34 +362,34 @@ const n4C: C = {
 // End Everest
 
 // Start Fuji
-avaxAssetID = "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
+luxAssetID = "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 const n5X: X = {
   blockchainID: "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm",
-  avaxAssetID: avaxAssetID,
+  luxAssetID: luxAssetID,
   alias: XChainAlias,
   vm: XChainVMName,
-  txFee: MILLIAVAX,
-  creationTxFee: CENTIAVAX,
-  mintTxFee: MILLIAVAX
+  txFee: MILLILUX,
+  creationTxFee: CENTILUX,
+  mintTxFee: MILLILUX
 }
 
 const n5P: P = {
   blockchainID: PlatformChainID,
-  avaxAssetID: avaxAssetID,
+  luxAssetID: luxAssetID,
   alias: PChainAlias,
   vm: PChainVMName,
-  txFee: MILLIAVAX,
-  creationTxFee: CENTIAVAX,
-  createSubnetTx: ONEAVAX,
-  createChainTx: ONEAVAX,
+  txFee: MILLILUX,
+  creationTxFee: CENTILUX,
+  createSubnetTx: ONELUX,
+  createChainTx: ONELUX,
   minConsumption: 0.1,
   maxConsumption: 0.12,
   maxStakingDuration: new BN(31536000),
-  maxSupply: new BN(720000000).mul(ONEAVAX),
-  minStake: ONEAVAX,
+  maxSupply: new BN(720000000).mul(ONELUX),
+  minStake: ONELUX,
   minStakeDuration: 24 * 60 * 60, //one day
   maxStakeDuration: 365 * 24 * 60 * 60, // one year
-  minDelegationStake: ONEAVAX,
+  minDelegationStake: ONELUX,
   minDelegationFee: new BN(2)
 }
 
@@ -401,7 +401,7 @@ const n5C: C = {
   costPerSignature: 1000,
   // DEPRECATED - txFee
   // WILL BE REMOVED IN NEXT MAJOR VERSION BUMP
-  txFee: MILLIAVAX,
+  txFee: MILLILUX,
   // DEPRECATED - gasPrice
   // WILL BE REMOVED IN NEXT MAJOR VERSION BUMP
   gasPrice: GWEI.mul(new BN(225)),
@@ -412,28 +412,28 @@ const n5C: C = {
 // End Fuji
 
 // Start custom network
-avaxAssetID = "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"
+luxAssetID = "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"
 const n1337X: X = { ...n5X }
 n1337X.blockchainID = "qzfF3A11KzpcHkkqznEyQgupQrCNS6WV6fTUTwZpEKqhj1QE7"
-n1337X.avaxAssetID = avaxAssetID
+n1337X.luxAssetID = luxAssetID
 const n1337P: P = { ...n5P }
 n1337P.blockchainID = PlatformChainID
 const n1337C: C = { ...n5C }
 n1337C.blockchainID = "BR28ypgLATNS6PbtHMiJ7NQ61vfpT27Hj8tAcZ1AHsfU5cz88"
-n1337C.avaxAssetID = avaxAssetID
+n1337C.luxAssetID = luxAssetID
 n1337C.chainID = 43112
 // End custom network
 
 // Start local network
-avaxAssetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
+luxAssetID = "2fombhL7aGPwj3KH4bfrmJwW6PVnMobf9Y2fn9GwxiAAJyFDbe"
 const n12345X: X = { ...n5X }
 n12345X.blockchainID = "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed"
-n12345X.avaxAssetID = avaxAssetID
+n12345X.luxAssetID = luxAssetID
 const n12345P: P = { ...n5P }
 n12345P.blockchainID = PlatformChainID
 const n12345C: C = { ...n5C }
 n12345C.blockchainID = "2CA6j5zYzasynPsFeNoqWkmTCt3VScMvXUZHbfDJ8k3oGzAPtU"
-n12345C.avaxAssetID = avaxAssetID
+n12345C.luxAssetID = luxAssetID
 n12345C.chainID = 43112
 // End local network
 

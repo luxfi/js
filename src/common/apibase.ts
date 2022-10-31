@@ -6,7 +6,7 @@
 import { StoreAPI } from "store2"
 import { ClientRequest } from "http"
 import DB from "../utils/db"
-import AvalancheCore from "../avalanche"
+import LuxCore from "../lux"
 
 /**
  * Response data for HTTP requests.
@@ -25,7 +25,7 @@ export class RequestResponseData {
  * Abstract class defining a generic endpoint that all endpoints must implement (extend).
  */
 export abstract class APIBase {
-  protected core: AvalancheCore
+  protected core: LuxCore
   protected baseURL: string
   protected db: StoreAPI
 
@@ -59,10 +59,10 @@ export abstract class APIBase {
 
   /**
    *
-   * @param core Reference to the Avalanche instance using this baseURL
+   * @param core Reference to the Lux instance using this baseURL
    * @param baseURL Path to the baseURL
    */
-  constructor(core: AvalancheCore, baseURL: string) {
+  constructor(core: LuxCore, baseURL: string) {
     this.core = core
     this.setBaseURL(baseURL)
   }

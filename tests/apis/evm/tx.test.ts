@@ -6,10 +6,10 @@ import {
 } from "../../../src/apis/evm"
 import {
   Defaults,
-  MILLIAVAX,
+  MILLILUX,
   PlatformChainID
 } from "../../../src/utils/constants"
-import { ONEAVAX } from "../../../src/utils/constants"
+import { ONELUX } from "../../../src/utils/constants"
 import { EVMOutput } from "../../../src/apis/evm"
 import BN from "bn.js"
 import { BinTools, Buffer } from "src"
@@ -18,7 +18,7 @@ const cHexAddress1: string = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"
 const bintools: BinTools = BinTools.getInstance()
 const cHexAddress2: string = "0xecC3B2968B277b837a81A7181e0b94EB1Ca54EdE"
 const antAssetID: string = "F4MyJcUvq3Rxbqgd4Zs8sUpvwLHApyrp4yxJXe2bAV86Vvp38"
-const avaxAssetID: string = Defaults.network[networkID].X.avaxAssetID
+const luxAssetID: string = Defaults.network[networkID].X.luxAssetID
 const txID: string = "QVb7DtKjcwVYLFWHgnGSdzQtQSc29KeRBYFNCBnbFu6dFqX7z"
 const blockchainID: string = Defaults.network[networkID].C.blockchainID
 const sourcechainID: string = Defaults.network[networkID].X.blockchainID
@@ -33,24 +33,24 @@ beforeEach((): void => {
 
 describe("EVM Transactions", () => {
   describe("ImportTx", () => {
-    test("Multiple AVAX EVMOutput fail", (): void => {
+    test("Multiple LUX EVMOutput fail", (): void => {
       const outputidx: Buffer = Buffer.from("")
-      const input: SECPTransferInput = new SECPTransferInput(ONEAVAX)
+      const input: SECPTransferInput = new SECPTransferInput(ONELUX)
       const xferin: TransferableInput = new TransferableInput(
         bintools.cb58Decode(txID),
         outputidx,
-        bintools.cb58Decode(avaxAssetID),
+        bintools.cb58Decode(luxAssetID),
         input
       )
       importedIns.push(xferin)
-      // Creating 2 outputs with the same address and AVAX assetID is invalid
+      // Creating 2 outputs with the same address and LUX assetID is invalid
       let evmOutput: EVMOutput = new EVMOutput(
         cHexAddress1,
-        ONEAVAX,
-        avaxAssetID
+        ONELUX,
+        luxAssetID
       )
       evmOutputs.push(evmOutput)
-      evmOutput = new EVMOutput(cHexAddress1, ONEAVAX, avaxAssetID)
+      evmOutput = new EVMOutput(cHexAddress1, ONELUX, luxAssetID)
       evmOutputs.push(evmOutput)
 
       expect((): void => {
@@ -66,27 +66,27 @@ describe("EVM Transactions", () => {
       )
     })
 
-    test("Multiple AVAX EVMOutput success", (): void => {
+    test("Multiple LUX EVMOutput success", (): void => {
       const outputidx: Buffer = Buffer.from("")
-      const input: SECPTransferInput = new SECPTransferInput(ONEAVAX)
+      const input: SECPTransferInput = new SECPTransferInput(ONELUX)
       const xferin: TransferableInput = new TransferableInput(
         bintools.cb58Decode(txID),
         outputidx,
-        bintools.cb58Decode(avaxAssetID),
+        bintools.cb58Decode(luxAssetID),
         input
       )
       importedIns.push(xferin)
       // Creating 2 outputs with different addresses valid
       let evmOutput: EVMOutput = new EVMOutput(
         cHexAddress1,
-        ONEAVAX.div(new BN(3)),
-        avaxAssetID
+        ONELUX.div(new BN(3)),
+        luxAssetID
       )
       evmOutputs.push(evmOutput)
       evmOutput = new EVMOutput(
         cHexAddress2,
-        ONEAVAX.div(new BN(3)),
-        avaxAssetID
+        ONELUX.div(new BN(3)),
+        luxAssetID
       )
       evmOutputs.push(evmOutput)
 
@@ -109,18 +109,18 @@ describe("EVM Transactions", () => {
       const xferin: TransferableInput = new TransferableInput(
         bintools.cb58Decode(txID),
         outputidx,
-        bintools.cb58Decode(avaxAssetID),
+        bintools.cb58Decode(luxAssetID),
         input
       )
       importedIns.push(xferin)
       // Creating 2 outputs with the same address and ANT assetID is invalid
       let evmOutput: EVMOutput = new EVMOutput(
         cHexAddress1,
-        ONEAVAX,
+        ONELUX,
         antAssetID
       )
       evmOutputs.push(evmOutput)
-      evmOutput = new EVMOutput(cHexAddress1, ONEAVAX, antAssetID)
+      evmOutput = new EVMOutput(cHexAddress1, ONELUX, antAssetID)
       evmOutputs.push(evmOutput)
       expect((): void => {
         new ImportTx(
@@ -141,17 +141,17 @@ describe("EVM Transactions", () => {
       const xferin: TransferableInput = new TransferableInput(
         bintools.cb58Decode(txID),
         outputidx,
-        bintools.cb58Decode(avaxAssetID),
+        bintools.cb58Decode(luxAssetID),
         input
       )
       importedIns.push(xferin)
       let evmOutput: EVMOutput = new EVMOutput(
         cHexAddress1,
-        ONEAVAX,
+        ONELUX,
         antAssetID
       )
       evmOutputs.push(evmOutput)
-      evmOutput = new EVMOutput(cHexAddress2, ONEAVAX, antAssetID)
+      evmOutput = new EVMOutput(cHexAddress2, ONELUX, antAssetID)
       evmOutputs.push(evmOutput)
 
       const importTx: ImportTx = new ImportTx(
@@ -170,15 +170,15 @@ describe("EVM Transactions", () => {
       const xferin: TransferableInput = new TransferableInput(
         bintools.cb58Decode(txID),
         outputidx,
-        bintools.cb58Decode(avaxAssetID),
+        bintools.cb58Decode(luxAssetID),
         input
       )
       importedIns.push(xferin)
 
-      // If the output is a non-avax assetID then don't subtract a fee
+      // If the output is a non-lux assetID then don't subtract a fee
       const evmOutput: EVMOutput = new EVMOutput(
         cHexAddress1,
-        ONEAVAX,
+        ONELUX,
         antAssetID
       )
       evmOutputs.push(evmOutput)
@@ -193,23 +193,23 @@ describe("EVM Transactions", () => {
           baseFee
         )
       }).toThrow(
-        "Error - 25000000000 nAVAX required for fee and only 0 nAVAX provided"
+        "Error - 25000000000 nLUX required for fee and only 0 nLUX provided"
       )
     })
 
     test("Single ANT EVMOutput success", (): void => {
       const outputidx: Buffer = Buffer.from("")
-      const input: SECPTransferInput = new SECPTransferInput(ONEAVAX)
+      const input: SECPTransferInput = new SECPTransferInput(ONELUX)
       const xferin: TransferableInput = new TransferableInput(
         bintools.cb58Decode(txID),
         outputidx,
-        bintools.cb58Decode(avaxAssetID),
+        bintools.cb58Decode(luxAssetID),
         input
       )
       importedIns.push(xferin)
       const evmOutput: EVMOutput = new EVMOutput(
         cHexAddress1,
-        ONEAVAX,
+        ONELUX,
         antAssetID
       )
       evmOutputs.push(evmOutput)
@@ -223,13 +223,13 @@ describe("EVM Transactions", () => {
       expect(importTx).toBeInstanceOf(ImportTx)
     })
 
-    test("Single AVAX EVMOutput fail", (): void => {
+    test("Single LUX EVMOutput fail", (): void => {
       const outputidx: Buffer = Buffer.from("")
       const input: SECPTransferInput = new SECPTransferInput(new BN(507))
       const xferin: TransferableInput = new TransferableInput(
         bintools.cb58Decode(txID),
         outputidx,
-        bintools.cb58Decode(avaxAssetID),
+        bintools.cb58Decode(luxAssetID),
         input
       )
       importedIns.push(xferin)
@@ -237,7 +237,7 @@ describe("EVM Transactions", () => {
       const evmOutput: EVMOutput = new EVMOutput(
         cHexAddress1,
         new BN(0),
-        avaxAssetID
+        luxAssetID
       )
       evmOutputs.push(evmOutput)
       const baseFee: BN = new BN(25000000000)
@@ -251,24 +251,24 @@ describe("EVM Transactions", () => {
           baseFee
         )
       }).toThrow(
-        "Error - 25000000000 nAVAX required for fee and only 507 nAVAX provided"
+        "Error - 25000000000 nLUX required for fee and only 507 nLUX provided"
       )
     })
 
-    test("Single AVAX EVMOutput success", (): void => {
+    test("Single LUX EVMOutput success", (): void => {
       const outputidx: Buffer = Buffer.from("")
-      const input: SECPTransferInput = new SECPTransferInput(ONEAVAX)
+      const input: SECPTransferInput = new SECPTransferInput(ONELUX)
       const xferin: TransferableInput = new TransferableInput(
         bintools.cb58Decode(txID),
         outputidx,
-        bintools.cb58Decode(avaxAssetID),
+        bintools.cb58Decode(luxAssetID),
         input
       )
       importedIns.push(xferin)
       const evmOutput: EVMOutput = new EVMOutput(
         cHexAddress1,
-        ONEAVAX.sub(MILLIAVAX),
-        avaxAssetID
+        ONELUX.sub(MILLILUX),
+        luxAssetID
       )
       evmOutputs.push(evmOutput)
       const importTx: ImportTx = new ImportTx(

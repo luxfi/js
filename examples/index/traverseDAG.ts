@@ -1,4 +1,4 @@
-import { Avalanche, Buffer } from "../../src"
+import { Lux, Buffer } from "../../src"
 import { Vertex } from "../../src/apis/avm"
 import { IndexAPI } from "../../src/apis/index"
 import {
@@ -6,12 +6,12 @@ import {
   GetLastAcceptedResponse
 } from "../../src/apis/index/interfaces"
 
-const ip: string = "indexer-demo.avax.network"
+const ip: string = "indexer-demo.lux.network"
 const port: number = 443
 const protocol: string = "https"
 const networkID: number = 1
-const avalanche: Avalanche = new Avalanche(ip, port, protocol, networkID)
-const index: IndexAPI = avalanche.Index()
+const lux: Lux = new Lux(ip, port, protocol, networkID)
+const index: IndexAPI = lux.Index()
 
 const sleep = (ms: number): Promise<unknown> => {
   return new Promise((resolve) => setTimeout(resolve, ms))
