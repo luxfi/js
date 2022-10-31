@@ -1,4 +1,4 @@
-# LuxJS - The Lux Platform JavaScript Library
+# LuxJS - The Lux Network JavaScript Library
 
 ## Overview
 
