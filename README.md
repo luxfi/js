@@ -52,19 +52,19 @@ This will generate a pure Javascript library and place it in a folder named "web
 The LuxJS library can be imported into your existing Node.js project as follows:
 
 ```js
-const lux = require("lux")
+const lux = require("luxnet")
 ```
 
 Or into your TypeScript project like this:
 
 ```js
-import { Lux } from "lux"
+import { Lux } from "luxnet"
 ```
 
 ### Importing essentials
 
 ```js
-import { Lux, BinTools, BN, Buffer } from "lux"
+import { Lux, BinTools, BN, Buffer } from "luxnet"
 
 const bintools = BinTools.getInstance()
 ```
@@ -81,7 +81,7 @@ The above lines import the libraries used in the tutorials. The libraries includ
 LuxJS comes with its own XVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it's registered. The first step in this process is to create an instance of LuxJS connected to our Lux Platform endpoint of choice.
 
 ```js
-import { Lux, BinTools, Buffer, BN } from "lux"
+import { Lux, BinTools, Buffer, BN } from "luxnet"
 
 const bintools = BinTools.getInstance()
 
@@ -168,8 +168,8 @@ const isValid = keypair.verify(message, signature) // returns a boolean
 This example creates an asset in the X-Chain and publishes it to the Lux Platform. The first step in this process is to create an instance of LuxJS connected to our Lux Platform endpoint of choice.
 
 ```js
-import { Lux, BinTools, Buffer, BN } from "lux"
-import { InitialStates, SECPTransferOutput } from "lux/dist/apis/xvm"
+import { Lux, BinTools, Buffer, BN } from "luxnet"
+import { InitialStates, SECPTransferOutput } from "luxnet/dist/apis/xvm"
 
 const myNetworkID = 12345 // default is 1, we want to override that for our local network
 const lux = new Lux("localhost", 9650, "http", myNetworkID)
@@ -291,7 +291,7 @@ The X-Chain uses the TxID of the transaction which created the asset as the uniq
 This example sends an asset in the X-Chain to a single recipient. The first step in this process is to create an instance of Lux connected to our Lux Platform endpoint of choice.
 
 ```js
-import { Lux, BinTools, Buffer, BN } from "lux"
+import { Lux, BinTools, Buffer, BN } from "luxnet"
 
 const myNetworkID = 12345 // default is 1, we want to override that for our local network
 const lux = new lux.Lux(

@@ -1,7 +1,7 @@
 {
-  "name": "@luxdefi/core",
+  "name": "luxnet",
   "version": "3.15.5",
-  "description": "Lux Platform JS Library",
+  "description": "Lux Network JS Library",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist/ && npx tsc -b && cp -r typings/src ./dist",
