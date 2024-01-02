@@ -1,4 +1,4 @@
-import { KeyChain, KeyPair } from "../../../src/apis/avm/keychain"
+import { KeyChain, KeyPair } from "../../../src/apis/xvm/keychain"
 import { Lux } from "../../../src/index"
 import { Buffer } from "buffer/"
 import createHash from "create-hash"

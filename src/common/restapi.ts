@@ -173,7 +173,7 @@ export class RESTAPI extends APIBase {
   /**
    *
    * @param core Reference to the Lux instance using this endpoint
-   * @param baseURL Path of the APIs baseURL - ex: "/ext/bc/avm"
+   * @param baseURL Path of the APIs baseURL - ex: "/ext/bc/xvm"
    * @param contentType Optional Determines the type of the entity attached to the
    * incoming request
    * @param acceptType Optional Determines the type of representation which is

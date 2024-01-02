@@ -186,7 +186,7 @@ export class EVMAPI extends JRPCAPI {
     // set base url to get asset description
     this.setBaseURL("/ext/bc/X")
     const response: RequestResponseData = await this.callMethod(
-      "avm.getAssetDescription",
+      "xvm.getAssetDescription",
       params
     )
 

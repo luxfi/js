@@ -27,7 +27,7 @@ import {
   UTXO,
   UTXOID,
   UTXOSet
-} from "src/apis/avm"
+} from "src/apis/xvm"
 import { Address, Serialized, Signature } from "src/common"
 import {
   DefaultNetworkID,
@@ -346,7 +346,7 @@ describe("Serialization", (): void => {
     const locktime: BN = new BN(0)
     const locktimeHex: string = "0000000000000000"
 
-    describe("AVM", (): void => {
+    describe("XVM", (): void => {
       const blockchainIDCB58: Buffer = serialization.typeToBuffer(
         Defaults.network[12345]["X"].blockchainID,
         cb58
@@ -357,7 +357,7 @@ describe("Serialization", (): void => {
       const localNetworkIDHex: string = "00000539"
       const outs: TransferableOutput[] = []
       const ins: TransferableInput[] = []
-      const vm: string = "AVM"
+      const vm: string = "XVM"
       const groupID: number = 12345
 
       test("GenesisAsset", (): void => {
@@ -384,7 +384,7 @@ describe("Serialization", (): void => {
           memo
         )
         const genesisasset2: GenesisAsset = new GenesisAsset()
-        const notes: string = "AVM GenesisAsset"
+        const notes: string = "XVM GenesisAsset"
         const serialized: Serialized = serialization.serialize(
           genesisasset,
           vm,
@@ -435,7 +435,7 @@ describe("Serialization", (): void => {
           memo
         )
         const basetx2: BaseTx = new BaseTx()
-        const notes: string = "AVM BaseTx"
+        const notes: string = "XVM BaseTx"
         const serialized: Serialized = serialization.serialize(
           basetx,
           vm,
@@ -489,7 +489,7 @@ describe("Serialization", (): void => {
           initialState
         )
         const createassettx2: CreateAssetTx = new CreateAssetTx()
-        const notes: string = "AVM CreateAssetTx"
+        const notes: string = "XVM CreateAssetTx"
         const serialized: Serialized = serialization.serialize(
           createassettx,
           vm,
@@ -544,7 +544,7 @@ describe("Serialization", (): void => {
           ops
         )
         const operationtx2: OperationTx = new OperationTx()
-        const notes: string = "AVM OperationTx"
+        const notes: string = "XVM OperationTx"
         const serialized: Serialized = serialization.serialize(
           operationtx,
           vm,
@@ -595,7 +595,7 @@ describe("Serialization", (): void => {
           importIns
         )
         const importtx2: ImportTx = new ImportTx()
-        const notes: string = "AVM ImportTx"
+        const notes: string = "XVM ImportTx"
         const serialized: Serialized = serialization.serialize(
           importtx,
           vm,
@@ -651,7 +651,7 @@ describe("Serialization", (): void => {
           exportOuts
         )
         const exporttx2: ExportTx = new ExportTx()
-        const notes: string = "AVM ExportTx"
+        const notes: string = "XVM ExportTx"
         const serialized: Serialized = serialization.serialize(
           exporttx,
           vm,
@@ -695,7 +695,7 @@ describe("Serialization", (): void => {
         const sigArray: Signature[] = []
         const secpcredential: SECPCredential = new SECPCredential(sigArray)
         const secpcredential2: SECPCredential = new SECPCredential()
-        const notes: string = "AVM SECPCredential"
+        const notes: string = "XVM SECPCredential"
         const serialized: Serialized = serialization.serialize(
           secpcredential,
           vm,
@@ -725,7 +725,7 @@ describe("Serialization", (): void => {
         const sigArray: Signature[] = []
         const nftcredential: NFTCredential = new NFTCredential(sigArray)
         const nftcredential2: NFTCredential = new NFTCredential()
-        const notes: string = "AVM NFTCredential"
+        const notes: string = "XVM NFTCredential"
         const serialized: Serialized = serialization.serialize(
           nftcredential,
           vm,
@@ -754,7 +754,7 @@ describe("Serialization", (): void => {
       test("InitialStates", (): void => {
         const initialStates: InitialStates = new InitialStates()
         const initialStates2: InitialStates = new InitialStates()
-        const notes: string = "AVM InitialStates"
+        const notes: string = "XVM InitialStates"
         const serialized: Serialized = serialization.serialize(
           initialStates,
           vm,
@@ -782,7 +782,7 @@ describe("Serialization", (): void => {
       test("SECPTransferInput", (): void => {
         const secptransferinput: SECPTransferInput = new SECPTransferInput()
         const secptransferinput2: SECPTransferInput = new SECPTransferInput()
-        const notes: string = "AVM SECPTransferInput"
+        const notes: string = "XVM SECPTransferInput"
         const serialized: Serialized = serialization.serialize(
           secptransferinput,
           vm,
@@ -815,7 +815,7 @@ describe("Serialization", (): void => {
       test("MinterSet", (): void => {
         const minterset: MinterSet = new MinterSet(threshold, minters)
         const minterset2: MinterSet = new MinterSet()
-        const notes: string = "AVM MinterSet"
+        const notes: string = "XVM MinterSet"
         const serialized: Serialized = serialization.serialize(
           minterset,
           vm,
@@ -853,7 +853,7 @@ describe("Serialization", (): void => {
           new TransferableOperation(assetID, utxoids, secpmintoperation)
         const transferableoperation2: TransferableOperation =
           new TransferableOperation()
-        const notes: string = "AVM TransferableOperation"
+        const notes: string = "XVM TransferableOperation"
         const serialized: Serialized = serialization.serialize(
           transferableoperation,
           vm,
@@ -895,7 +895,7 @@ describe("Serialization", (): void => {
           secptransferoutput
         )
         const secpmintoperation2: SECPMintOperation = new SECPMintOperation()
-        const notes: string = "AVM SECPMintOperation"
+        const notes: string = "XVM SECPMintOperation"
         const serialized: Serialized = serialization.serialize(
           secpmintoperation,
           vm,
@@ -927,7 +927,7 @@ describe("Serialization", (): void => {
         // const nftmintoutput: NFTMintOutput = new NFTMintOutput()
         // const nftmintoperation: NFTMintOperation = new NFTMintOperation(groupID, payload, [nftmintoutput])
         // const nftmintoperation2: NFTMintOperation = new NFTMintOperation()
-        // const notes: string = "AVM NFTMintOperation"
+        // const notes: string = "XVM NFTMintOperation"
         // const serialized: Serialized = serialization.serialize(nftmintoperation, vm, hex, notes)
         // expect(serialized.vm).toBe(vm)
         // expect(serialized.encoding).toBe(hex)
@@ -958,7 +958,7 @@ describe("Serialization", (): void => {
           new NFTTransferOperation(nfttransferoutput)
         const nfttransferoperation2: NFTTransferOperation =
           new NFTTransferOperation()
-        const notes: string = "AVM NFTTransferOperation"
+        const notes: string = "XVM NFTTransferOperation"
         const serialized: Serialized = serialization.serialize(
           nfttransferoperation,
           vm,
@@ -998,7 +998,7 @@ describe("Serialization", (): void => {
           "000000000000000000000000000000000000000000000000000000000000000000000000"
         const utxoid: UTXOID = new UTXOID()
         const utxoid2: UTXOID = new UTXOID()
-        const notes: string = "AVM UTXOID"
+        const notes: string = "XVM UTXOID"
         const serialized: Serialized = serialization.serialize(
           utxoid,
           vm,
@@ -1032,7 +1032,7 @@ describe("Serialization", (): void => {
           secpmintoutput
         )
         const transferableoutput2: TransferableOutput = new TransferableOutput()
-        const notes: string = "AVM TransferableOutput"
+        const notes: string = "XVM TransferableOutput"
         const serialized: Serialized = serialization.serialize(
           transferableoutput,
           vm,
@@ -1065,7 +1065,7 @@ describe("Serialization", (): void => {
       test("SECPTransferOutput", (): void => {
         const secptransferoutput: SECPTransferOutput = new SECPTransferOutput()
         const secptransferoutput2: SECPTransferOutput = new SECPTransferOutput()
-        const notes: string = "AVM SECPTransferOutput"
+        const notes: string = "XVM SECPTransferOutput"
         const serialized: Serialized = serialization.serialize(
           secptransferoutput,
           vm,
@@ -1106,7 +1106,7 @@ describe("Serialization", (): void => {
       test("SECPMintOutput", (): void => {
         const secpmintoutput: SECPMintOutput = new SECPMintOutput()
         const secpmintoutput2: SECPMintOutput = new SECPMintOutput()
-        const notes: string = "AVM SECPMintOutput"
+        const notes: string = "XVM SECPMintOutput"
         const serialized: Serialized = serialization.serialize(
           secpmintoutput,
           vm,
@@ -1141,7 +1141,7 @@ describe("Serialization", (): void => {
       test("NFTMintOutput", (): void => {
         const nftmintoutput: NFTMintOutput = new NFTMintOutput(groupID)
         const nftmintoutput2: NFTMintOutput = new NFTMintOutput()
-        const notes: string = "AVM NFTMintOutput"
+        const notes: string = "XVM NFTMintOutput"
         const serialized: Serialized = serialization.serialize(
           nftmintoutput,
           vm,
@@ -1181,7 +1181,7 @@ describe("Serialization", (): void => {
           payload
         )
         const nfttransferoutput2: NFTTransferOutput = new NFTTransferOutput()
-        const notes: string = "AVM NFTTransferOutput"
+        const notes: string = "XVM NFTTransferOutput"
         const serialized: Serialized = serialization.serialize(
           nfttransferoutput,
           vm,
@@ -1227,7 +1227,7 @@ describe("Serialization", (): void => {
         )
         const unsignedtx: UnsignedTx = new UnsignedTx(basetx)
         const unsignedtx2: UnsignedTx = new UnsignedTx()
-        const notes: string = "AVM UnsignedTx"
+        const notes: string = "XVM UnsignedTx"
         const serialized: Serialized = serialization.serialize(
           unsignedtx,
           vm,
@@ -1264,7 +1264,7 @@ describe("Serialization", (): void => {
         const unsignedtx: UnsignedTx = new UnsignedTx(basetx)
         const tx: Tx = new Tx(unsignedtx)
         const tx2: Tx = new Tx()
-        const notes: string = "AVM Tx"
+        const notes: string = "XVM Tx"
         const serialized: Serialized = serialization.serialize(
           tx,
           vm,
@@ -1308,7 +1308,7 @@ describe("Serialization", (): void => {
           nfttransferoutput
         )
         const utxo2: UTXO = new UTXO()
-        const notes: string = "AVM UTXO"
+        const notes: string = "XVM UTXO"
         const serialized: Serialized = serialization.serialize(
           utxo,
           vm,
@@ -1343,7 +1343,7 @@ describe("Serialization", (): void => {
       test("UTXOSet", (): void => {
         const utxoset: UTXOSet = new UTXOSet()
         const utxoset2: UTXOSet = new UTXOSet()
-        const notes: string = "AVM UTXOSet"
+        const notes: string = "XVM UTXOSet"
         const serialized: Serialized = serialization.serialize(
           utxoset,
           vm,

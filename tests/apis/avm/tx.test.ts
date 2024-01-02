@@ -1,12 +1,12 @@
 import mockAxios from "jest-mock-axios"
-import { UTXOSet, UTXO } from "../../../src/apis/avm/utxos"
-import { AVMAPI } from "../../../src/apis/avm/api"
-import { UnsignedTx, Tx } from "../../../src/apis/avm/tx"
-import { KeyChain } from "../../../src/apis/avm/keychain"
+import { UTXOSet, UTXO } from "../../../src/apis/xvm/utxos"
+import { XVMAPI } from "../../../src/apis/xvm/api"
+import { UnsignedTx, Tx } from "../../../src/apis/xvm/tx"
+import { KeyChain } from "../../../src/apis/xvm/keychain"
 import {
   SECPTransferInput,
   TransferableInput
-} from "../../../src/apis/avm/inputs"
+} from "../../../src/apis/xvm/inputs"
 import createHash from "create-hash"
 import BinTools from "../../../src/utils/bintools"
 import BN from "bn.js"
@@ -15,21 +15,21 @@ import {
   SECPTransferOutput,
   NFTTransferOutput,
   TransferableOutput
-} from "../../../src/apis/avm/outputs"
-import { AVMConstants } from "../../../src/apis/avm/constants"
+} from "../../../src/apis/xvm/outputs"
+import { XVMConstants } from "../../../src/apis/xvm/constants"
 import {
   TransferableOperation,
   NFTTransferOperation
-} from "../../../src/apis/avm/ops"
+} from "../../../src/apis/xvm/ops"
 import { Lux } from "../../../src/index"
 import { UTF8Payload } from "../../../src/utils/payload"
-import { InitialStates } from "../../../src/apis/avm/initialstates"
+import { InitialStates } from "../../../src/apis/xvm/initialstates"
 import { UnixNow } from "../../../src/utils/helperfunctions"
-import { BaseTx } from "../../../src/apis/avm/basetx"
-import { CreateAssetTx } from "../../../src/apis/avm/createassettx"
-import { OperationTx } from "../../../src/apis/avm/operationtx"
-import { ImportTx } from "../../../src/apis/avm/importtx"
-import { ExportTx } from "../../../src/apis/avm/exporttx"
+import { BaseTx } from "../../../src/apis/xvm/basetx"
+import { CreateAssetTx } from "../../../src/apis/xvm/createassettx"
+import { OperationTx } from "../../../src/apis/xvm/operationtx"
+import { ImportTx } from "../../../src/apis/xvm/importtx"
+import { ExportTx } from "../../../src/apis/xvm/exporttx"
 import { PlatformChainID } from "../../../src/utils/constants"
 import { Defaults } from "../../../src/utils/constants"
 import { ONELUX } from "../../../src/utils/constants"
@@ -56,7 +56,7 @@ describe("Transactions", (): void => {
   let exportOuts: TransferableOutput[]
   let fungutxos: UTXO[]
   let exportUTXOIDS: string[]
-  let api: AVMAPI
+  let api: XVMAPI
   const amnt: number = 10000
   const netid: number = 12345
   const bID: string = Defaults.network[netid].X.blockchainID
@@ -106,7 +106,7 @@ describe("Transactions", (): void => {
       undefined,
       true
     )
-    api = new AVMAPI(lux, "/ext/bc/avm", bID)
+    api = new XVMAPI(lux, "/ext/bc/xvm", bID)
 
     const result: Promise<Buffer> = api.getLUXAssetID()
     const payload: object = {
@@ -180,7 +180,7 @@ describe("Transactions", (): void => {
       outputs.push(xferout)
 
       const u: UTXO = new UTXO(
-        AVMConstants.LATESTCODEC,
+        XVMConstants.LATESTCODEC,
         txid,
         txidx,
         assetID,
@@ -216,7 +216,7 @@ describe("Transactions", (): void => {
           .digest()
       )
       const nftutxo: UTXO = new UTXO(
-        AVMConstants.LATESTCODEC,
+        XVMConstants.LATESTCODEC,
         nfttxid,
         1000 + i,
         NFTassetID,
@@ -242,13 +242,13 @@ describe("Transactions", (): void => {
   test("BaseTx codecIDs", (): void => {
     const baseTx: BaseTx = new BaseTx()
     expect(baseTx.getCodecID()).toBe(codecID_zero)
-    expect(baseTx.getTypeID()).toBe(AVMConstants.BASETX)
+    expect(baseTx.getTypeID()).toBe(XVMConstants.BASETX)
     baseTx.setCodecID(codecID_one)
     expect(baseTx.getCodecID()).toBe(codecID_one)
-    expect(baseTx.getTypeID()).toBe(AVMConstants.BASETX_CODECONE)
+    expect(baseTx.getTypeID()).toBe(XVMConstants.BASETX_CODECONE)
     baseTx.setCodecID(codecID_zero)
     expect(baseTx.getCodecID()).toBe(codecID_zero)
-    expect(baseTx.getTypeID()).toBe(AVMConstants.BASETX)
+    expect(baseTx.getTypeID()).toBe(XVMConstants.BASETX)
   })
 
   test("Invalid BaseTx codecID", (): void => {
@@ -263,13 +263,13 @@ describe("Transactions", (): void => {
   test("CreateAssetTx codecIDs", (): void => {
     const createAssetTx: CreateAssetTx = new CreateAssetTx()
     expect(createAssetTx.getCodecID()).toBe(codecID_zero)
-    expect(createAssetTx.getTypeID()).toBe(AVMConstants.CREATEASSETTX)
+    expect(createAssetTx.getTypeID()).toBe(XVMConstants.CREATEASSETTX)
     createAssetTx.setCodecID(codecID_one)
     expect(createAssetTx.getCodecID()).toBe(codecID_one)
-    expect(createAssetTx.getTypeID()).toBe(AVMConstants.CREATEASSETTX_CODECONE)
+    expect(createAssetTx.getTypeID()).toBe(XVMConstants.CREATEASSETTX_CODECONE)
     createAssetTx.setCodecID(codecID_zero)
     expect(createAssetTx.getCodecID()).toBe(codecID_zero)
-    expect(createAssetTx.getTypeID()).toBe(AVMConstants.CREATEASSETTX)
+    expect(createAssetTx.getTypeID()).toBe(XVMConstants.CREATEASSETTX)
   })
 
   test("Invalid CreateAssetTx codecID", (): void => {
@@ -284,13 +284,13 @@ describe("Transactions", (): void => {
   test("OperationTx codecIDs", (): void => {
     const operationTx: OperationTx = new OperationTx()
     expect(operationTx.getCodecID()).toBe(codecID_zero)
-    expect(operationTx.getTypeID()).toBe(AVMConstants.OPERATIONTX)
+    expect(operationTx.getTypeID()).toBe(XVMConstants.OPERATIONTX)
     operationTx.setCodecID(codecID_one)
     expect(operationTx.getCodecID()).toBe(codecID_one)
-    expect(operationTx.getTypeID()).toBe(AVMConstants.OPERATIONTX_CODECONE)
+    expect(operationTx.getTypeID()).toBe(XVMConstants.OPERATIONTX_CODECONE)
     operationTx.setCodecID(codecID_zero)
     expect(operationTx.getCodecID()).toBe(codecID_zero)
-    expect(operationTx.getTypeID()).toBe(AVMConstants.OPERATIONTX)
+    expect(operationTx.getTypeID()).toBe(XVMConstants.OPERATIONTX)
   })
 
   test("Invalid OperationTx codecID", (): void => {
@@ -305,13 +305,13 @@ describe("Transactions", (): void => {
   test("ImportTx codecIDs", (): void => {
     const importTx: ImportTx = new ImportTx()
     expect(importTx.getCodecID()).toBe(codecID_zero)
-    expect(importTx.getTypeID()).toBe(AVMConstants.IMPORTTX)
+    expect(importTx.getTypeID()).toBe(XVMConstants.IMPORTTX)
     importTx.setCodecID(codecID_one)
     expect(importTx.getCodecID()).toBe(codecID_one)
-    expect(importTx.getTypeID()).toBe(AVMConstants.IMPORTTX_CODECONE)
+    expect(importTx.getTypeID()).toBe(XVMConstants.IMPORTTX_CODECONE)
     importTx.setCodecID(codecID_zero)
     expect(importTx.getCodecID()).toBe(codecID_zero)
-    expect(importTx.getTypeID()).toBe(AVMConstants.IMPORTTX)
+    expect(importTx.getTypeID()).toBe(XVMConstants.IMPORTTX)
   })
 
   test("Invalid ImportTx codecID", (): void => {
@@ -326,13 +326,13 @@ describe("Transactions", (): void => {
   test("ExportTx codecIDs", (): void => {
     const exportTx: ExportTx = new ExportTx()
     expect(exportTx.getCodecID()).toBe(codecID_zero)
-    expect(exportTx.getTypeID()).toBe(AVMConstants.EXPORTTX)
+    expect(exportTx.getTypeID()).toBe(XVMConstants.EXPORTTX)
     exportTx.setCodecID(codecID_one)
     expect(exportTx.getCodecID()).toBe(codecID_one)
-    expect(exportTx.getTypeID()).toBe(AVMConstants.EXPORTTX_CODECONE)
+    expect(exportTx.getTypeID()).toBe(XVMConstants.EXPORTTX_CODECONE)
     exportTx.setCodecID(codecID_zero)
     expect(exportTx.getCodecID()).toBe(codecID_zero)
-    expect(exportTx.getTypeID()).toBe(AVMConstants.EXPORTTX)
+    expect(exportTx.getTypeID()).toBe(XVMConstants.EXPORTTX)
   })
 
   test("Invalid ExportTx codecID", (): void => {
@@ -639,9 +639,9 @@ describe("Transactions", (): void => {
       1
     )
     const initialState: InitialStates = new InitialStates()
-    initialState.addOutput(secpbase1, AVMConstants.SECPFXID)
-    initialState.addOutput(secpbase2, AVMConstants.SECPFXID)
-    initialState.addOutput(secpbase3, AVMConstants.SECPFXID)
+    initialState.addOutput(secpbase1, XVMConstants.SECPFXID)
+    initialState.addOutput(secpbase2, XVMConstants.SECPFXID)
+    initialState.addOutput(secpbase3, XVMConstants.SECPFXID)
     const name: string = "Rickcoin is the most intelligent coin"
     const symbol: string = "RICK"
     const denomination: number = 9
@@ -665,7 +665,7 @@ describe("Transactions", (): void => {
       initialState.toBuffer().toString("hex")
     )
 
-    expect(txu.getTxType()).toBe(AVMConstants.CREATEASSETTX)
+    expect(txu.getTxType()).toBe(XVMConstants.CREATEASSETTX)
     expect(txu.getNetworkID()).toBe(12345)
     expect(txu.getBlockchainID().toString("hex")).toBe(
       blockchainID.toString("hex")

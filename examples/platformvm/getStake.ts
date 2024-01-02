@@ -1,10 +1,7 @@
 import { Lux } from "lux/dist"
 import { PlatformVMAPI, KeyChain } from "lux/dist/apis/platformvm"
 import { GetStakeResponse } from "lux/dist/apis/platformvm/interfaces"
-import {
-  PrivateKeyPrefix,
-  DefaultLocalGenesisPrivateKey
-} from "lux/dist/utils"
+import { PrivateKeyPrefix, DefaultLocalGenesisPrivateKey } from "lux/dist/utils"
 
 const ip: string = "localhost"
 const port: number = 9650

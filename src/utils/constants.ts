@@ -125,7 +125,7 @@ export const PrimaryNetworkID: string = "11111111111111111111111111111111LpoYY"
 export const XChainAlias: string = "X"
 export const CChainAlias: string = "C"
 export const PChainAlias: string = "P"
-export const XChainVMName: string = "avm"
+export const XChainVMName: string = "xvm"
 export const CChainVMName: string = "evm"
 export const PChainVMName: string = "platformvm"
 

@@ -1,9 +1,9 @@
-import { UTXOSet, UTXO } from "../../../src/apis/avm/utxos"
-import { KeyChain } from "../../../src/apis/avm/keychain"
+import { UTXOSet, UTXO } from "../../../src/apis/xvm/utxos"
+import { KeyChain } from "../../../src/apis/xvm/keychain"
 import {
   SECPTransferInput,
   TransferableInput
-} from "../../../src/apis/avm/inputs"
+} from "../../../src/apis/xvm/inputs"
 import createHash from "create-hash"
 import BinTools from "../../../src/utils/bintools"
 import BN from "bn.js"
@@ -12,8 +12,8 @@ import {
   SECPTransferOutput,
   AmountOutput,
   TransferableOutput
-} from "../../../src/apis/avm/outputs"
-import { AVMConstants } from "../../../src/apis/avm/constants"
+} from "../../../src/apis/xvm/outputs"
+import { XVMConstants } from "../../../src/apis/xvm/constants"
 import { Input } from "../../../src/common/input"
 import { Output } from "../../../src/common/output"
 
@@ -67,7 +67,7 @@ describe("Inputs", (): void => {
       )
       const xferout: TransferableOutput = new TransferableOutput(assetID, out)
       const u: UTXO = new UTXO(
-        AVMConstants.LATESTCODEC,
+        XVMConstants.LATESTCODEC,
         txid,
         txidx,
         assetID,
@@ -96,7 +96,7 @@ describe("Inputs", (): void => {
     input = new SECPTransferInput(amount)
     xferinput = new TransferableInput(txid, txidx, asset, input)
     expect(xferinput.getUTXOID()).toBe(u.getUTXOID())
-    expect(input.getInputID()).toBe(AVMConstants.SECPINPUTID)
+    expect(input.getInputID()).toBe(XVMConstants.SECPINPUTID)
 
     input.addSignatureIdx(0, addrs2[0])
     input.addSignatureIdx(1, addrs2[1])
@@ -171,15 +171,15 @@ describe("Inputs", (): void => {
       (utxos[0].getOutput() as AmountOutput).getAmount()
     )
     expect(secpTransferInput.getCodecID()).toBe(codecID_zero)
-    expect(secpTransferInput.getInputID()).toBe(AVMConstants.SECPINPUTID)
+    expect(secpTransferInput.getInputID()).toBe(XVMConstants.SECPINPUTID)
     secpTransferInput.setCodecID(codecID_one)
     expect(secpTransferInput.getCodecID()).toBe(codecID_one)
     expect(secpTransferInput.getInputID()).toBe(
-      AVMConstants.SECPINPUTID_CODECONE
+      XVMConstants.SECPINPUTID_CODECONE
     )
     secpTransferInput.setCodecID(codecID_zero)
     expect(secpTransferInput.getCodecID()).toBe(codecID_zero)
-    expect(secpTransferInput.getInputID()).toBe(AVMConstants.SECPINPUTID)
+    expect(secpTransferInput.getInputID()).toBe(XVMConstants.SECPINPUTID)
   })
 
   test("Invalid SECPTransferInput codecID", (): void => {

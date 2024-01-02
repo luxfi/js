@@ -5,10 +5,10 @@
 import LuxCore from "./lux"
 import { AdminAPI } from "./apis/admin/api"
 import { AuthAPI } from "./apis/auth/api"
-import { AVMAPI } from "./apis/avm/api"
+import { XVMAPI } from "./apis/xvm/api"
 import { EVMAPI } from "./apis/evm/api"
-import { GenesisAsset } from "./apis/avm/genesisasset"
-import { GenesisData } from "./apis/avm/genesisdata"
+import { GenesisAsset } from "./apis/xvm/genesisasset"
+import { GenesisData } from "./apis/xvm/genesisdata"
 import { HealthAPI } from "./apis/health/api"
 import { IndexAPI } from "./apis/index/api"
 import { InfoAPI } from "./apis/info/api"
@@ -52,9 +52,9 @@ export default class Lux extends LuxCore {
   CChain = () => this.apis.cchain as EVMAPI
 
   /**
-   * Returns a reference to the AVM RPC pointed at the X-Chain.
+   * Returns a reference to the XVM RPC pointed at the X-Chain.
    */
-  XChain = () => this.apis.xchain as AVMAPI
+  XChain = () => this.apis.xchain as XVMAPI
 
   /**
    * Returns a reference to the Health RPC for a node.
@@ -95,7 +95,7 @@ export default class Lux extends LuxCore {
    * @param protocol The protocol string to use before a "://" in a request,
    * ex: "http", "https", "git", "ws", etc. Defaults to http
    * @param networkID Sets the NetworkID of the class. Default [[DefaultNetworkID]]
-   * @param XChainID Sets the blockchainID for the AVM. Will try to auto-detect,
+   * @param XChainID Sets the blockchainID for the XVM. Will try to auto-detect,
    * otherwise default "2eNy1mUFdmaxXNj1eQHUe7Np4gju9sJsEtWQ4MX3ToiNKuADed"
    * @param CChainID Sets the blockchainID for the EVM. Will try to auto-detect,
    * otherwise default "2CA6j5zYzasynPsFeNoqWkmTCt3VScMvXUZHbfDJ8k3oGzAPtU"
@@ -152,7 +152,7 @@ export default class Lux extends LuxCore {
     if (!skipinit) {
       this.addAPI("admin", AdminAPI)
       this.addAPI("auth", AuthAPI)
-      this.addAPI("xchain", AVMAPI, "/ext/bc/X", xchainid)
+      this.addAPI("xchain", XVMAPI, "/ext/bc/X", xchainid)
       this.addAPI("cchain", EVMAPI, "/ext/bc/C/lux", cchainid)
       this.addAPI("health", HealthAPI)
       this.addAPI("info", InfoAPI)
@@ -179,7 +179,7 @@ export { Socket }
 
 export * as admin from "./apis/admin"
 export * as auth from "./apis/auth"
-export * as avm from "./apis/avm"
+export * as xvm from "./apis/xvm"
 export * as common from "./common"
 export * as evm from "./apis/evm"
 export * as health from "./apis/health"

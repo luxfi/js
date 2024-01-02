@@ -1,6 +1,6 @@
 import Lux, { HDNode, Mnemonic } from "src"
 import { Buffer } from "buffer/"
-import { AVMAPI, KeyChain } from "src/apis/avm"
+import { XVMAPI, KeyChain } from "src/apis/xvm"
 
 const ip: string = "localhost"
 const port: number = 9650
@@ -8,7 +8,7 @@ const protocol: string = "http"
 const networkID: number = 1
 const lux: Lux = new Lux(ip, port, protocol, networkID)
 const mnemonic: Mnemonic = Mnemonic.getInstance()
-const xchain: AVMAPI = lux.XChain()
+const xchain: XVMAPI = lux.XChain()
 const xKeychain: KeyChain = xchain.keyChain()
 
 describe("HDNode", (): void => {

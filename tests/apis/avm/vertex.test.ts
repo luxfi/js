@@ -1,7 +1,7 @@
 import BinTools from "../../../src/utils/bintools"
 import BN from "bn.js"
 import { Buffer } from "buffer/"
-import { Vertex, Tx } from "src/apis/avm"
+import { Vertex, Tx } from "src/apis/xvm"
 
 /**
  * @ignore

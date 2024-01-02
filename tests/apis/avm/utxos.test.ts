@@ -1,8 +1,8 @@
 import BN from "bn.js"
 import { Buffer } from "buffer/"
 import BinTools from "../../../src/utils/bintools"
-import { UTXO, UTXOSet } from "../../../src/apis/avm/utxos"
-import { AmountOutput } from "../../../src/apis/avm/outputs"
+import { UTXO, UTXOSet } from "../../../src/apis/xvm/utxos"
+import { AmountOutput } from "../../../src/apis/xvm/outputs"
 import { UnixNow } from "../../../src/utils/helperfunctions"
 import { SerializedEncoding } from "../../../src/utils"
 

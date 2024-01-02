@@ -1,6 +1,6 @@
 import mockAxios from "jest-mock-axios"
 import { Lux, LuxCore } from "../src"
-import { AVMAPI } from "../src/apis/avm/api"
+import { XVMAPI } from "../src/apis/xvm/api"
 import { AdminAPI } from "../src/apis/admin/api"
 import { HealthAPI } from "../src/apis/health/api"
 import { InfoAPI } from "../src/apis/info/api"
@@ -36,7 +36,7 @@ describe("Lux", (): void => {
       skipinit
     )
     lux.addAPI("admin", AdminAPI)
-    lux.addAPI("xchain", AVMAPI, "/ext/subnet/avm", blockchainID)
+    lux.addAPI("xchain", XVMAPI, "/ext/subnet/xvm", blockchainID)
     lux.addAPI("health", HealthAPI)
     lux.addAPI("info", InfoAPI)
     lux.addAPI("keystore", KeystoreAPI)
@@ -93,11 +93,11 @@ describe("Lux", (): void => {
   })
 
   test("Endpoints correct", (): void => {
-    expect(lux.Admin()).not.toBeInstanceOf(AVMAPI)
+    expect(lux.Admin()).not.toBeInstanceOf(XVMAPI)
     expect(lux.Admin()).toBeInstanceOf(AdminAPI)
 
     expect(lux.XChain()).not.toBeInstanceOf(AdminAPI)
-    expect(lux.XChain()).toBeInstanceOf(AVMAPI)
+    expect(lux.XChain()).toBeInstanceOf(XVMAPI)
 
     expect(lux.Health()).not.toBeInstanceOf(KeystoreAPI)
     expect(lux.Health()).toBeInstanceOf(HealthAPI)
@@ -121,8 +121,8 @@ describe("Lux", (): void => {
   })
 
   test("Create new API", (): void => {
-    lux.addAPI("avm2", AVMAPI)
-    expect(lux.api("avm2")).toBeInstanceOf(AVMAPI)
+    lux.addAPI("xvm2", XVMAPI)
+    expect(lux.api("xvm2")).toBeInstanceOf(XVMAPI)
 
     lux.addAPI("keystore2", KeystoreAPI, "/ext/keystore2")
     expect(lux.api("keystore2")).toBeInstanceOf(KeystoreAPI)

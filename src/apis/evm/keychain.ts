@@ -15,7 +15,7 @@ const bintools: BinTools = BinTools.getInstance()
 const serialization: Serialization = Serialization.getInstance()
 
 /**
- * Class for representing a private and public keypair on an AVM Chain.
+ * Class for representing a private and public keypair on an XVM Chain.
  */
 export class KeyPair extends SECP256k1KeyPair {
   clone(): this {

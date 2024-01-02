@@ -1,15 +1,15 @@
 import BN from "bn.js"
 import { Buffer } from "buffer/"
-import { SECPTransferOutput } from "../../../src/apis/avm/outputs"
-import { InitialStates } from "../../../src/apis/avm/initialstates"
-import { GenesisData, GenesisAsset, AVMConstants } from "../../../src/apis/avm"
+import { SECPTransferOutput } from "../../../src/apis/xvm/outputs"
+import { InitialStates } from "../../../src/apis/xvm/initialstates"
+import { GenesisData, GenesisAsset, XVMConstants } from "../../../src/apis/xvm"
 import { Serialization, SerializedType } from "../../../src/utils"
 
 /**
  * @ignore
  */
 const serialization: Serialization = Serialization.getInstance()
-describe("AVM", (): void => {
+describe("XVM", (): void => {
   test("GenesisData", (): void => {
     const networkID: number = 1337
     const m: string = "2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X"
@@ -50,7 +50,7 @@ describe("AVM", (): void => {
     )
     expect(genesisData.getTypeName()).toBe("GenesisData")
     expect(genesisData.getTypeID()).toBeUndefined()
-    expect(genesisData.getCodecID()).toBe(AVMConstants.LATESTCODEC)
+    expect(genesisData.getCodecID()).toBe(XVMConstants.LATESTCODEC)
     expect(genesisData.getNetworkID()).toBe(networkID)
     expect(genesisData.getGenesisAssets()).toStrictEqual(genesisAssets)
   })

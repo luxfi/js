@@ -3,9 +3,9 @@ import { Buffer } from "buffer/"
 import {
   SECPTransferOutput,
   TransferableOutput
-} from "../../../src/apis/avm/outputs"
-import { InitialStates } from "../../../src/apis/avm/initialstates"
-import { GenesisAsset, TransferableInput } from "../../../src/apis/avm"
+} from "../../../src/apis/xvm/outputs"
+import { InitialStates } from "../../../src/apis/xvm/initialstates"
+import { GenesisAsset, TransferableInput } from "../../../src/apis/xvm"
 import {
   DefaultNetworkID,
   Serialization,
@@ -17,7 +17,7 @@ import {
  * @ignore
  */
 const serialization: Serialization = Serialization.getInstance()
-describe("AVM", (): void => {
+describe("XVM", (): void => {
   test("GenesisAsset", (): void => {
     const m: string = "2Zc54v4ek37TEwu4LiV3j41PUMRd6acDDU3ZCVSxE7X"
     const mHex: string =

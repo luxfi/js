@@ -1,20 +1,20 @@
-import { UTXO } from "../../../src/apis/avm/utxos"
+import { UTXO } from "../../../src/apis/xvm/utxos"
 import createHash from "create-hash"
 import BinTools from "../../../src/utils/bintools"
 import BN from "bn.js"
 import { Buffer } from "buffer/"
-import { NFTTransferOutput } from "../../../src/apis/avm/outputs"
-import { AVMConstants } from "../../../src/apis/avm/constants"
+import { NFTTransferOutput } from "../../../src/apis/xvm/outputs"
+import { XVMConstants } from "../../../src/apis/xvm/constants"
 import {
   SelectOperationClass,
   Operation,
   TransferableOperation,
   NFTTransferOperation,
   NFTMintOperation
-} from "../../../src/apis/avm/ops"
+} from "../../../src/apis/xvm/ops"
 import { OutputOwners } from "../../../src/common/output"
 import { SigIdx } from "../../../src/common/credentials"
-import { UTXOID } from "../../../src/apis/avm/ops"
+import { UTXOID } from "../../../src/apis/xvm/ops"
 
 /**
  * @ignore
@@ -92,7 +92,7 @@ describe("Operations", (): void => {
         outputOwners
       )
 
-      expect(op.getOperationID()).toBe(AVMConstants.NFTMINTOPID)
+      expect(op.getOperationID()).toBe(XVMConstants.NFTMINTOPID)
       expect(op.getOutputOwners().toString()).toBe(outputOwners.toString())
 
       const opcopy: NFTMintOperation = new NFTMintOperation()
@@ -110,15 +110,15 @@ describe("Operations", (): void => {
         outputOwners
       )
       expect(nftMintOperation.getCodecID()).toBe(codecID_zero)
-      expect(nftMintOperation.getOperationID()).toBe(AVMConstants.NFTMINTOPID)
+      expect(nftMintOperation.getOperationID()).toBe(XVMConstants.NFTMINTOPID)
       nftMintOperation.setCodecID(codecID_one)
       expect(nftMintOperation.getCodecID()).toBe(codecID_one)
       expect(nftMintOperation.getOperationID()).toBe(
-        AVMConstants.NFTMINTOPID_CODECONE
+        XVMConstants.NFTMINTOPID_CODECONE
       )
       nftMintOperation.setCodecID(codecID_zero)
       expect(nftMintOperation.getCodecID()).toBe(codecID_zero)
-      expect(nftMintOperation.getOperationID()).toBe(AVMConstants.NFTMINTOPID)
+      expect(nftMintOperation.getOperationID()).toBe(XVMConstants.NFTMINTOPID)
     })
 
     test("Invalid NFTMintOperation codecID", (): void => {
@@ -182,7 +182,7 @@ describe("Operations", (): void => {
       )
       const op: NFTTransferOperation = new NFTTransferOperation(nout)
 
-      expect(op.getOperationID()).toBe(AVMConstants.NFTXFEROPID)
+      expect(op.getOperationID()).toBe(XVMConstants.NFTXFEROPID)
       expect(op.getOutput().toString()).toBe(nout.toString())
 
       const opcopy: NFTTransferOperation = new NFTTransferOperation()
@@ -205,17 +205,17 @@ describe("Operations", (): void => {
         )
       expect(nftTransferOperation.getCodecID()).toBe(codecID_zero)
       expect(nftTransferOperation.getOperationID()).toBe(
-        AVMConstants.NFTXFEROPID
+        XVMConstants.NFTXFEROPID
       )
       nftTransferOperation.setCodecID(codecID_one)
       expect(nftTransferOperation.getCodecID()).toBe(codecID_one)
       expect(nftTransferOperation.getOperationID()).toBe(
-        AVMConstants.NFTXFEROPID_CODECONE
+        XVMConstants.NFTXFEROPID_CODECONE
       )
       nftTransferOperation.setCodecID(codecID_zero)
       expect(nftTransferOperation.getCodecID()).toBe(codecID_zero)
       expect(nftTransferOperation.getOperationID()).toBe(
-        AVMConstants.NFTXFEROPID
+        XVMConstants.NFTXFEROPID
       )
     })
 
@@ -250,7 +250,7 @@ describe("Operations", (): void => {
       bintools.fromBNToBuffer(new BN(1000), 4)
     )
     const nftutxo: UTXO = new UTXO(
-      AVMConstants.LATESTCODEC,
+      XVMConstants.LATESTCODEC,
       nfttxid,
       nftoutputidx,
       assetIDBuff,

@@ -1,12 +1,5 @@
-import {
-  Lux,
-  BinTools,
-  BN,
-  Buffer,
-  GenesisAsset,
-  GenesisData
-} from "lux/dist"
-import { InitialStates } from "lux/dist/apis/avm"
+import { Lux, BinTools, BN, Buffer, GenesisAsset, GenesisData } from "lux/dist"
+import { InitialStates } from "lux/dist/apis/xvm"
 import {
   PlatformVMAPI,
   KeyChain,
@@ -142,8 +135,8 @@ const main = async (): Promise<any> => {
   const subnetID: Buffer = bintools.cb58Decode(
     "yKRV4EvGYWj7HHXUxSYzaAQVazEvaFPKPhJie4paqbrML5dub"
   )
-  const chainName: string = "EPIC AVM"
-  const vmID: string = "avm"
+  const chainName: string = "EPIC XVM"
+  const vmID: string = "xvm"
   const fxIDs: string[] = ["secp256k1fx", "nftfx", "propertyfx"]
   fxIDs.sort()
   const blockchainID: Buffer = bintools.cb58Decode(pChainBlockchainID)

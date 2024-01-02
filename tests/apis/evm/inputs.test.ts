@@ -1,9 +1,9 @@
-import { UTXOSet, UTXO } from "../../../src/apis/avm/utxos"
-import { KeyChain } from "../../../src/apis/avm/keychain"
+import { UTXOSet, UTXO } from "../../../src/apis/xvm/utxos"
+import { KeyChain } from "../../../src/apis/xvm/keychain"
 import {
   SECPTransferInput,
   TransferableInput
-} from "../../../src/apis/avm/inputs"
+} from "../../../src/apis/xvm/inputs"
 import createHash from "create-hash"
 import BinTools from "../../../src/utils/bintools"
 import BN from "bn.js"
@@ -12,7 +12,7 @@ import {
   SECPTransferOutput,
   AmountOutput,
   TransferableOutput
-} from "../../../src/apis/avm/outputs"
+} from "../../../src/apis/xvm/outputs"
 import { EVMConstants } from "../../../src/apis/evm/constants"
 import { Input } from "../../../src/common/input"
 import { Output } from "../../../src/common/output"

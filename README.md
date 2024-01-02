@@ -8,7 +8,7 @@ The APIs currently supported by default are:
 
 * Admin API
 * Auth API
-* AVM API (X-Chain)
+* XVM API (X-Chain)
 * EVM API (C-Chain)
 * Health API
 * Index API
@@ -78,7 +78,7 @@ The above lines import the libraries used in the tutorials. The libraries includ
 
 ## Example 1 &mdash; Managing X-Chain Keys
 
-LuxJS comes with its own AVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it's registered. The first step in this process is to create an instance of LuxJS connected to our Lux Platform endpoint of choice.
+LuxJS comes with its own XVM Keychain. This KeyChain is used in the functions of the API, enabling them to sign using keys it's registered. The first step in this process is to create an instance of LuxJS connected to our Lux Platform endpoint of choice.
 
 ```js
 import { Lux, BinTools, Buffer, BN } from "lux"
@@ -98,7 +98,7 @@ The KeyChain is accessed through the X-Chain and can be referenced directly or t
 const myKeychain = xchain.keyChain()
 ```
 
-This exposes the instance of the class AVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
+This exposes the instance of the class XVMKeyChain which is created when the X-Chain API is created. At present, this supports secp256k1 curve for ECDSA key pairs.
 
 ### Creating X-Chain key pairs
 
@@ -169,7 +169,7 @@ This example creates an asset in the X-Chain and publishes it to the Lux Platfor
 
 ```js
 import { Lux, BinTools, Buffer, BN } from "lux"
-import { InitialStates, SECPTransferOutput } from "lux/dist/apis/avm"
+import { InitialStates, SECPTransferOutput } from "lux/dist/apis/xvm"
 
 const myNetworkID = 12345 // default is 1, we want to override that for our local network
 const lux = new Lux("localhost", 9650, "http", myNetworkID)
@@ -223,7 +223,7 @@ initialState.addOutput(secpOutput3)
 
 ### Creating the signed transaction
 
-Now that we know what we want an asset to look like, we create an output to send to the network. There is an AVM helper function `buildCreateAssetTx()` which does just that.
+Now that we know what we want an asset to look like, we create an output to send to the network. There is an XVM helper function `buildCreateAssetTx()` which does just that.
 
 ```js
 // Fetch the UTXOSet for our addresses
@@ -268,7 +268,7 @@ We assume ONE of those methods are used to issue the transaction.
 
 ### Get the status of the transaction
 
-Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the AVM API.
+Now that we sent the transaction to the network, it takes a few seconds to determine if the transaction has gone through. We can get an updated status on the transaction using the TxID through the XVM API.
 
 ```js
 // returns one of: "Accepted", "Processing", "Unknown", and "Rejected"

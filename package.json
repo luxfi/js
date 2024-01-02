@@ -1,5 +1,5 @@
 {
-  "name": "luxjs",
+  "name": "luxnet",
   "version": "3.15.5",
   "description": "Lux Platform JS Library",
   "main": "dist/index.js",
@@ -33,13 +33,6 @@
     "defi"
   ],
   "author": "Zach Kelling <z@lux.partners>",
-  "contributors": [
-    "Evan Richard <evan@avalabs.org>",
-    "Paul Kim <paul.kim@avalabs.org>",
-    "Raj Ranjan <raj.ranjan@avalabs.org>",
-    "Gergely Lovas <gergely.lovas@avalabs.org>",
-    "Dhruba Basu <dhruba@avalabs.org>"
-  ],
   "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/luxdefi/luxjs/issues"

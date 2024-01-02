@@ -60,9 +60,7 @@ export default class LuxCore {
     const protocols: string[] = ["http", "https"]
     if (!protocols.includes(protocol)) {
       /* istanbul ignore next */
-      throw new ProtocolError(
-        "Error - LuxCore.setAddress: Invalid protocol"
-      )
+      throw new ProtocolError("Error - LuxCore.setAddress: Invalid protocol")
     }
 
     this.host = host
@@ -258,11 +256,7 @@ export default class LuxCore {
    */
   addAPI = <GA extends APIBase>(
     apiName: string,
-    ConstructorFN: new (
-      lux: LuxCore,
-      baseurl?: string,
-      ...args: any[]
-    ) => GA,
+    ConstructorFN: new (lux: LuxCore, baseurl?: string, ...args: any[]) => GA,
     baseurl: string = undefined,
     ...args: any[]
   ) => {

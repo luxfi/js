@@ -5,10 +5,10 @@ import {
   SECPTransferOutput,
   SelectOutputClass,
   NFTMintOutput
-} from "../../../src/apis/avm/outputs"
+} from "../../../src/apis/xvm/outputs"
 import { Output } from "../../../src/common/output"
-import { SECPMintOutput } from "../../../src/apis/avm/outputs"
-import { AVMConstants } from "../../../src/apis/avm"
+import { SECPMintOutput } from "../../../src/apis/xvm/outputs"
+import { XVMConstants } from "../../../src/apis/xvm"
 
 const bintools: BinTools = BinTools.getInstance()
 
@@ -61,15 +61,15 @@ describe("Outputs", (): void => {
       )
 
       expect(nftMintOutput.getCodecID()).toBe(codecID_zero)
-      expect(nftMintOutput.getOutputID()).toBe(AVMConstants.NFTMINTOUTPUTID)
+      expect(nftMintOutput.getOutputID()).toBe(XVMConstants.NFTMINTOUTPUTID)
       nftMintOutput.setCodecID(codecID_one)
       expect(nftMintOutput.getCodecID()).toBe(codecID_one)
       expect(nftMintOutput.getOutputID()).toBe(
-        AVMConstants.NFTMINTOUTPUTID_CODECONE
+        XVMConstants.NFTMINTOUTPUTID_CODECONE
       )
       nftMintOutput.setCodecID(codecID_zero)
       expect(nftMintOutput.getCodecID()).toBe(codecID_zero)
-      expect(nftMintOutput.getOutputID()).toBe(AVMConstants.NFTMINTOUTPUTID)
+      expect(nftMintOutput.getOutputID()).toBe(XVMConstants.NFTMINTOUTPUTID)
     })
 
     test("Invalid NFTMintOutput codecID", (): void => {
@@ -219,17 +219,17 @@ describe("Outputs", (): void => {
       )
       expect(secPTransferOutput.getCodecID()).toBe(codecID_zero)
       expect(secPTransferOutput.getOutputID()).toBe(
-        AVMConstants.SECPXFEROUTPUTID
+        XVMConstants.SECPXFEROUTPUTID
       )
       secPTransferOutput.setCodecID(codecID_one)
       expect(secPTransferOutput.getCodecID()).toBe(codecID_one)
       expect(secPTransferOutput.getOutputID()).toBe(
-        AVMConstants.SECPXFEROUTPUTID_CODECONE
+        XVMConstants.SECPXFEROUTPUTID_CODECONE
       )
       secPTransferOutput.setCodecID(codecID_zero)
       expect(secPTransferOutput.getCodecID()).toBe(codecID_zero)
       expect(secPTransferOutput.getOutputID()).toBe(
-        AVMConstants.SECPXFEROUTPUTID
+        XVMConstants.SECPXFEROUTPUTID
       )
     })
 
@@ -291,15 +291,15 @@ describe("Outputs", (): void => {
         3
       )
       expect(secpMintOutput.getCodecID()).toBe(codecID_zero)
-      expect(secpMintOutput.getOutputID()).toBe(AVMConstants.SECPMINTOUTPUTID)
+      expect(secpMintOutput.getOutputID()).toBe(XVMConstants.SECPMINTOUTPUTID)
       secpMintOutput.setCodecID(codecID_one)
       expect(secpMintOutput.getCodecID()).toBe(codecID_one)
       expect(secpMintOutput.getOutputID()).toBe(
-        AVMConstants.SECPMINTOUTPUTID_CODECONE
+        XVMConstants.SECPMINTOUTPUTID_CODECONE
       )
       secpMintOutput.setCodecID(codecID_zero)
       expect(secpMintOutput.getCodecID()).toBe(codecID_zero)
-      expect(secpMintOutput.getOutputID()).toBe(AVMConstants.SECPMINTOUTPUTID)
+      expect(secpMintOutput.getOutputID()).toBe(XVMConstants.SECPMINTOUTPUTID)
     })
 
     test("Invalid SECPMintOutput codecID", (): void => {

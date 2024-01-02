@@ -1,5 +1,5 @@
 import { Lux, Buffer } from "../../src"
-import { Vertex } from "../../src/apis/avm"
+import { Vertex } from "../../src/apis/xvm"
 import { IndexAPI } from "../../src/apis/index"
 import {
   GetContainerByIndexResponse,

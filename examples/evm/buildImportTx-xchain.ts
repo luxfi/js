@@ -1,5 +1,5 @@
 import { Lux, BN } from "lux/dist"
-import { AVMAPI, KeyChain as AVMKeyChain } from "lux/dist/apis/avm"
+import { XVMAPI, KeyChain as XVMKeyChain } from "lux/dist/apis/xvm"
 import {
   EVMAPI,
   KeyChain as EVMKeyChain,
@@ -19,9 +19,9 @@ const port: number = 9650
 const protocol: string = "http"
 const networkID: number = 1337
 const lux: Lux = new Lux(ip, port, protocol, networkID)
-const xchain: AVMAPI = lux.XChain()
+const xchain: XVMAPI = lux.XChain()
 const cchain: EVMAPI = lux.CChain()
-const xKeychain: AVMKeyChain = xchain.keyChain()
+const xKeychain: XVMKeyChain = xchain.keyChain()
 const cHexAddress: string = "0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC"
 const privKey: string = `${PrivateKeyPrefix}${DefaultLocalGenesisPrivateKey}`
 const cKeychain: EVMKeyChain = cchain.keyChain()

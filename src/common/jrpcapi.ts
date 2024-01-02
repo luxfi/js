@@ -79,14 +79,10 @@ export class JRPCAPI extends APIBase {
   /**
    *
    * @param core Reference to the Lux instance using this endpoint
-   * @param baseURL Path of the APIs baseURL - ex: "/ext/bc/avm"
+   * @param baseURL Path of the APIs baseURL - ex: "/ext/bc/xvm"
    * @param jrpcVersion The jrpc version to use, default "2.0".
    */
-  constructor(
-    core: LuxCore,
-    baseURL: string,
-    jrpcVersion: string = "2.0"
-  ) {
+  constructor(core: LuxCore, baseURL: string, jrpcVersion: string = "2.0") {
     super(core, baseURL)
     this.jrpcVersion = jrpcVersion
     this.rpcID = 1

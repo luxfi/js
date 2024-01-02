@@ -1,9 +1,5 @@
 import { Lux } from "lux/dist"
-import {
-  PlatformVMAPI,
-  KeyChain,
-  KeyPair
-} from "lux/dist/apis/platformvm"
+import { PlatformVMAPI, KeyChain, KeyPair } from "lux/dist/apis/platformvm"
 
 const ip: string = "localhost"
 const port: number = 9650

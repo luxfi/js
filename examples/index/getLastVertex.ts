@@ -1,7 +1,7 @@
 import { Lux, BinTools, Buffer } from "../../src"
 import { IndexAPI } from "../../src/apis/index/index"
 import { GetLastAcceptedResponse } from "../../src/apis/index/interfaces"
-import { Vertex } from "../../src/apis/avm"
+import { Vertex } from "../../src/apis/xvm"
 
 const ip: string = "indexer-demo.lux.network"
 const port: number = 443

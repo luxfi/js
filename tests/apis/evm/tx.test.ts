@@ -44,11 +44,7 @@ describe("EVM Transactions", () => {
       )
       importedIns.push(xferin)
       // Creating 2 outputs with the same address and LUX assetID is invalid
-      let evmOutput: EVMOutput = new EVMOutput(
-        cHexAddress1,
-        ONELUX,
-        luxAssetID
-      )
+      let evmOutput: EVMOutput = new EVMOutput(cHexAddress1, ONELUX, luxAssetID)
       evmOutputs.push(evmOutput)
       evmOutput = new EVMOutput(cHexAddress1, ONELUX, luxAssetID)
       evmOutputs.push(evmOutput)
@@ -83,11 +79,7 @@ describe("EVM Transactions", () => {
         luxAssetID
       )
       evmOutputs.push(evmOutput)
-      evmOutput = new EVMOutput(
-        cHexAddress2,
-        ONELUX.div(new BN(3)),
-        luxAssetID
-      )
+      evmOutput = new EVMOutput(cHexAddress2, ONELUX.div(new BN(3)), luxAssetID)
       evmOutputs.push(evmOutput)
 
       const importTx: ImportTx = new ImportTx(
@@ -114,11 +106,7 @@ describe("EVM Transactions", () => {
       )
       importedIns.push(xferin)
       // Creating 2 outputs with the same address and ANT assetID is invalid
-      let evmOutput: EVMOutput = new EVMOutput(
-        cHexAddress1,
-        ONELUX,
-        antAssetID
-      )
+      let evmOutput: EVMOutput = new EVMOutput(cHexAddress1, ONELUX, antAssetID)
       evmOutputs.push(evmOutput)
       evmOutput = new EVMOutput(cHexAddress1, ONELUX, antAssetID)
       evmOutputs.push(evmOutput)
@@ -145,11 +133,7 @@ describe("EVM Transactions", () => {
         input
       )
       importedIns.push(xferin)
-      let evmOutput: EVMOutput = new EVMOutput(
-        cHexAddress1,
-        ONELUX,
-        antAssetID
-      )
+      let evmOutput: EVMOutput = new EVMOutput(cHexAddress1, ONELUX, antAssetID)
       evmOutputs.push(evmOutput)
       evmOutput = new EVMOutput(cHexAddress2, ONELUX, antAssetID)
       evmOutputs.push(evmOutput)

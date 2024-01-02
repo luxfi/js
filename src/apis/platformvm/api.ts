@@ -63,7 +63,7 @@ import {
 import { TransferableOutput } from "./outputs"
 import { Serialization, SerializedType } from "../../utils"
 import { SubnetAuth } from "."
-import { GenesisData } from "../avm"
+import { GenesisData } from "../xvm"
 
 /**
  * @ignore
