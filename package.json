@@ -1,5 +1,5 @@
 {
-  "name": "luxnetwork",
+  "name": "luxnet",
   "version": "3.15.5",
   "description": "Lux Platform JS Library",
   "main": "dist/index.js",
