@@ -85,7 +85,7 @@ describe("XVMAPI", (): void => {
   const port: number = 9650
   const protocol: string = "https"
 
-  const username: string = "AvaLabs"
+  const username: string = "LuxPartners"
   const password: string = "password"
 
   const lux: Lux = new Lux(
@@ -2076,7 +2076,7 @@ describe("XVMAPI", (): void => {
         genesisData: {
           assetAlias1: {
             name: "human readable name",
-            symbol: "AVAL",
+            symbol: "LUX",
             initialState: {
               fixedCap: [
                 {
@@ -2092,7 +2092,7 @@ describe("XVMAPI", (): void => {
           },
           assetAliasCanBeAnythingUnique: {
             name: "human readable name",
-            symbol: "AVAL",
+            symbol: "LUX",
             initialState: {
               variableCap: [
                 {

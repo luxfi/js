@@ -17,7 +17,7 @@ describe("EVMAPI", (): void => {
   const ip: string = "127.0.0.1"
   const port: number = 9650
   const protocol: string = "https"
-  const username: string = "AvaLabs"
+  const username: string = "LuxPartners"
   const password: string = "password"
 
   const lux: Lux = new Lux(

@@ -95,7 +95,7 @@ describe("PlatformVMAPI", (): void => {
   const startTime: BN = UnixNow().add(new BN(60 * 5))
   const endTime: BN = startTime.add(new BN(1209600))
 
-  const username: string = "AvaLabs"
+  const username: string = "LuxPartners"
   const password: string = "password"
 
   const lux: Lux = new Lux(
