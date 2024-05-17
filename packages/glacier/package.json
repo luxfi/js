@@ -2,8 +2,10 @@
   "name": "@luxfi/glacier",
   "version": "0.0.0",
   "main": "src/index.ts",
-  "private": true,
   "type": "module",
+  "publishConfig": {
+      "access": "public"
+  },
   "scripts": {
     "lint": "eslint \"src/**/*.ts\"",
     "codegen": "node --loader ts-node/esm ./src/scripts/generate-api.ts"

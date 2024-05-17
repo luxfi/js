@@ -3,6 +3,9 @@
   "version": "1.9.0",
   "main": "dist/index.js",
   "type": "module",
+  "publishConfig": {
+      "access": "public"
+  },
   "scripts": {
     "build": "tsup",
     "prettier": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"src/**/*.ts*\"",
