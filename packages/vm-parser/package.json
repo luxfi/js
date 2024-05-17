@@ -1,0 +1,21 @@
+{
+  "name": "@luxfi/vm-parser",
+  "version": "1.9.0",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "prettier": "prettier --config ../../.prettierrc --ignore-path ../../.prettierignore --write \"src/**/*.ts*\"",
+    "lint": "eslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "aptos": "1.17.0",
+    "lodash-es": "4.17.21"
+  },
+  "devDependencies": {
+    "@luxdefi/eslint-config": "workspace:*",
+    "@luxdefi/tsup-config": "workspace:*",
+    "tsup": "8.0.1",
+    "type-fest": "4.9.0"
+  }
+}

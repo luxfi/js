@@ -1,10 +1,10 @@
 module.exports = {
-  plugins: ['security'],
-  extends: ['prettier', 'plugin:security/recommended'],
+  plugins: ["security", "@typescript-eslint"],
+  extends: ["prettier", "plugin:security/recommended"],
   parserOptions: {
-    project: 'tsconfig.json',
+    project: "tsconfig.json",
     ecmaVersion: 2017,
-    sourceType: "module"
+    sourceType: "module",
   },
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
 };

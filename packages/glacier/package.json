@@ -1,0 +1,21 @@
+{
+  "name": "@luxdefi/glacier",
+  "version": "0.0.0",
+  "main": "src/index.ts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint \"src/**/*.ts\"",
+    "codegen": "node --loader ts-node/esm ./src/scripts/generate-api.ts"
+  },
+  "dependencies": {
+    "viem": "*"
+  },
+  "devDependencies": {
+    "@types/node": "20.5.6",
+    "@luxdefi/eslint-config": "workspace:*",
+    "openapi-typescript-codegen": "0.25.0",
+    "ts-node": "^10.9.1",
+    "tslib": "2.6.2"
+  }
+}
