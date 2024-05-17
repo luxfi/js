@@ -1,5 +1,5 @@
 {
-  "extends": "@luxdefi/tsconfig/tsconfig.base.json",
+  "extends": "@luxfi/tsconfig/tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
     "incremental": false // Need to turn off because of tsup dts

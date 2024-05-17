@@ -1,4 +1,4 @@
 import { defineConfig } from "tsup";
-import { baseConfig } from "@luxdefi/tsup-config";
+import { baseConfig } from "@luxfi/tsup-config";
 
 export default defineConfig(baseConfig);

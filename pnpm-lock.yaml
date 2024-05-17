@@ -10,10 +10,10 @@ importers:
       "@changesets/cli":
         specifier: 2.26.2
         version: 2.26.2
-      "@luxdefi/eslint-config":
+      "@luxfi/eslint-config":
         specifier: workspace:*
         version: link:packages/eslint-config
-      "@luxdefi/tsconfig":
+      "@luxfi/tsconfig":
         specifier: workspace:*
         version: link:packages/tsconfig
       eslint:
@@ -203,10 +203,10 @@ importers:
         specifier: 3.22.2
         version: 3.22.2
     devDependencies:
-      "@luxdefi/glacier":
+      "@luxfi/glacier":
         specifier: workspace:*
         version: link:../../packages/glacier
-      "@luxdefi/tsconfig":
+      "@luxfi/tsconfig":
         specifier: workspace:*
         version: link:../../packages/tsconfig
       "@types/big.js":
@@ -414,7 +414,7 @@ importers:
       "@actions/github":
         specifier: 5.1.1
         version: 5.1.1
-      "@luxdefi/tsconfig":
+      "@luxfi/tsconfig":
         specifier: workspace:*
         version: link:../tsconfig
       colorette:
@@ -427,7 +427,7 @@ importers:
         specifier: "*"
         version: 1.21.4(typescript@5.3.3)(zod@3.22.2)
     devDependencies:
-      "@luxdefi/eslint-config":
+      "@luxfi/eslint-config":
         specifier: workspace:*
         version: link:../eslint-config
       "@types/node":
@@ -447,10 +447,10 @@ importers:
 
   packages/tsup-config:
     devDependencies:
-      "@luxdefi/eslint-config":
+      "@luxfi/eslint-config":
         specifier: workspace:*
         version: link:../eslint-config
-      "@luxdefi/tsconfig":
+      "@luxfi/tsconfig":
         specifier: workspace:*
         version: link:../tsconfig
       tsup:
@@ -466,10 +466,10 @@ importers:
         specifier: 4.17.21
         version: 4.17.21
     devDependencies:
-      "@luxdefi/eslint-config":
+      "@luxfi/eslint-config":
         specifier: workspace:*
         version: link:../eslint-config
-      "@luxdefi/tsup-config":
+      "@luxfi/tsup-config":
         specifier: workspace:*
         version: link:../tsup-config
       tsup:

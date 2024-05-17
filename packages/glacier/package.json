@@ -1,5 +1,5 @@
 {
-  "name": "@luxdefi/glacier",
+  "name": "@luxfi/glacier",
   "version": "0.0.0",
   "main": "src/index.ts",
   "private": true,
@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@types/node": "20.5.6",
-    "@luxdefi/eslint-config": "workspace:*",
+    "@luxfi/eslint-config": "workspace:*",
     "openapi-typescript-codegen": "0.25.0",
     "ts-node": "^10.9.1",
     "tslib": "2.6.2"

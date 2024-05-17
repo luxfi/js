@@ -3,7 +3,7 @@ import { CHAINS } from "@/constants/chains";
 import { NULL_ADDRESS } from "@/constants/token";
 import type { EvmChain } from "@/types/chain";
 import { isFullfilled } from "@/utils/is-fullfilled";
-import type { Erc20Transfer } from "@luxdefi/glacier";
+import type { Erc20Transfer } from "@luxfi/glacier";
 import { compact, sortBy } from "lodash-es";
 import useSWR from "swr";
 import { useAccount, type Address } from "wagmi";

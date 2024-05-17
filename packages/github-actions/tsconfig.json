@@ -1,5 +1,5 @@
 {
-  "extends": "@luxdefi/tsconfig/tsconfig.base.json",
+  "extends": "@luxfi/tsconfig/tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
     // Preserve directory structure (ex: dist/get-branch-name/index.js)

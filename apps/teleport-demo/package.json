@@ -1,5 +1,5 @@
 {
-  "name": "@luxdefi/teleport-demo",
+  "name": "@luxfi/teleport-demo",
   "private": true,
   "version": "0.0.0",
   "scripts": {
@@ -65,8 +65,8 @@
     "zod": "3.22.2"
   },
   "devDependencies": {
-    "@luxdefi/glacier": "workspace:*",
-    "@luxdefi/tsconfig": "workspace:*",
+    "@luxfi/glacier": "workspace:*",
+    "@luxfi/tsconfig": "workspace:*",
     "@types/big.js": "6.2.0",
     "@types/lodash-es": "4.17.8",
     "@types/react": "18.2.21",

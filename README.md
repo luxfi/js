@@ -32,17 +32,17 @@ pnpm build    # builds all packages
 
 > These Packages are published to NPM
 
-- `@luxdefi/core`: Lux Network JavaScript SDK.
-- `@luxdefi/vm-parser`: Parse arbitrary VM data for display in the Lux Network Explorer.
+- `@luxfi/core`: Lux Network JavaScript SDK.
+- `@luxfi/vm-parser`: Parse arbitrary VM data for display in the Lux Network Explorer.
 
 #### Internal Packages
 
 > These packages are only used internally within this repo
 
-- `@luxdefi/tsconfig`: tsconfig for sdks
-- `@luxdefi/tsupp-config`: tsup for sdks
-- `@luxdefi/eslint-config`: eslint config for sdks
-- `@luxdefi/github-actions`: github actions for sdks
+- `@luxfi/tsconfig`: tsconfig for sdks
+- `@luxfi/tsupp-config`: tsup for sdks
+- `@luxfi/eslint-config`: eslint config for sdks
+- `@luxfi/github-actions`: github actions for sdks
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
 

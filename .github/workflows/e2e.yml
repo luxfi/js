@@ -3,7 +3,7 @@ on: push
 
 env:
   GOPATH: /home/runner/go
-  LUXPATH: src/github.com/luxdefi
+  LUXPATH: src/github.com/luxfi
   ACTIONS_RUNTIME_URL:
   ACTIONS_RUNTIME_TOKEN:
   ACTIONS_CACHE_URL:
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout LuxJS
         uses: actions/checkout@v2
         with:
-          repository: "luxdefi/luxjs"
+          repository: "luxfi/luxjs"
       - name: Install dependencies
         run: sudo apt update && sudo apt install zstd git build-essential nodejs -y
       - name: Install NodeJS dependencies
@@ -32,13 +32,13 @@ jobs:
       - name: Clone and Build Lux Node
         run: |
           cd $GOPATH/$LUXPATH
-          git clone https://github.com/luxdefi/node
+          git clone https://github.com/luxfi/node
           cd node
           ./scripts/build.sh
       - name: Checkout ANR
         run: |
           cd $GOPATH/$LUXPATH
-          git clone https://github.com/luxdefi/netrunner
+          git clone https://github.com/luxfi/netrunner
       - name: Starting ANR
         run: |
           cd $GOPATH/$LUXPATH

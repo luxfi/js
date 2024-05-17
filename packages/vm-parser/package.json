@@ -13,8 +13,8 @@
     "lodash-es": "4.17.21"
   },
   "devDependencies": {
-    "@luxdefi/eslint-config": "workspace:*",
-    "@luxdefi/tsup-config": "workspace:*",
+    "@luxfi/eslint-config": "workspace:*",
+    "@luxfi/tsup-config": "workspace:*",
     "tsup": "8.0.1",
     "type-fest": "4.9.0"
   }

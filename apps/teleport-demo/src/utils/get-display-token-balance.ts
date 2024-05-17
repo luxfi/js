@@ -1,4 +1,4 @@
-import type { Erc20TokenBalance, NativeTokenBalance } from "@luxdefi/glacier";
+import type { Erc20TokenBalance, NativeTokenBalance } from "@luxfi/glacier";
 
 export const getDisplayTokenBalance = ({
   balance,

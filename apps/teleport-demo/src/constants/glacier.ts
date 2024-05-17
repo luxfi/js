@@ -1,4 +1,4 @@
-import { Glacier } from "@luxdefi/glacier";
+import { Glacier } from "@luxfi/glacier";
 import { GLACIER_API_URL } from "./urls";
 
 export const GLACIER_EVM_MAX_PAGE_SIZE = 100;

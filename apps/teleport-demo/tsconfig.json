@@ -1,5 +1,5 @@
 {
-  "extends": "@luxdefi/tsconfig/tsconfig.react.json",
+  "extends": "@luxfi/tsconfig/tsconfig.react.json",
   "compilerOptions": {
     "allowJs": true,
     "baseUrl": ".",

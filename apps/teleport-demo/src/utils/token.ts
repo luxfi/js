@@ -1,7 +1,7 @@
 import {
   type Erc20TokenBalance as GlacierErc20TokenBalance,
   type NativeTokenBalance as GlacierNativeTokenBalance,
-} from "@luxdefi/glacier";
+} from "@luxfi/glacier";
 import type Big from "big.js";
 import { isNil } from "lodash-es";
 import { type Except } from "type-fest";

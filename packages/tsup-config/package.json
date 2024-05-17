@@ -1,12 +1,12 @@
 {
-  "name": "@luxdefi/tsup-config",
+  "name": "@luxfi/tsup-config",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "main": "index.js",
   "devDependencies": {
-    "@luxdefi/eslint-config": "workspace:*",
-    "@luxdefi/tsconfig": "workspace:*",
+    "@luxfi/eslint-config": "workspace:*",
+    "@luxfi/tsconfig": "workspace:*",
     "tsup": "8.0.1"
   }
 }

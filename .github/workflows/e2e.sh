@@ -1,9 +1,9 @@
 mount_spec=$(pwd):/luxjs/
-image=luxdefi/lux-testing:master
+image=luxfi/lux-testing:master
 
 echo "$DOCKER_PASS" | docker login --username "$DOCKER_USERNAME" --password-stdin
 custom_params_json="{
-    \"nodeImage\":\"/luxdefi/node/build/\",
+    \"nodeImage\":\"/luxfi/node/build/\",
     \"testParams\": {\"luxJS\": { \"dir\": \"/luxjs/\" } },
     \"executeTests\":[\"LuxJS\"]
 }"
