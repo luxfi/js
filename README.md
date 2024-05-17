@@ -32,12 +32,12 @@ pnpm build    # builds all packages
 
 > These Packages are published to NPM
 
-- `@luxfi/core`: Lux Network JavaScript SDK.
+- `luxnet`: Lux Network JavaScript SDK.
 - `@luxfi/vm-parser`: Parse arbitrary VM data for display in the Lux Network Explorer.
 
-#### Internal Packages
+#### Dev Packages
 
-> These packages are only used internally within this repo
+> These packages are only used internally for development
 
 - `@luxfi/tsconfig`: tsconfig for sdks
 - `@luxfi/tsupp-config`: tsup for sdks
