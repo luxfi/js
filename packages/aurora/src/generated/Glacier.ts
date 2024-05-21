@@ -25,7 +25,7 @@ import { PrimaryNetworkVerticesService } from './services/PrimaryNetworkVertices
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
-export class Glacier {
+export class Aurora {
 
     public readonly default: DefaultService;
     public readonly evmBalances: EvmBalancesService;

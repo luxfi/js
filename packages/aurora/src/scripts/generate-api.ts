@@ -14,19 +14,19 @@ const main = async () => {
   );
 
   /**
-   * Generate Glacier Service
+   * Generate Aurora Service
    */
   await generateTypescriptClientFromOpenAPI({
     input: openApiSpec,
     output: OUTPUT_DIRECTORY,
     useOptions: true,
     useUnionTypes: true,
-    clientName: "Glacier",
+    clientName: "Aurora",
   });
-  console.log(`✅ Successfully generated Glacier TypeScript client!`);
+  console.log(`✅ Successfully generated Aurora TypeScript client!`);
 };
 
 main().catch((e) => {
-  console.error(`❌ Error generating Glacier TypeScript client:`);
+  console.error(`❌ Error generating Aurora TypeScript client:`);
   console.error(e);
 });

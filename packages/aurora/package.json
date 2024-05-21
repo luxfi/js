@@ -1,6 +1,6 @@
 {
-  "name": "@luxfi/glacier",
-  "version": "0.0.0",
+  "name": "@luxfi/aurora-sdk",
+  "version": "0.1.0",
   "main": "src/index.ts",
   "type": "module",
   "publishConfig": {
