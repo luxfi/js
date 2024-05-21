@@ -1,5 +1,5 @@
 {
-  "name": "@luxfi/aurora-sdk",
+  "name": "@luxfi/aurora",
   "version": "0.1.0",
   "main": "src/index.ts",
   "type": "module",
