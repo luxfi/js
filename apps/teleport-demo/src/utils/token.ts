@@ -1,12 +1,12 @@
 import {
-  type Erc20TokenBalance as GlacierErc20TokenBalance,
-  type NativeTokenBalance as GlacierNativeTokenBalance,
-} from "@luxfi/glacier";
+  type Erc20TokenBalance as AuroraErc20TokenBalance,
+  type NativeTokenBalance as AuroraNativeTokenBalance,
+} from "@luxfi/aurora";
 import type Big from "big.js";
 import { isNil } from "lodash-es";
 import { type Except } from "type-fest";
 
-export type Erc20TokenBalance = Except<GlacierErc20TokenBalance, "balance"> & {
+export type Erc20TokenBalance = Except<AuroraErc20TokenBalance, "balance"> & {
   balance: Big;
   rawBalance: bigint;
   displayBalance: string;
@@ -14,7 +14,7 @@ export type Erc20TokenBalance = Except<GlacierErc20TokenBalance, "balance"> & {
 };
 
 export type NativeTokenBalance = Except<
-  GlacierNativeTokenBalance,
+  AuroraNativeTokenBalance,
   "balance"
 > & {
   balance: Big;
@@ -38,7 +38,7 @@ export const isNativeTokenBalance = (
 };
 
 export const getUniveralTokenId = (
-  token: TokenBalance | GlacierErc20TokenBalance | GlacierNativeTokenBalance,
+  token: TokenBalance | AuroraErc20TokenBalance | AuroraNativeTokenBalance,
 ) => {
   if ("ercType" in token) {
     return `${token.chainId}-${token.address}`;

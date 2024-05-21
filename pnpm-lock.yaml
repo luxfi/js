@@ -203,9 +203,9 @@ importers:
         specifier: 3.22.2
         version: 3.22.2
     devDependencies:
-      "@luxfi/glacier":
+      "@luxfi/aurora":
         specifier: workspace:*
-        version: link:../../packages/glacier
+        version: link:../../packages/aurora
       "@luxfi/tsconfig":
         specifier: workspace:*
         version: link:../../packages/tsconfig
@@ -421,7 +421,7 @@ importers:
         specifier: 2.0.20
         version: 2.0.20
 
-  packages/glacier:
+  packages/aurora:
     dependencies:
       viem:
         specifier: "*"

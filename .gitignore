@@ -116,4 +116,3 @@ public/
 **/*.sedbak
 
 .turbo
-packages/glacier/src/generated/
