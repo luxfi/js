@@ -88,7 +88,7 @@ export const useTeleport = ({
         if (!writeAsync) {
           throw new Error("writeAsync is undefined.");
         }
-        setTimeout(refetchTxs, 3000); // Wait since aurora is behind the RPC by a few seconds
+        setTimeout(refetchTxs, 3000); // Wait since cloud is behind the RPC by a few seconds
         return await writeAsync();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {

@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export { Aurora } from './Aurora';
+export { Cloud } from './Cloud';
 
 export { ApiError } from './core/ApiError';
 export { BaseHttpRequest } from './core/BaseHttpRequest';

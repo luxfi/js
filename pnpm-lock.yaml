@@ -203,9 +203,9 @@ importers:
         specifier: 3.22.2
         version: 3.22.2
     devDependencies:
-      "@luxfi/aurora":
+      "@luxfi/cloud":
         specifier: workspace:*
-        version: link:../../packages/aurora
+        version: link:../../packages/cloud
       "@luxfi/tsconfig":
         specifier: workspace:*
         version: link:../../packages/tsconfig
@@ -421,7 +421,7 @@ importers:
         specifier: 2.0.20
         version: 2.0.20
 
-  packages/aurora:
+  packages/cloud:
     dependencies:
       viem:
         specifier: "*"

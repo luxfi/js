@@ -3029,8 +3029,8 @@
     }
   },
   "info": {
-    "title": "Aurora API",
-    "description": "The Aurora API provides web3 application developers with multi-chain data related to Lux's primary network, Lux subnets, and Ethereum. With Aurora, you can easily build products that leverage real-time and historical transaction and transfer history, native and token balances, and various types of token metadata. The API is in Beta and may be subject to change.</br></br>If you have feedback or feature requests for the API, please submit them <a href=\"https://portal.productboard.com/dndv9ahlkdfye4opdm8ksafi/tabs/4-aurora-api\">here</a>. Bug reports can be submitted <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSeJQrcp7QoNiqozMDKrVJGX5wpU827d3cVTgF8qa7t_J1Pb-g/viewform\">here</a>, and any potential security issues can be reported <a href=\"https://hackenproof.com/avalanche\">here</a>.",
+    "title": "Cloud API",
+    "description": "The Cloud API provides web3 application developers with multi-chain data related to Lux's primary network, Lux subnets, and Ethereum. With Cloud, you can easily build products that leverage real-time and historical transaction and transfer history, native and token balances, and various types of token metadata. The API is in Beta and may be subject to change.</br></br>If you have feedback or feature requests for the API, please submit them <a href=\"https://portal.productboard.com/dndv9ahlkdfye4opdm8ksafi/tabs/4-cloud-api\">here</a>. Bug reports can be submitted <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSeJQrcp7QoNiqozMDKrVJGX5wpU827d3cVTgF8qa7t_J1Pb-g/viewform\">here</a>, and any potential security issues can be reported <a href=\"https://hackenproof.com/avalanche\">here</a>.",
     "version": "Beta",
     "contact": {}
   },
@@ -3087,10 +3087,10 @@
   "servers": [{ "url": "http://localhost:3000" }],
   "components": {
     "securitySchemes": {
-      "x-aurora-api-key": {
+      "x-cloud-api-key": {
         "type": "apiKey",
         "in": "header",
-        "name": "x-aurora-api-key",
+        "name": "x-cloud-api-key",
         "description": "Api keys provide higher access to rate limits. To obtain an api key, sign up for an account at https://avacloud.io/."
       }
     },

@@ -1,4 +1,4 @@
-import type { Erc20TokenBalance, NativeTokenBalance } from "@luxfi/aurora";
+import type { Erc20TokenBalance, NativeTokenBalance } from "@luxfi/cloud";
 
 export const getDisplayTokenBalance = ({
   balance,

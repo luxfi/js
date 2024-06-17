@@ -14,19 +14,19 @@ const main = async () => {
   );
 
   /**
-   * Generate Aurora Service
+   * Generate Cloud Service
    */
   await generateTypescriptClientFromOpenAPI({
     input: openApiSpec,
     output: OUTPUT_DIRECTORY,
     useOptions: true,
     useUnionTypes: true,
-    clientName: "Aurora",
+    clientName: "Cloud",
   });
-  console.log(`✅ Successfully generated Aurora TypeScript client!`);
+  console.log(`✅ Successfully generated Cloud TypeScript client!`);
 };
 
 main().catch((e) => {
-  console.error(`❌ Error generating Aurora TypeScript client:`);
+  console.error(`❌ Error generating Cloud TypeScript client:`);
   console.error(e);
 });

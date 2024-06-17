@@ -1,4 +1,4 @@
-export const AURORA_API_URL = "https://aurora-api.lux.network";
+export const CLOUD_API_URL = "https://api.luxcloud.xyz";
 export const METAMASK_DOWNLOAD_URL = "https://metamask.io/download";
 export const CORE_CHROME_DOWNLOAD_URL =
   "https://chrome.google.com/webstore/detail/core/agoakfejjabomempkjlepdflaleeobhb";

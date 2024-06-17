@@ -25,7 +25,7 @@ import { PrimaryNetworkVerticesService } from './services/PrimaryNetworkVertices
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
-export class Aurora {
+export class Cloud {
 
     public readonly default: DefaultService;
     public readonly evmBalances: EvmBalancesService;

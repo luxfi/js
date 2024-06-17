@@ -1,9 +1,9 @@
-import { auroraService } from "@/constants";
+import { cloudService } from "@/constants";
 import { CHAINS } from "@/constants/chains";
 import { NULL_ADDRESS } from "@/constants/token";
 import type { EvmChain } from "@/types/chain";
 import { isFullfilled } from "@/utils/is-fullfilled";
-import type { Erc20Transfer } from "@luxfi/aurora";
+import type { Erc20Transfer } from "@luxfi/cloud";
 import { compact, sortBy } from "lodash-es";
 import useSWR from "swr";
 import { useAccount, type Address } from "wagmi";
@@ -35,7 +35,7 @@ const getLatestTeleporterTransactions = async ({
 }) => {
   const settledResponses = await Promise.allSettled(
     CHAINS.map((chain) => {
-      return auroraService.evmTransactions.listErc20Transactions({
+      return cloudService.evmTransactions.listErc20Transactions({
         address,
         chainId: chain.chainId,
         pageSize: TRANSACTION_COUNT,
