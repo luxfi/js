@@ -9,7 +9,7 @@ import { Output } from "lux/dist/common"
 //         2 - X-cascade19rknw8l0grnfunjrzwxlxync6zrlu33ypmtvnh
 //         3 - X-denali19rknw8l0grnfunjrzwxlxync6zrlu33yhc357h
 //         4 - X-everest19rknw8l0grnfunjrzwxlxync6zrlu33yn44wty
-//         5 - X-fuji19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
+//         5 - X-testnet19rknw8l0grnfunjrzwxlxync6zrlu33yxqzg0h
 //      1337 - X-custom19rknw8l0grnfunjrzwxlxync6zrlu33yeg5dya
 //     12345 - X-local19rknw8l0grnfunjrzwxlxync6zrlu33ynpm3qq
 const networkID: number = 12345

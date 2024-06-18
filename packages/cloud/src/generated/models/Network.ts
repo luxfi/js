@@ -3,4 +3,4 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type Network = 'mainnet' | 'fuji';
+export type Network = 'mainnet' | 'testnet';

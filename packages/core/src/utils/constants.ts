@@ -9,7 +9,7 @@ export const PrivateKeyPrefix: string = "PrivateKey-"
 export const NodeIDPrefix: string = "NodeID-"
 export const PrimaryAssetAlias: string = "LUX"
 export const MainnetAPI: string = "api.lux.network"
-export const FujiAPI: string = "api.lux-test.network"
+export const TestnetAPI: string = "api.lux-test.network"
 
 export interface C {
   blockchainID: string
@@ -72,7 +72,7 @@ export const NetworkIDToHRP: object = {
   2: "cascade",
   3: "denali",
   4: "everest",
-  5: "fuji",
+  5: "testnet",
   1337: "custom",
   12345: "local"
 }
@@ -83,7 +83,7 @@ export const HRPToNetworkID: object = {
   cascade: 2,
   denali: 3,
   everest: 4,
-  fuji: 5,
+  testnet: 5,
   custom: 1337,
   local: 12345
 }
@@ -94,7 +94,7 @@ export const NetworkIDToNetworkNames: object = {
   2: ["Cascade"],
   3: ["Denali"],
   4: ["Everest"],
-  5: ["Fuji", "Testnet"],
+  5: ["Testnet"],
   1337: ["Custom Network"],
   12345: ["Local Network"]
 }
@@ -106,7 +106,6 @@ export const NetworkNameToNetworkID: object = {
   Cascade: 2,
   Denali: 3,
   Everest: 4,
-  Fuji: 5,
   Testnet: 5,
   Custom: 1337,
   "Custom Network": 1337,
@@ -129,7 +128,7 @@ export const XChainVMName: string = "xvm"
 export const CChainVMName: string = "evm"
 export const PChainVMName: string = "platformvm"
 
-// DO NOT use the following private keys and/or mnemonic on Fuji or Testnet
+// DO NOT use the following private keys and/or mnemonic on Testnet
 // This address/account is for testing on the local avash network
 export const DefaultLocalGenesisPrivateKey: string =
   "ewoqjP7PxY4yr3iLTpLisriqt94hdyDFNgchSxGGztUrTXtNN"
@@ -361,7 +360,7 @@ const n4C: C = {
 }
 // End Everest
 
-// Start Fuji
+// Start Testnet
 luxAssetID = "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"
 const n5X: X = {
   blockchainID: "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm",
@@ -409,7 +408,7 @@ const n5C: C = {
   maxGasPrice: GWEI.mul(new BN(1000)),
   chainID: 43113
 }
-// End Fuji
+// End Testnet
 
 // Start custom network
 luxAssetID = "BUuypiq2wyuLMvyhzFXcPyxPMCgSp7eeDohhQRqTChoBjKziC"

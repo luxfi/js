@@ -42,7 +42,7 @@ export class PrimaryNetworkBalancesService {
          */
         blockTimestamp?: number,
         /**
-         * A comma separated list of X-Chain or P-Chain wallet addresses, starting with "lux"/"fuji", "P-lux"/"P-fuji" or "X-lux"/"X-fuji".
+         * A comma separated list of X-Chain or P-Chain wallet addresses, starting with "lux"/"testnet", "P-lux"/"P-testnet" or "X-lux"/"X-testnet".
          */
         addresses?: string,
     }): CancelablePromise<(ListPChainBalancesResponse | ListXChainBalancesResponse | ListCChainAtomicBalancesResponse)> {
