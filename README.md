@@ -9,7 +9,7 @@
 </p>
 
 <h2 align="center">
-  Official monorepo for Lux JavaScript/TypeScript SDKs and tools.
+  Official Lux JavaScript/TypeScript SDKs and tools.
 </h2>
 
 ## Getting Started 🚀
