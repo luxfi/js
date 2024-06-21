@@ -2,8 +2,10 @@
   "extends": "@luxfi/tsconfig/tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "importHelpers": true,
-    "incremental": false // Need to turn off because of tsup dts
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": ".",
+    "importHelpers": true
   },
   "include": ["src", "src/types"],
   "references": [
