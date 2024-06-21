@@ -33,6 +33,7 @@ pnpm build    # builds all packages
 > These Packages are published to NPM
 
 - `luxnet`: Lux Network JavaScript SDK.
+- `@luxfi/cloud`: Lux Cloud JavaScript SDK.
 - `@luxfi/vm-parser`: Parse arbitrary VM data for display in the Lux Network Explorer.
 
 #### Dev Packages
