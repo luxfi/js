@@ -29,7 +29,6 @@ pnpm build    # builds all packages
 - `@luxfi/cloud`: Lux Cloud JavaScript SDK.
 - `@luxfi/vue-components`: Lux Wallet Vue Components and Vue SDK.
 - `@luxfi/wallet-sdk`: Lux Wallet SDK.
-
 - `@luxfi/vm-parser`: Parse arbitrary VM data for display in the Lux Network Explorer.
 
 #### Dev Packages
@@ -45,7 +44,7 @@ pnpm build    # builds all packages
 
 > These are apps published to the web
 
-- `teleport-demo`: This is a demo of the Lux Teleport cross-chain messaging system for EVM subnets.
+- `teleport-demo`: This is a demo of the Lux Teleport cross-chain messaging system.
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
 
