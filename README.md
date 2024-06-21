@@ -59,7 +59,7 @@ Please check out the `examples` folder for more info.
 
 ### Overview
 
-LuxNet is a JavaScript Library for interfacing with the Lux Network. It is built using TypeScript and intended to support both browser and Node.js. The LuxNet library allows you to issue commands to the Avalanche node APIs.
+LuxNet is a JavaScript Library for interfacing with the Lux Network. It is built using TypeScript and intended to support both browser and Node.js. The LuxNet library allows you to issue commands to the Lux node APIs.
 
 Using LuxNet, developers can:
 
