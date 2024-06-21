@@ -8,9 +8,9 @@
 </a>
 </p>
 
-<h1 align="center">Consumer SDKs</h1>
+<h1 align="center">Lux JS</h1>
 <p align="center">
-  This is an official Lux monorepo for JavaScript/TypeScript SDKs and tools.
+  This is the official monorepo for Lux JavaScript/TypeScript SDKs and tools.
 </p>
 
 ## Getting Started 🚀
@@ -46,12 +46,70 @@ pnpm build    # builds all packages
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
 
+Please check out the `examples` folder for more info.
+
 ### Useful commands
 
 - `pnpm build` - Build all packages
 - `pnpm dev` - Develop all packages
 - `pnpm lint` - Lint all packages
 - `pnpm changeset` - Generate a changeset. See in #versioning-and-publishing-packages
+
+## LuxNet - The Lux Network JavaScript Library
+
+### Overview
+
+LuxNet is a JavaScript Library for interfacing with the Lux Network. It is built using TypeScript and intended to support both browser and Node.js. The LuxNet library allows you to issue commands to the Avalanche node APIs.
+
+Using LuxNet, developers can:
+
+- Retrieve balances on addresses
+- Get UTXOs for addresses
+- Build and sign transactions
+- Issue signed transactions to the X-Chain, P-Chain, and C-Chain
+- Perform cross-chain swaps between the X, P and C chains
+- Add Validators and Delegators
+- Create Subnets and Blockchains
+
+### Requirements
+
+LuxNet requires Node.js LTS version 20.11.1 or higher to compile.
+
+### Installation
+
+### Using the NPM Package
+
+Add LuxNet to your project via `npm` or `yarn`.
+
+For installing via `npm`:
+
+`npm install --save luxnet`
+
+For installing via `yarn`:
+
+`yarn add luxnet`
+
+### Importing Essentials
+
+```ts
+import { avm /** X-chain */, pvm /** P-chain */, evm /** C-chain */, utils, secp256k1 } from "luxnet"
+
+// example calls
+const exportTx = avm.newExportTx(...) // constructs a new export tx from X
+const addValidatorTx = pvm.newAddPermissionlessValidatorTx(...) // constructs a new add validator tx on P
+const importTx = evm.newImportTx(...) // constructs a new import tx to C
+
+const publicKeyBytes = utils.hexToBuffer(publicKeyHex)
+const signature = secp256k1.signHash(bytes, privateKeyBytes)
+```
+
+### Use LuxNet in Projects
+
+The LuxNet library can be imported into your existing project as follows:
+
+```ts
+import { avm, pvm, evm } from 'luxnet';
+```
 
 ## Versioning and Publishing packages
 
