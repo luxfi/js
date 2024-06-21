@@ -21,13 +21,7 @@ pnpm build    # builds all packages
 
 ## What's inside? 🔍
 
-#### Apps
-
-> These are apps published to the web
-
-- `teleport-demo`: This is a demo of the Lux Teleport cross-chain messaging system for EVM subnets.
-
-#### Packages
+#### Core Packages
 
 > These Packages are published to NPM
 
@@ -43,6 +37,12 @@ pnpm build    # builds all packages
 - `@luxfi/tsupp-config`: tsup for sdks
 - `@luxfi/eslint-config`: eslint config for sdks
 - `@luxfi/github-actions`: github actions for sdks
+
+#### Example Apps
+
+> These are apps published to the web
+
+- `teleport-demo`: This is a demo of the Lux Teleport cross-chain messaging system for EVM subnets.
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
 
