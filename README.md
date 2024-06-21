@@ -27,6 +27,9 @@ pnpm build    # builds all packages
 
 - `luxnet`: Lux Network JavaScript SDK.
 - `@luxfi/cloud`: Lux Cloud JavaScript SDK.
+- `@luxfi/vue-components`: Lux Wallet Vue Components and Vue SDK.
+- `@luxfi/wallet-sdk`: Lux Wallet SDK.
+
 - `@luxfi/vm-parser`: Parse arbitrary VM data for display in the Lux Network Explorer.
 
 #### Dev Packages
