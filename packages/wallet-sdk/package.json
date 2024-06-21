@@ -1,0 +1,101 @@
+{
+    "name": "@luxfi/wallet-sdk",
+    "version": "0.20.6",
+    "license": "BSD-3",
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "files": [
+        "dist",
+        "src"
+    ],
+    "engines": {
+        "node": ">=15"
+    },
+    "scripts": {
+        "build:prod": "rollup -c --environment BUILD:production",
+        "build": "rollup -c",
+        "docs:watch": "typedoc --watch",
+        "docs": "typedoc",
+        "prepare": "pnpm build:prod",
+        "start": "rollup -c --watch",
+        "test:watch": "NODE_OPTIONS=--openssl-legacy-provider jest --watch",
+        "test": "NODE_OPTIONS=--openssl-legacy-provider jest"
+    },
+    "lint-staged": {
+        "**/*": "prettier --write --ignore-unknown"
+    },
+    "author": "Lux Partners Limited",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/luxfi/wallet"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "@babel/core": "7.17.8",
+        "@babel/preset-env": "7.16.11",
+        "@babel/preset-typescript": "7.16.7",
+        "@rollup/plugin-commonjs": "25.0.7",
+        "@rollup/plugin-json": "6.1.0",
+        "@rollup/plugin-typescript": "11.1.6",
+        "@types/big.js": "^6.0.2",
+        "@types/bn.js": "5.1.5",
+        "@types/create-hash": "1.2.2",
+        "@types/crypto-js": "4.2.2",
+        "@types/hdkey": "2.0.3",
+        "@types/jest": "29.5.12",
+        "@types/randomstring": "1.3.0",
+        "@types/tiny-secp256k1": "^2.0.1",
+        "@zerollup/ts-transform-paths": "1.7.18",
+        "babel-jest": "29.4.0",
+        "babel-plugin-module-resolver": "5.0.2",
+        "jest": "29.7.0",
+        "lint-staged": "15.2.4",
+        "luxnet": "3.15.6",
+        "prettier": "2.6.2",
+        "rollup": "4.18.0",
+        "rollup-plugin-delete": "2.0.0",
+        "rollup-plugin-typescript2": "0.36.0",
+        "ts-node": "10.9.2",
+        "tslib": "2.6.2",
+        "ttypescript": "1.5.15",
+        "typedoc": "0.25.13",
+        "typescript": "5.4.5"
+    },
+    "dependencies": {
+        "@ethereumjs/common": "^4.3.0",
+        "@ethereumjs/tx": "5.3.0",
+        "@ledgerhq/hw-app-eth": "6.36.1",
+        "@ledgerhq/hw-transport": "6.30.6",
+        "@luxfi/cloud": "0.1.0",
+        "@luxfi/hw-app-lux": "0.2.3",
+        "@luxfi/hw-app-luxz": "0.6.11",
+        "@metamask/eth-sig-util": "7.0.2",
+        "@openzeppelin/contracts": "5.0.2",
+        "big.js": "^6.1.1",
+        "bip32": "4.0.0",
+        "bip32-path": "0.4.2",
+        "bip39": "3.1.0",
+        "bitcoinjs-lib": "^6.1.6",
+        "bn.js": "5.2.1",
+        "create-hash": "1.2.0",
+        "crypto-js": "4.2.0",
+        "ecpair": "^2.1.0",
+        "ethereumjs-util": "^7.0.7",
+        "ethers": "5.6.8",
+        "hdkey": "2.0.1",
+        "moment": "2.29.4",
+        "randomstring": "1.2.2",
+        "sockette": "2.0.6",
+        "tiny-secp256k1": "^2.2.3",
+        "typescript-transform-paths": "2.2.3",
+        "url": "0.11.0",
+        "web3": "1.10.0",
+        "web3-eth-contract": "1.10.0",
+        "xss": "1.0.11"
+    },
+    "peerDependencies": {
+        "luxnet": ">= 3.15.5"
+    }
+}

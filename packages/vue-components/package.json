@@ -1,0 +1,60 @@
+{
+    "name": "@luxfi/vue-components",
+    "version": "0.10.1",
+    "main": "dist/index.umd.js",
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build --target lib --name index ./src/wrapper.js --mode production",
+        "lint": "vue-cli-service lint",
+        "prepare": "yarn build"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.27",
+        "@fortawesome/free-solid-svg-icons": "^5.12.1",
+        "@fortawesome/vue-fontawesome": "^0.1.9",
+        "@ledgerhq/cryptoassets": "^13.1.0",
+        "@ledgerhq/domain-service": "^1.2.0",
+        "@ledgerhq/evm-tools": "^1.1.0",
+        "@ledgerhq/types-cryptoassets": "^7.13.0",
+        "@luxfi/wallet-sdk": "^0.20.6",
+        "@zxing/library": "^0.15.2",
+        "assert": "^2.1.0",
+        "browserify-zlib": "^0.2.0",
+        "buffer": "^6.0.3",
+        "core-js": "^3.6.4",
+        "crypto-browserify": "^3.12.0",
+        "https-browserify": "^1.0.0",
+        "luxnet": "^3.15.6",
+        "os-browserify": "^0.3.0",
+        "path-browserify": "^1.0.1",
+        "process": "^0.11.10",
+        "stream-browserify": "^3.0.0",
+        "stream-http": "^3.2.0",
+        "url": "^0.11.3",
+        "vue": "^2.7.16"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "^5.0.8",
+        "@vue/cli-service": "^3.3.1",
+        "np": "^10.0.5",
+        "vue-template-compiler": "^2.7.16"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "description": "A collection of Vue based components by Lux Wallet.",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/luxfi/wallet.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/luxfi/wallet/issues"
+    },
+    "homepage": "https://github.com/luxfi/wallet#readme"
+}

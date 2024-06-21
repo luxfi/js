@@ -1,0 +1,31 @@
+{
+    "include": ["src", "types", "test", "node_modules/@ledgerhq/**/*.ts"],
+    "compilerOptions": {
+        "module": "esnext",
+        "target": "ES6",
+        "lib": ["dom", "esnext"],
+        "importHelpers": true,
+        "outDir": "./dist",
+        "declaration": true,
+        "declarationDir": "./dist",
+        "sourceMap": true,
+        "rootDir": "./src",
+        "strict": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": true,
+        "moduleResolution": "node",
+        "jsx": "react",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "resolveJsonModule": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "typeRoots": ["node_modules/@types", "./types"]
+    }
+}
