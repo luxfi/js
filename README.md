@@ -8,10 +8,9 @@
 </a>
 </p>
 
-<h1 align="center">Lux JS</h1>
-<p align="center">
+<h2 align="center">
   This is the official monorepo for Lux JavaScript/TypeScript SDKs and tools.
-</p>
+</h2>
 
 ## Getting Started 🚀
 
