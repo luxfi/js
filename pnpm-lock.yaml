@@ -255,9 +255,6 @@ importers:
       rollup-plugin-dts:
         specifier: ^6.1.1
         version: 6.1.1(rollup@4.18.0)(typescript@5.4.5)
-      viem:
-        specifier: '*'
-        version: 1.21.4(typescript@5.4.5)(zod@3.22.2)
     devDependencies:
       '@luxfi/eslint-config':
         specifier: workspace:*
